@@ -3,6 +3,11 @@ project(Simstudio)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(Simstudio main.cpp
-        src/prelude.h
-        src/logging.h)
+
+file(GLOB_RECURSE  Simstudio_SRC
+     "${CMAKE_SOURCE_DIR}/*.cpp"
+)
+
+add_executable(
+        Simstudio 
+${Simstudio_SRC})

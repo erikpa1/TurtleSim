@@ -1,31 +1,45 @@
 #include <iostream>
 #include <sstream>
 
-class Logger {
+class Logger
+{
 public:
-    enum Level {
+    enum Level
+    {
+        Debug,
         Info,
-        Error
+        Error,
+        Warning,
     };
 
-    Logger(Level level) : level_(level) {
-        switch (level_) {
-            case Info:
-                stream_ << "\033[0m \033[94m [Info] ";
+    Logger(Level level) : level_(level)
+    {
+        switch (level_)
+        {
+        case Debug:
+            stream_ << "\033[0m \033[94m [Debug] ";
             break;
-            case Error:
-                stream_ << "\033[0m \033[91m [Error] ";
+        case Info:
+            stream_ << "\033[0m \033[30m [Info] ";
+            break;
+        case Error:
+            stream_ << "\033[0m \033[91m [Error] ";
+            break;
+        case Warning:
+            stream_ << "\033[0m \033[33m [Warning] ";
             break;
         }
     }
 
-    ~Logger() {
+    ~Logger()
+    {
         stream_ << "\033[0m" << std::endl;
         std::cout << stream_.str();
     }
 
     template <typename T>
-    Logger& operator<<(const T& msg) {
+    Logger &operator<<(const T &msg)
+    {
         stream_ << msg;
         return *this;
     }
@@ -35,6 +49,8 @@ private:
     std::ostringstream stream_;
 };
 
-#define Log Logger(Logger::Info)
+
 #define LogI Logger(Logger::Info)
+#define LogD Logger(Logger::Debug)
 #define LogE Logger(Logger::Error)
+#define LogW Logger(Logger::Warning)
