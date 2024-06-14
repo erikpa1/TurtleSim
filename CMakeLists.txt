@@ -5,9 +5,10 @@ set(CMAKE_CXX_STANDARD 23)
 
 
 file(GLOB_RECURSE  Simstudio_SRC
-     "${CMAKE_SOURCE_DIR}/*.cpp"
+     "${CMAKE_SOURCE_DIR}/src/*.cpp"
 )
 
 add_executable(
         Simstudio 
+        main.cpp
 ${Simstudio_SRC})

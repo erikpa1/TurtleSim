@@ -14,5 +14,7 @@ using HashMap = std::unordered_map<std::string, T>;
 template <typename T>
 using Shared = std::shared_ptr<T>;
 
-template <typename T>
-using Share = std::make_shared<T>;
+template <typename T, typename... Args>
+std::shared_ptr<T> Share(Args&&... args) {
+    return std::make_shared<T>(std::forward<Args>(args)...);
+}

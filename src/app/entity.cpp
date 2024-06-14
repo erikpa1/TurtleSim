@@ -5,6 +5,9 @@
 namespace simstudio {
 
     void Entity::Step() {
+        
+            
+
 
     }
 

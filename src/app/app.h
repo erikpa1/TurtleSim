@@ -6,6 +6,7 @@ namespace simstudio
 
     class Entity;
 
+
     class App
     {
     public:
@@ -15,6 +16,6 @@ namespace simstudio
         HashMap<Shared<Entity>> _entities;
 
         void Step();
-    }
+    };
 
-}
+};

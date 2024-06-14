@@ -3,6 +3,7 @@
         "*.embeddedhtml": "html",
         "unordered_map": "cpp",
         "xstring": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "memory": "cpp"
     }
 }

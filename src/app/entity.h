@@ -7,6 +7,6 @@ namespace simstudio
     {
     public:
         void Step();
-    }
+    };
 
-}
+};

@@ -10,7 +10,11 @@ namespace Simstudio {
 
 
     void Stepper::Step() {
-        LogI << "Doing the step";
+        LogI << "Doing the step: " << _stepIndex;
+
+        _stepIndex += 1;
+
+
     }
 
 
