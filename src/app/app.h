@@ -4,6 +4,7 @@
 namespace simstudio
 {
 
+    class Stepper;
     class Entity;
 
     class App
@@ -13,7 +14,7 @@ namespace simstudio
 
         HashMap<Shared<Entity>> _entities;
 
-        void Step();
+        void Step(Stepper & stepper);
         void AddEntity(Shared<Entity> entity);
     };
 

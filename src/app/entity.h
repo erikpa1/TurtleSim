@@ -3,6 +3,8 @@
 namespace simstudio
 {
 
+    class Stepper;
+
     class Entity
     {
 
@@ -10,8 +12,14 @@ namespace simstudio
         String _name;
         String _uid;
 
+
+
+
     public:
-        void Step();
+
+        Entity();
+
+        void Step(Stepper & stepper);
     };
 
 };

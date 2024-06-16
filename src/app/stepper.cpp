@@ -6,7 +6,7 @@
 
 
 
-namespace Simstudio {
+namespace simstudio {
 
 
     void Stepper::Step() {

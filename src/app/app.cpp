@@ -2,7 +2,7 @@
 
 #include "app.h"
 #include "entity.h"
-
+#include "stepper.h"
 namespace simstudio
 {
 
@@ -10,13 +10,13 @@ namespace simstudio
     {
     }
 
-    void App::Step()
+    void App::Step(Stepper & stepper)
     {
 
         for (const auto &iter : _entities)
         {
-            Shared<Entity> entity = iter.second;
-            entity->Step();
+            // Shared<Entity> entity = iter.second;
+            // entity->Step(stepper);
             LogI << "Stepping on entity";
         }
     }

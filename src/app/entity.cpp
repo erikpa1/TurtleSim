@@ -1,14 +1,17 @@
 
 #include "entity.h"
+#include "stepper.h"
+
+namespace simstudio
+{
+
+    Entity::Entity()
+    {
+    }
 
 
-namespace simstudio {
-
-    void Entity::Step() {
-        
-            
-
-
+    void Entity::Step(Stepper &stepper)
+    {
     }
 
 }

@@ -1,6 +1,6 @@
 
 
-namespace Simstudio
+namespace simstudio
 {
 
     class Stepper

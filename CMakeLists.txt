@@ -11,4 +11,5 @@ file(GLOB_RECURSE  Simstudio_SRC
 add_executable(
         Simstudio 
         main.cpp
+        # main_1.cpp
 ${Simstudio_SRC})

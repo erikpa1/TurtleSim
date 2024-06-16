@@ -1,3 +1,5 @@
+#pragma once 
+
 #include <iostream>
 #include <sstream>
 
@@ -27,7 +29,8 @@ private:
     std::ostringstream stream_;
 };
 
-#define LogI Logger(Logger::Info)
-#define LogD Logger(Logger::Debug)
-#define LogE Logger(Logger::Error)
-#define LogW Logger(Logger::Warning)
+#define LogI SimLogger(SimLogger::Info)
+#define LogD SimLogger(SimLogger::Debug)
+#define LogE SimLogger(SimLogger::Error)
+#define LogW SimLogger(SimLogger::Warning)
+
