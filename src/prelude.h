@@ -8,6 +8,9 @@
 
 #include "logging.h"
 
+
+using String = std::string;
+
 template <typename T>
 using HashMap = std::unordered_map<std::string, T>;
 

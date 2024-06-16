@@ -12,30 +12,8 @@ public:
         Warning,
     };
 
-    Logger(Level level) : level_(level)
-    {
-        switch (level_)
-        {
-        case Debug:
-            stream_ << "\033[0m \033[94m [Debug] ";
-            break;
-        case Info:
-            stream_ << "\033[0m \033[30m [Info] ";
-            break;
-        case Error:
-            stream_ << "\033[0m \033[91m [Error] ";
-            break;
-        case Warning:
-            stream_ << "\033[0m \033[33m [Warning] ";
-            break;
-        }
-    }
-
-    ~Logger()
-    {
-        stream_ << "\033[0m" << std::endl;
-        std::cout << stream_.str();
-    }
+    Logger(Level level);
+    ~Logger();
 
     template <typename T>
     Logger &operator<<(const T &msg)
@@ -45,10 +23,9 @@ public:
     }
 
 private:
-    Level level_;
+    Level _level;
     std::ostringstream stream_;
 };
-
 
 #define LogI Logger(Logger::Info)
 #define LogD Logger(Logger::Debug)

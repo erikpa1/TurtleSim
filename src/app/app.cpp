@@ -13,11 +13,17 @@ namespace simstudio
     void App::Step()
     {
 
-        for (const auto & iter: _entities) {
+        for (const auto &iter : _entities)
+        {
             Shared<Entity> entity = iter.second;
             entity->Step();
             LogI << "Stepping on entity";
         }
+    }
+
+    void App::AddEntity(Shared<Entity> entity)
+    {
+        _entities[entity->_uid] = entity;
     }
 
 }
