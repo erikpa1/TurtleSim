@@ -1,10 +1,8 @@
-
-
 #pragma once
 
 #include "logging.h"
 
-Logger::Logger(Level level)
+SimLogger::SimLogger(Level level)
 {
     _level = level;
 
@@ -25,7 +23,7 @@ Logger::Logger(Level level)
     }
 }
 
-Logger::~Logger()
+SimLogger::~SimLogger()
 {
     stream_ << "\033[0m" << std::endl;
     std::cout << stream_.str();

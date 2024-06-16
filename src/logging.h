@@ -1,7 +1,7 @@
 #include <iostream>
 #include <sstream>
 
-class Logger
+class SimLogger
 {
 public:
     enum Level
@@ -12,11 +12,11 @@ public:
         Warning,
     };
 
-    Logger(Level level);
-    ~Logger();
+    SimLogger(Level level);
+    ~SimLogger();
 
     template <typename T>
-    Logger &operator<<(const T &msg)
+    SimLogger &operator<<(const T &msg)
     {
         stream_ << msg;
         return *this;
