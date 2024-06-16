@@ -12,7 +12,7 @@ SimLogger::SimLogger(Level level)
         stream_ << "\033[0m \033[94m [Debug] ";
         break;
     case Info:
-        stream_ << "\033[0m \033[30m [Info] ";
+        stream_ << "\033[0m  [Info] ";
         break;
     case Error:
         stream_ << "\033[0m \033[91m [Error] ";
