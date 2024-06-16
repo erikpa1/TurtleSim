@@ -7,10 +7,12 @@ namespace simstudio
     {
 
     public:
-
         long _stepIndex = 0;
 
         void Step();
+
+        double GetStepSecond();
+
     };
 
 };

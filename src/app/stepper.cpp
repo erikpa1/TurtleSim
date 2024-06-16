@@ -3,21 +3,18 @@
 
 #include "./stepper.h"
 
+namespace simstudio
+{
 
-
-
-namespace simstudio {
-
-
-    void Stepper::Step() {
+    void Stepper::Step()
+    {
         LogI << "Doing the step: " << _stepIndex;
-
         _stepIndex += 1;
-
-
     }
 
-
-
+    double Stepper::GetStepSecond()
+    {
+        return static_cast<double>(_stepIndex);
+    }
 
 }

@@ -14,8 +14,11 @@ namespace simstudio
 
         HashMap<Shared<Entity>> _entities;
 
-        void Step(Stepper & stepper);
+        void Init();
+        void Step(Stepper &stepper);
         void AddEntity(Shared<Entity> entity);
+
+        void PrintFinalStatistics();
     };
 
 };

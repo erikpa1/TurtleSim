@@ -9,8 +9,15 @@ namespace simstudio
     {
     }
 
+    void Entity::Init()
+    {
+    }
 
     void Entity::Step(Stepper &stepper)
+    {
+    }
+
+    void Entity::PrintFinalStatistics()
     {
     }
 

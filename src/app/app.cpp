@@ -10,20 +10,37 @@ namespace simstudio
     {
     }
 
-    void App::Step(Stepper & stepper)
+    void App::Init()
+    {
+        for (const auto &iter : _entities)
+        {
+            iter.second->Init();
+        }
+    }
+
+    void App::Step(Stepper &stepper)
     {
 
         for (const auto &iter : _entities)
         {
-            // Shared<Entity> entity = iter.second;
-            // entity->Step(stepper);
-            LogI << "Stepping on entity";
+            auto entity = iter.second;
+            entity->Step(stepper);
         }
     }
 
     void App::AddEntity(Shared<Entity> entity)
     {
         _entities[entity->_uid] = entity;
+    }
+
+    void App::PrintFinalStatistics()
+    {
+        LogI << "==============";
+        LogI << "Final statistics:";
+        for (const auto &iter : _entities)
+        {
+            iter.second->PrintFinalStatistics();
+        }
     }
 
 }

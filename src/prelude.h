@@ -6,6 +6,8 @@
 #include <iostream>
 #include <memory>
 #include <optional>
+#include <format>
+#include <any>
 
 #include "logging.h"
 
@@ -20,6 +22,9 @@ using Array = std::vector<T>;
 template <typename T>
 using Option = std::optional<T>;
 
+
+using Any = std::any;
+
 template <typename T>
 using Shared = std::shared_ptr<T>;
 
@@ -28,3 +33,11 @@ std::shared_ptr<T> Share(Args &&...args)
 {
     return std::make_shared<T>(std::forward<Args>(args)...);
 }
+
+template <typename T>
+String ToString(T arg)
+{
+    return std::to_string(arg);
+}
+
+#define F(first_param, ...) std::format(first_param, __VA_ARGS__)

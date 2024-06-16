@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../prelude.h"
 
 namespace simstudio
@@ -19,7 +21,9 @@ namespace simstudio
 
         Entity();
 
-        void Step(Stepper & stepper);
+        virtual void Init();
+        virtual void Step(Stepper & stepper);
+        virtual void PrintFinalStatistics();
     };
 
 };
