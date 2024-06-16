@@ -13,3 +13,6 @@ add_executable(
         main.cpp
         # main_1.cpp
 ${Simstudio_SRC})
+
+
+target_compile_options(Simstudio PRIVATE "/bigobj")

@@ -6,12 +6,17 @@
 #include <iostream>
 #include <variant>
 
+#include "../external/exprtk.hpp"
+
+std::default_random_engine rng;
+
+using namespace exprtk;
+
 namespace simstudio
 {
 
-    double MathExpr::Execute(String &expr)
+    Option<double> MathExpr::Execute(String &expr)
     {
-        std::default_random_engine rng;
 
         std::regex uniformRegex(R"(uniform\(([^,]+),\s*([^)]+)\))");
         std::regex standardRangeRegex(R"(standard\(([^,]+),\s*([^)]+)\))");
@@ -21,8 +26,8 @@ namespace simstudio
 
         if (std::regex_search(expr, match, uniformRegex))
         {
-            std::string minStr = match[1];
-            std::string maxStr = match[2];
+            String minStr = match[1];
+            String maxStr = match[2];
 
             double min = std::stod(minStr);
             double max = std::stod(maxStr);
@@ -32,8 +37,8 @@ namespace simstudio
         }
         else if (std::regex_search(expr, match, standardRangeRegex))
         {
-            std::string minStr = match[1];
-            std::string maxStr = match[2];
+            String minStr = match[1];
+            String maxStr = match[2];
 
             double min = std::stod(minStr);
             double max = std::stod(maxStr);
@@ -45,7 +50,7 @@ namespace simstudio
         }
         else if (std::regex_search(expr, match, standardMaxRegex))
         {
-            std::string maxStr = match[1];
+            String maxStr = match[1];
 
             double max = std::stod(maxStr);
 
@@ -56,10 +61,30 @@ namespace simstudio
         }
         else
         {
-            // Evaluate the expression in another way if needed (not implemented here)
-            std::cerr << "[Error][" << expr << "] Unknown expression" << std::endl;
-            return 0.0;
+
+            symbol_table<double> symbol_table;
+            expression<double> expression;
+            parser<double> parser;
+
+            expression.register_symbol_table(symbol_table);
+            parser.compile(expr, expression);
+
+            const double y = expression.value();
+
+            if (std::isnan(y))
+            {
+                LogE << "Received: " << y;
+                return {};
+            }
+            else
+            {
+                return y;
+            }
+
+            return y;
         }
+
+        return {};
     }
 
 }

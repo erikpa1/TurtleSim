@@ -53,6 +53,12 @@
         "algorithm": "cpp",
         "xlocmon": "cpp",
         "xloctime": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "locale": "cpp",
+        "random": "cpp",
+        "variant": "cpp",
+        "xlocbuf": "cpp",
+        "xlocmes": "cpp",
+        "optional": "cpp"
     }
 }
