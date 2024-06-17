@@ -1,24 +1,34 @@
 
 #include "entity.h"
 #include "stepper.h"
+#include "app.h"
 
 namespace simstudio
 {
 
-    Entity::Entity()
-    {
-    }
+	Entity::Entity()
+	{
+	}
 
-    void Entity::Init()
-    {
-    }
+	void Entity::Init()
+	{
+	}
 
-    void Entity::Step(Stepper &stepper)
-    {
-    }
+	void Entity::Step(App& app, Stepper& stepper)
+	{
+	}
 
-    void Entity::PrintFinalStatistics()
-    {
-    }
+	void Entity::TakeEntity()
+	{
+		LogI << _uid << " is taking some entity";
+	}
+
+	void Entity::TakeEntity(Shared<Entity>& entity)
+	{
+	}
+
+	void Entity::PrintFinalStatistics()
+	{
+	}
 
 }

@@ -12,7 +12,7 @@ add_executable(
         Simstudio 
         main.cpp
         # main_1.cpp
-${Simstudio_SRC})
+${Simstudio_SRC} "src/app/drain.cpp")
 
 
 target_compile_options(Simstudio PRIVATE "/bigobj")
