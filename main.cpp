@@ -5,19 +5,16 @@
 #include "src/app/prelude.h"
 #include "src/utils/prelude.h"
 
-//#include "src/external/tinyxml2.h"
+#include "src/runs/run_xml.h"
 
 
 
 using namespace simstudio;
-//using namespace tinyxml2;
 
-int main()
+int main_local()
 {
 
-	//static const char* xml = "<element/>";
-	//XMLDocument doc;
-	//doc.Parse(xml);
+
 
 	App app;
 	Stepper steper;
@@ -62,6 +59,18 @@ int main()
 	app.PrintFinalStatistics();
 
 	//TODO zobrazit to XML v korytnacke
+
+	return 0;
+}
+
+
+
+int main() {
+
+
+	run_xml();
+
+
 
 	return 0;
 }

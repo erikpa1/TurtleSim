@@ -1,5 +1,7 @@
 <app>
 
+	<name>Example app</name>
+	
     <entities>
         <source name="Source_1" uid="Source_1" />
         <station name="Station_0" uid="Station_0" />

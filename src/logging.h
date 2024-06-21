@@ -3,6 +3,8 @@
 #include <iostream>
 #include <sstream>
 
+
+
 class SimLogger
 {
 public:
@@ -14,7 +16,7 @@ public:
         Warning,
     };
 
-    SimLogger(Level level);
+	SimLogger(Level level, const char* file, const char* function, int line);
     ~SimLogger();
 
     template <typename T>
@@ -29,8 +31,11 @@ private:
     std::ostringstream stream_;
 };
 
-#define LogI SimLogger(SimLogger::Info)
-#define LogD SimLogger(SimLogger::Debug)
-#define LogE SimLogger(SimLogger::Error)
-#define LogW SimLogger(SimLogger::Warning)
 
+
+
+
+#define LogI SimLogger(SimLogger::Info, __FILE__, __FUNCTION__, __LINE__)
+#define LogD SimLogger(SimLogger::Debug, __FILE__, __FUNCTION__, __LINE__)
+#define LogE SimLogger(SimLogger::Error, __FILE__, __FUNCTION__, __LINE__)
+#define LogW SimLogger(SimLogger::Warning, __FILE__, __FUNCTION__, __LINE__)
