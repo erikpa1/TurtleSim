@@ -6,7 +6,10 @@
 namespace simstudio
 
 {
-
+	Shared<Station> Station::New()
+	{
+		return Shared<Station>();
+	}
 	void Station::Init()
 	{
 		_operation_time = _any_operation_time.CompileSeconds();

@@ -8,14 +8,37 @@ using namespace tinyxml2;
 namespace simstudio {
 
 	//Safe node code
-	SafeXmlNode::SafeXmlNode(Shared<tinyxml2::XMLElement>& element)
+	SafeXmlNode::SafeXmlNode(XMLElement* element)
 	{
-		//_element = element;
+		_element = element;
 	}
 
-	bool SafeXmlNode::BoolVal()
+	bool SafeXmlNode::GetBoolAttrib(const String& key, bool notFoud)
 	{
-		return false;
+		if (_element) {
+			return _element->BoolAttribute(key.c_str(), notFoud);
+		}
+		else {
+			return notFoud;
+		}
+	}
+		
+	String SafeXmlNode::GetStringAttrib(const String& key, String notFoud)
+	{
+		if (_element) {
+			auto value = _element->Attribute(key.c_str());
+
+			if (value) {
+				return value;
+			}
+			else {
+				return notFoud;
+			}
+
+		}
+		else {
+			return notFoud;
+		}
 	}
 
 

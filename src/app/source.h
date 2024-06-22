@@ -5,6 +5,9 @@ namespace simstudio {
 
 	class Source : public Entity {
 
+	public:
+		static Shared<Source> New();
+
 	};
 
 }

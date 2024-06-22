@@ -26,6 +26,9 @@ namespace simstudio
 	class Station : public Entity
 	{
 	public:
+
+		static Shared<Station> New();
+
 		double _operation_time = 0;
 
 		AnyNumber _any_operation_time;
@@ -41,7 +44,7 @@ namespace simstudio
 
 	public:
 		virtual void Init();
-		virtual void Step(App & app, Stepper& stepper) override;
+		virtual void Step(App& app, Stepper& stepper) override;
 
 		virtual void PrintFinalStatistics();
 	};

@@ -10,6 +10,7 @@ namespace tinyxml2 {
 namespace simstudio {
 
 
+
 	class SafeXmlNode {
 
 	public:
@@ -17,9 +18,10 @@ namespace simstudio {
 
 	public:
 
-		SafeXmlNode(Shared<tinyxml2::XMLElement> &element);
+		SafeXmlNode(tinyxml2::XMLElement * element);
 
-		bool BoolVal();
+		bool GetBoolAttrib(const String& key, bool notFoud=false);
+		String GetStringAttrib(const String& key, String notFound="");
 
 	};
 
