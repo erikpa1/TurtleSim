@@ -6,8 +6,6 @@
 #include "../utils/exe_dir.h"
 #include "../serialization/safexml.h"
 
-
-
 #include "../utils/prelude.h"
 #include "../app/prelude.h"
 
@@ -18,9 +16,12 @@ using namespace tinyxml2;
 namespace simstudio {
 	void run_xml()
 	{
-
 		App app;
 
+		ClassFactory factory;
+		factory.RegisterClass<Source>();
+		factory.RegisterClass<Station>();
+		factory.RegisterClass<Drain>();
 
 		String example_file = F("{}\\{}", GetSolutionDirectory(), "example.xml");
 
@@ -46,37 +47,43 @@ namespace simstudio {
 						auto child_name = safe_child.GetStringAttrib("name");
 						auto child_uid = safe_child.GetStringAttrib("uid");
 
-						if (child_type == "source") {
-							auto tmp = Source::New();
-							tmp->_name = child_name;
-							tmp->_uid = child_name;
-							app.AddEntity(tmp);
-						}
-						else if (child_type == "station") {
-							auto tmp = Station::New();
-							tmp->_name = child_name;
-							tmp->_uid = child_name;
-							tmp->_any_operation_time._strValue = "uniform(5, 10)";
-							app.AddEntity(tmp);
-						}
-						else if (child_type == "drain") {
-							auto tmp = Drain::New();
-							tmp->_name = child_name;
-							tmp->_uid = child_name;
-							app.AddEntity(tmp);
-						}
+
+						auto entity = factory.Construct<Entity>(child_type);
+						entity->FromXml(safe_child);
+						app.AddEntity(entity);
+
 					}
 				}
 				else {
 					LogE << "Entities was invalid";
 				}
 
+				auto connections = node_app->FirstChildElement("connections");
+
+				if (connections) {
+					for (auto child = connections->FirstChildElement(); child != nullptr; child = child->NextSiblingElement()) {
+						SafeXmlNode connection(child);
+
+						auto a = connection.GetStringAttrib("a");
+						auto b = connection.GetStringAttrib("b");
+
+						if (a != "" && b != "") {
+							app.AddEntityConnection(a, b);
+						}
+						else {
+							LogE << "Incomplete connection, " << a << " " << b;
+						}
+					}
+
+				}
+				else {
+					LogE << "Connections was invalid";
+				}
+
+
+
+
 			}
-
-
-			//XMLElement* titleElement = doc.FirstChildElement("app")->FirstChildElement("name");
-			//auto title = titleElement->GetText();
-			//LogI << "Name: " << title;
 		}
 		else {
 			LogE << "Failed to open XML";
@@ -84,8 +91,9 @@ namespace simstudio {
 
 		LogI << doc.ErrorID();
 
-
-
+		app.Init();
+		app.StartSimulation();
+		app.PrintFinalStatistics();
 
 	}
 }

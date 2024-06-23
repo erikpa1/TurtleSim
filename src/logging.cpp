@@ -6,10 +6,6 @@ SimLogger::SimLogger(Level level, const char* file, const char* function, int li
 {
 	_level = level;
 
-
-	stream_ << file << ":" << line << " (" << function << ") ";
-
-
 	switch (_level)
 	{
 	case Debug:
@@ -25,6 +21,10 @@ SimLogger::SimLogger(Level level, const char* file, const char* function, int li
 		stream_ << "\033[0m \033[33m [Warning] ";
 		break;
 	}
+
+	stream_ << file << ":" << line << " (" << function << ") ";
+
+
 }
 
 SimLogger::~SimLogger()

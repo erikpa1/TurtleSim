@@ -3,27 +3,38 @@
 #include "stepper.h"
 #include "app.h"
 
+
+#include "../serialization/prelude.h"
+
 namespace simstudio
 
 {
+	Station::~Station()
+	{
+		LogD << "Station got somehow destructed";
+	}
 	Shared<Station> Station::New()
 	{
-		return Shared<Station>();
+		auto station = Shared<Station>();
+		return Share<Station>();
+	}
+	String Station::Type()
+	{
+		return "Type[Station]";
 	}
 	void Station::Init()
 	{
-		_operation_time = _any_operation_time.CompileSeconds();
-		LogI << F("Station [{}] operation time: [{}]", _uid, _operation_time);
 	}
-
 
 
 	void Station::Step(App& app, Stepper& stepper)
 	{
 		if (_is_manufacturing)
 		{
-			if (stepper.GetStepSecond() < (_manufacturing_started + _operation_time))
+			if (_manufacturing_end <= stepper.GetStepSecond())
 			{
+				_is_manufacturing = false;
+
 				_statistics.manufactured += 1;
 
 				if (app._connections.contains(_uid)) {
@@ -32,27 +43,18 @@ namespace simstudio
 					if (app._entities.contains(successor_uid)) {
 						auto successor = app._entities[successor_uid];
 						if (successor) {
-							successor->TakeEntity();
+							successor->TakeEntity(_activeEntity);
+							_activeEntity.reset();
 						}
 					}
 					else {
 						LogE << successor_uid << " successor don't exists";
 					}
-
 				}
 				else {
 					LogW << _uid << " has no accessor to send material on";
 				}
-
-
 			}
-		}
-
-		if (_is_manufacturing == false)
-		{
-
-			_manufacturing_started = stepper._stepIndex;
-			_is_manufacturing = true;
 		}
 	}
 
@@ -63,5 +65,46 @@ namespace simstudio
 
 		LogD << "Manufactures count: " << _statistics.manufactured;
 	}
+
+	void Station::FromXml(SafeXmlNode& node)
+	{
+		Entity::FromXml(node);
+		_any_operation_time._strValue = node.GetStringAttrib("operation_time", _any_operation_time._strValue);
+
+	}
+
+	bool Station::TakeEntity(Shared<Entity>& entity)
+	{
+		if (_activeEntity) {
+			LogE << _uid << " is already manufacturing something";
+			return true;
+		}
+		else {
+			_activeEntity = entity;
+			_StartManufacturing();
+			return false;
+		}
+
+	}
+
+	bool Station::CanTakeEntity()
+	{
+		return bool(_activeEntity) == false;
+	}
+
+	void Station::_StartManufacturing()
+	{
+		if (_activeEntity) {
+			auto manufacturing_time = _any_operation_time.CompileSecondsLong();
+			_is_manufacturing = true;
+			_manufacturing_end = _activeTime + manufacturing_time;
+			LogI << "Started manufacturing, will be finished at: " << _manufacturing_end;
+		}
+		else {
+			LogE << "Station didn't started manufacturing because entity was null";
+		}
+	}
+
+
 
 }

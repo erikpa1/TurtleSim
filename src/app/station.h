@@ -8,6 +8,9 @@ namespace simstudio
 
 	class Stepper;
 	class App;
+	class Mu;
+
+	class SafeXmlNode;
 
 	enum StationNotEnoughEntitiesMode
 	{
@@ -25,13 +28,18 @@ namespace simstudio
 
 	class Station : public Entity
 	{
+
 	public:
 
-		static Shared<Station> New();
+		FactoryType("station");
+		~Station();
 
-		double _operation_time = 0;
+	public:
+
 
 		AnyNumber _any_operation_time;
+
+		long _manufacturing_end = LONG_MAX;
 
 		String _operation_time_input = "00:00";
 
@@ -42,11 +50,30 @@ namespace simstudio
 
 		StationStatistics _statistics;
 
+		Shared<Entity> _activeEntity;
+
+
+
+
+
 	public:
+
+		static Shared<Station> New();
+
+		String Type();
+
 		virtual void Init();
 		virtual void Step(App& app, Stepper& stepper) override;
 
 		virtual void PrintFinalStatistics();
+
+		virtual void FromXml(SafeXmlNode& node) override;
+		virtual bool TakeEntity(Shared<Entity>& entity) override;
+		virtual bool CanTakeEntity() override;
+
+	private:
+		void _StartManufacturing();
+
 	};
 
 };

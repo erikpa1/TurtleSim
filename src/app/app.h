@@ -1,10 +1,11 @@
 
 #include "../prelude.h"
 
+#include "stepper.h"
+
 namespace simstudio
 {
 
-	class Stepper;
 	class Entity;
 
 	class App
@@ -16,12 +17,20 @@ namespace simstudio
 
 		HashMap<String> _connections;
 
+		Stepper _stepper;
+
 		void Init();
-		void Step(Stepper& stepper);
+
+		void PrintEntities();
+
+		void StartSimulation();
+
+		void Step();
 		void AddEntity(Shared<Entity> entity);
 
-
 		void AddEntityConnection(String connA, String connB);
+
+		bool MoveEntity(Shared<Entity> &entity, String fromEntity, String toEntity);
 
 
 		void PrintFinalStatistics();

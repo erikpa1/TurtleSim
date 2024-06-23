@@ -8,7 +8,7 @@ namespace simstudio
 
     void Stepper::Step()
     {
-        LogI << "Doing the step: " << _stepIndex;
+        LogI << "------------- Doing the step: " << _stepIndex;
         _stepIndex += 1;
     }
 

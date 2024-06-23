@@ -2,12 +2,14 @@
 
 #include "app.h"
 #include "entity.h"
+
 #include "stepper.h"
 namespace simstudio
 {
 
 	App::App()
 	{
+		_stepper = Stepper();
 	}
 
 	void App::Init()
@@ -18,14 +20,36 @@ namespace simstudio
 		}
 	}
 
-	void App::Step(Stepper& stepper)
+	void App::PrintEntities()
 	{
+		for (const auto& iter : _entities)
+		{
+			LogI << iter.second->_uid;
+		}
+	}
+
+	void App::StartSimulation()
+	{
+		for (long i = 0; i < 100; i++) {
+			Step();
+		}
+	}
+
+	void App::Step()
+	{
+		for (const auto& iter : _entities)
+		{
+			auto &entity = iter.second;
+			entity->_activeTime = _stepper._stepIndex;
+		}
 
 		for (const auto& iter : _entities)
 		{
-			auto entity = iter.second;
-			entity->Step(*this, stepper);
+			auto &entity = iter.second;
+
+			entity->Step(*this, _stepper);
 		}
+		_stepper.Step();
 	}
 
 	void App::AddEntity(Shared<Entity> entity)
@@ -37,6 +61,18 @@ namespace simstudio
 	{
 		_connections[connA] = connB;
 	}
+
+	bool App::MoveEntity(Shared<Entity>& entity, String fromEntity, String toEntity)
+	{
+		LogD << "Moving entity from: " << fromEntity << " to " << toEntity;
+
+		if (_connections.find(toEntity) != _connections.end()) {
+			return _entities[toEntity]->TakeEntity(entity);
+		}
+		return false;
+	}
+
+
 
 	void App::PrintFinalStatistics()
 	{

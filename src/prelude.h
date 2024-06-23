@@ -8,6 +8,7 @@
 #include <optional>
 #include <format>
 #include <any>
+#include <functional>
 
 #include "logging.h"
 
@@ -31,13 +32,18 @@ using Shared = std::shared_ptr<T>;
 template <typename T, typename... Args>
 std::shared_ptr<T> Share(Args &&...args)
 {
-    return std::make_shared<T>(std::forward<Args>(args)...);
+	return std::make_shared<T>(std::forward<Args>(args)...);
 }
 
 template <typename T>
 String ToString(T arg)
 {
-    return std::to_string(arg);
+	return std::to_string(arg);
 }
 
 #define F(first_param, ...) std::format(first_param, __VA_ARGS__)
+
+
+#define FactoryType(type) \
+    static String ClassType() { return type;} \
+

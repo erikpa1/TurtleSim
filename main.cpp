@@ -17,7 +17,7 @@ int main_local()
 
 
 	App app;
-	Stepper steper;
+
 
 	auto source = Share<Source>();
 	source->_uid = "Source_1";
@@ -47,14 +47,7 @@ int main_local()
 	app.AddEntityConnection("Station_4", "Drain_1");
 
 	app.Init();
-
-	for (int i = 0; i < 20; i++)
-	{
-		app.Step(steper);
-		steper.Step();
-	}
-
-
+	app.StartSimulation();
 
 	app.PrintFinalStatistics();
 

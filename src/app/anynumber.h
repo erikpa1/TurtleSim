@@ -12,5 +12,6 @@ namespace simstudio
         double CompileMathExpr(double notFound);
         uint64_t CompileMilis();
         double CompileSeconds();
+        long CompileSecondsLong();
     };
 };

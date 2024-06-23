@@ -3,7 +3,7 @@
 namespace simstudio {
 	Shared<Drain> Drain::New()
 	{
-		return Shared<Drain>();
+		return Share<Drain>();
 	}
 
 }
