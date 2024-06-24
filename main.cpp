@@ -8,6 +8,7 @@
 #include "src/runs/run_xml.h"
 
 
+#include "src/external/imgui/run_directx.h"
 
 using namespace simstudio;
 
@@ -60,6 +61,8 @@ int main_local()
 
 int main() {
 
+
+	run_directx();
 
 	run_xml();
 

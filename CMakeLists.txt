@@ -12,7 +12,14 @@ add_executable(
         Simstudio 
         main.cpp
         # main_1.cpp
-${Simstudio_SRC} "src/app/drain.cpp" "src/serialization/safexml.h" "src/utils/class_factory.h" "src/utils/crypto.cpp")
+${Simstudio_SRC})
+
+
+#Adding Direct12
+find_library(D3D12_LIB d3d12.lib)
+target_link_libraries(${PROJECT_NAME} ${D3D12_LIB})
+find_library(DXGI dxgi.lib)
+target_link_libraries(${PROJECT_NAME} ${DXGI})
 
 
 #target_precompile_headers(Simstudio Private src/prelude.h)
