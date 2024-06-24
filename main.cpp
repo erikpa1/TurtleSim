@@ -4,68 +4,28 @@
 
 #include "src/app/prelude.h"
 #include "src/utils/prelude.h"
-
 #include "src/runs/run_xml.h"
 
+#include "run_directx.h"
 
-#include "src/external/imgui/run_directx.h"
+#include "src/factory_registration.h"
+
 
 using namespace simstudio;
-
-int main_local()
-{
-
-
-
-	App app;
-
-
-	auto source = Share<Source>();
-	source->_uid = "Source_1";
-	source->_name = source->_uid;
-
-	auto drain = Share<Drain>();
-	drain->_uid = "Drain_1";
-	drain->_name = drain->_uid;
-
-	app.AddEntity(source);
-	app.AddEntity(drain);
-
-	for (int i = 0; i < 5; i++)
-	{
-		auto station = Share<Station>();
-		station->_name = F("Station_{}", i);
-		station->_uid = F("Station_{}", i);
-		station->_any_operation_time._strValue = "uniform(5, 10)";
-		app.AddEntity(station);
-	}
-
-	app.AddEntityConnection("Source_1", "Station_0");
-	app.AddEntityConnection("Station_0", "Station_1");
-	app.AddEntityConnection("Station_1", "Station_2");
-	app.AddEntityConnection("Station_2", "Station_3");
-	app.AddEntityConnection("Station_3", "Station_4");
-	app.AddEntityConnection("Station_4", "Drain_1");
-
-	app.Init();
-	app.StartSimulation();
-
-	app.PrintFinalStatistics();
-
-	//TODO zobrazit to XML v korytnacke
-
-	return 0;
-}
 
 
 
 int main() {
 
+	RegisterClasses();
 
-	run_directx();
+	auto factory = ClassFactory::Instance();
+	LogI << &factory;
 
+	App app;
+
+	run_directx(app);
 	run_xml();
-
 
 
 	return 0;

@@ -4,6 +4,16 @@
 #include "entity.h"
 
 #include "stepper.h"
+
+#include "../utils/class_factory.h"
+
+//TODO toto zaobalit na kompletku
+#include "../external/tinyxml2.h"
+#include "../serialization/safexml.h"
+
+using namespace tinyxml2;
+
+
 namespace simstudio
 {
 
@@ -39,13 +49,13 @@ namespace simstudio
 	{
 		for (const auto& iter : _entities)
 		{
-			auto &entity = iter.second;
+			auto& entity = iter.second;
 			entity->_activeTime = _stepper._stepIndex;
 		}
 
 		for (const auto& iter : _entities)
 		{
-			auto &entity = iter.second;
+			auto& entity = iter.second;
 
 			entity->Step(*this, _stepper);
 		}
@@ -82,6 +92,80 @@ namespace simstudio
 		{
 			iter.second->PrintFinalStatistics();
 		}
+	}
+
+	void App::LoadFromXmlFile(const String& path)
+	{
+		auto factory = ClassFactory::Instance();
+
+		LogI << &factory;
+
+		SafeXml doc;
+		doc.LoadFile(path);
+
+		if (doc.ErrorID() == 0) {
+
+			auto node_app = doc._document->FirstChildElement("app");
+
+
+			if (node_app) {
+				auto entities = node_app->FirstChildElement("entities");
+
+				if (entities) {
+
+					for (auto child = entities->FirstChildElement(); child != nullptr; child = child->NextSiblingElement()) {
+
+						auto child_type = child->Name();
+
+						SafeXmlNode safe_child(child);
+
+						auto child_name = safe_child.GetStringAttrib("name");
+						auto child_uid = safe_child.GetStringAttrib("uid");
+
+
+						auto entity = factory->Construct<Entity>(child_type);
+						entity->FromXml(safe_child);
+						AddEntity(entity);
+
+					}
+				}
+				else {
+					LogE << "Entities was invalid";
+				}
+
+				auto connections = node_app->FirstChildElement("connections");
+
+				if (connections) {
+					for (auto child = connections->FirstChildElement(); child != nullptr; child = child->NextSiblingElement()) {
+						SafeXmlNode connection(child);
+
+						auto a = connection.GetStringAttrib("a");
+						auto b = connection.GetStringAttrib("b");
+
+						if (a != "" && b != "") {
+							AddEntityConnection(a, b);
+						}
+						else {
+							LogE << "Incomplete connection, " << a << " " << b;
+						}
+					}
+
+				}
+				else {
+					LogE << "Connections was invalid";
+				}
+
+
+				auto factory = ClassFactory::Instance();
+
+				LogI << &factory;
+			}
+		}
+		else {
+			LogE << "Failed to open XML error id: " << doc.ErrorID();;
+		}
+
+
 	}
 
 }

@@ -1,4 +1,4 @@
-
+#pragma once
 #include "../prelude.h"
 
 #include "stepper.h"
@@ -34,6 +34,8 @@ namespace simstudio
 
 
 		void PrintFinalStatistics();
+
+		void LoadFromXmlFile(const String& path);
 	};
 
 };

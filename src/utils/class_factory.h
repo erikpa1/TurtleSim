@@ -1,4 +1,4 @@
-
+#pragma once
 #include "../prelude.h"
 
 namespace simstudio {
@@ -10,7 +10,14 @@ namespace simstudio {
 	public:
 		HashMap<ConstructFunction> _constructors;
 
+		static ClassFactory* _instance;
+
 	public:
+
+
+		static ClassFactory* Instance();
+
+
 		void RegisterConstructor(String type, ConstructFunction function);
 
 		template<typename T>
@@ -27,7 +34,12 @@ namespace simstudio {
 				return tmp;
 			}
 			else {
-				LogE << "Unable to find constructor of class";
+				LogE << "Unable to find constructor of class [" << type << "]";
+
+				for (const auto& iter : _constructors) {
+					LogI << "--" << iter.first;
+				}
+
 			}
 			return Share<T>();
 		}
