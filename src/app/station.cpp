@@ -58,12 +58,15 @@ namespace simstudio
 		}
 	}
 
-	void Station::PrintFinalStatistics()
+	void Station::PrintFinalStatistics(long statistics_delay, long simulation_duration)
 	{
 		LogD << "======================";
 		LogD << F("Final statistics for Station [{}]", _uid);
 
-		LogD << "Manufactures count: " << _statistics.manufactured;
+		LogI << "Manufactures count: " << _statistics.manufactured;
+		LogI << "Manufacturing percentage: " << (static_cast<double>(_statistics.manufactured_time) / static_cast<double>(simulation_duration)) * 100 << "%";
+		LogI << "Avg manufacturing time: " << static_cast<double>(_statistics.manufactured_time) / static_cast<double>(_statistics.manufactured);
+
 	}
 
 	void Station::FromXml(SafeXmlNode& node)
@@ -98,6 +101,7 @@ namespace simstudio
 			auto manufacturing_time = _any_operation_time.CompileSecondsLong();
 			_is_manufacturing = true;
 			_manufacturing_end = _activeTime + manufacturing_time;
+			_statistics.manufactured_time += manufacturing_time;
 			LogI << "Started manufacturing, will be finished at: " << _manufacturing_end;
 		}
 		else {

@@ -13,6 +13,16 @@ namespace simstudio {
 		_element = element;
 	}
 
+	int SafeXmlNode::GetIntAttrib(const String& key, int notFoud) {
+		if (_element) {
+			return _element->IntAttribute(key.c_str(), notFoud);
+		}
+		else {
+			return notFoud;
+		}
+	}
+
+
 	bool SafeXmlNode::GetBoolAttrib(const String& key, bool notFoud)
 	{
 		if (_element) {
@@ -22,7 +32,7 @@ namespace simstudio {
 			return notFoud;
 		}
 	}
-		
+
 	String SafeXmlNode::GetStringAttrib(const String& key, String notFoud)
 	{
 		if (_element) {

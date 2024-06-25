@@ -3,6 +3,8 @@
 #include "entity.h"
 #include "anynumber.h"
 
+#include "statistics/station_statistics.h"
+
 namespace simstudio
 {
 
@@ -19,12 +21,6 @@ namespace simstudio
 
 	};
 
-	class StationStatistics
-	{
-	public:
-		uint64_t manufactured;
-		uint64_t manufactured_time;
-	};
 
 	class Station : public Entity
 	{
@@ -44,15 +40,13 @@ namespace simstudio
 		String _operation_time_input = "00:00";
 
 		bool _is_manufacturing = false;
-		uint64_t _manufacturing_started = 0;
+		long _manufacturing_started = 0;
 
 		StationNotEnoughEntitiesMode _not_enought_entities_mode = StationNotEnoughEntitiesMode::NON_OPERATIVE;
 
 		StationStatistics _statistics;
 
 		Shared<Entity> _activeEntity;
-
-
 
 
 
@@ -65,7 +59,7 @@ namespace simstudio
 		virtual void Init();
 		virtual void Step(App& app, Stepper& stepper) override;
 
-		virtual void PrintFinalStatistics();
+		virtual void PrintFinalStatistics(long statistics_delay, long simulation_duration);
 
 		virtual void FromXml(SafeXmlNode& node) override;
 		virtual bool TakeEntity(Shared<Entity>& entity) override;

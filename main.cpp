@@ -19,13 +19,9 @@ int main() {
 
 	RegisterClasses();
 
-	auto factory = ClassFactory::Instance();
-	LogI << &factory;
-
 	App app;
-
-	run_directx(app);
-	run_xml();
+	//run_directx(app);
+	run_xml(app);
 
 
 	return 0;

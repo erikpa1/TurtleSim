@@ -20,6 +20,7 @@ namespace simstudio {
 
 		SafeXmlNode(tinyxml2::XMLElement * element);
 
+		int GetIntAttrib(const String& key, int notFoud=0);
 		bool GetBoolAttrib(const String& key, bool notFoud=false);
 		String GetStringAttrib(const String& key, String notFound="");
 

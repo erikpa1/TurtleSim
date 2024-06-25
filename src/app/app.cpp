@@ -6,10 +6,12 @@
 #include "stepper.h"
 
 #include "../utils/class_factory.h"
+#include "../utils/time_expr.h"
 
 //TODO toto zaobalit na kompletku
 #include "../external/tinyxml2.h"
 #include "../serialization/safexml.h"
+
 
 using namespace tinyxml2;
 
@@ -40,7 +42,9 @@ namespace simstudio
 
 	void App::StartSimulation()
 	{
-		for (long i = 0; i < 100; i++) {
+		LogD << "Starting simulation with duration: " << _stepper._endIndex;
+
+		for (long i = 0; i <= _stepper._endIndex; i++) {
 			Step();
 		}
 	}
@@ -90,7 +94,7 @@ namespace simstudio
 		LogI << "Final statistics:";
 		for (const auto& iter : _entities)
 		{
-			iter.second->PrintFinalStatistics();
+			iter.second->PrintFinalStatistics(0, _stepper._stepIndex);
 		}
 	}
 
@@ -109,6 +113,17 @@ namespace simstudio
 
 
 			if (node_app) {
+
+
+				auto simparams = node_app->FirstChildElement("simparams");
+
+				if (simparams) {
+					SafeXmlNode safe_sim_params(simparams);
+					auto time_param = safe_sim_params.GetStringAttrib("simtime", "2:00");
+					_stepper._endIndex = TimeExpr::SecondsFromTimeString(time_param);
+				}
+
+
 				auto entities = node_app->FirstChildElement("entities");
 
 				if (entities) {

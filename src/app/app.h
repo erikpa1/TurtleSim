@@ -30,7 +30,7 @@ namespace simstudio
 
 		void AddEntityConnection(String connA, String connB);
 
-		bool MoveEntity(Shared<Entity> &entity, String fromEntity, String toEntity);
+		bool MoveEntity(Shared<Entity>& entity, String fromEntity, String toEntity);
 
 
 		void PrintFinalStatistics();

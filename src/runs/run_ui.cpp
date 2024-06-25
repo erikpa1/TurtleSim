@@ -37,6 +37,8 @@ namespace simstudio {
 
 	}
 
+	static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
+
 	void _draw(App& app)
 	{
 		static float f = 0.0f;
@@ -44,7 +46,16 @@ namespace simstudio {
 
 		static bool my_tool_active = false;
 
+
+		dockspace_flags &= ~ImGuiDockNodeFlags_PassthruCentralNode;
+
+		ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar;
+
+
 		ImGui::Begin("Controls", &my_tool_active, ImGuiWindowFlags_MenuBar);
+
+		ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+		ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 
 
 		if (ImGui::BeginMenuBar())

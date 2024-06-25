@@ -3,7 +3,9 @@
 
 namespace simstudio {
 
-	void run_xml();
+	class App;
+
+	void run_xml(App& app);
 
 
 }

@@ -35,7 +35,7 @@ namespace simstudio
 		return false;
 	}
 
-	void Entity::PrintFinalStatistics()
+	void Entity::PrintFinalStatistics(long statistics_delay, long simulation_duration)
 	{
 	}
 
