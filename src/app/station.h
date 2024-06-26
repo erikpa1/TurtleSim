@@ -14,10 +14,12 @@ namespace simstudio
 
 	class SafeXmlNode;
 
-	enum StationNotEnoughEntitiesMode
+	enum StationStates
 	{
 		NON_OPERATIVE,
-		HANDICAPED
+		HANDICAPED,
+		BLOCKED,
+		WORKING
 
 	};
 
@@ -39,10 +41,10 @@ namespace simstudio
 
 		String _operation_time_input = "00:00";
 
-		bool _is_manufacturing = false;
+
 		long _manufacturing_started = 0;
 
-		StationNotEnoughEntitiesMode _not_enought_entities_mode = StationNotEnoughEntitiesMode::NON_OPERATIVE;
+		StationStates _activeState = StationStates::NON_OPERATIVE;
 
 		StationStatistics _statistics;
 
@@ -65,8 +67,12 @@ namespace simstudio
 		virtual bool TakeEntity(Shared<Entity>& entity) override;
 		virtual bool CanTakeEntity() override;
 
+
+
 	private:
 		void _StartManufacturing();
+		void _FinishManufacturing(App& app);
+		void _TryToPassNextEntity(App& app);
 
 	};
 

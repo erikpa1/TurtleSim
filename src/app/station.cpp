@@ -3,8 +3,11 @@
 #include "stepper.h"
 #include "app.h"
 
+#include <iomanip>  
+
 
 #include "../serialization/prelude.h"
+#include "../utils/time_expr.h"
 
 namespace simstudio
 
@@ -29,45 +32,20 @@ namespace simstudio
 
 	void Station::Step(App& app, Stepper& stepper)
 	{
-		if (_is_manufacturing)
+		if (_activeState == StationStates::WORKING)
 		{
 			if (_manufacturing_end <= stepper.GetStepSecond())
 			{
-				_is_manufacturing = false;
-
-				_statistics.manufactured += 1;
-
-				if (app._connections.contains(_uid)) {
-					String successor_uid = app._connections[_uid];
-
-					if (app._entities.contains(successor_uid)) {
-						auto successor = app._entities[successor_uid];
-						if (successor) {
-							successor->TakeEntity(_activeEntity);
-							_activeEntity.reset();
-						}
-					}
-					else {
-						LogE << successor_uid << " successor don't exists";
-					}
-				}
-				else {
-					LogW << _uid << " has no accessor to send material on";
-				}
+				_FinishManufacturing(app);
 			}
 		}
-	}
+		else if (_activeState == StationStates::BLOCKED) {
+			_TryToPassNextEntity(app);
+		}
 
-	void Station::PrintFinalStatistics(long statistics_delay, long simulation_duration)
-	{
-		LogD << "======================";
-		LogD << F("Final statistics for Station [{}]", _uid);
-
-		LogI << "Manufactures count: " << _statistics.manufactured;
-		LogI << "Manufacturing percentage: " << (static_cast<double>(_statistics.manufactured_time) / static_cast<double>(simulation_duration)) * 100 << "%";
-		LogI << "Avg manufacturing time: " << static_cast<double>(_statistics.manufactured_time) / static_cast<double>(_statistics.manufactured);
 
 	}
+
 
 	void Station::FromXml(SafeXmlNode& node)
 	{
@@ -80,14 +58,14 @@ namespace simstudio
 	{
 		if (_activeEntity) {
 			LogE << _uid << " is already manufacturing something";
-			return true;
+			return false;
 		}
 		else {
 			_activeEntity = entity;
+			_statistics.entities_in += 1;
 			_StartManufacturing();
-			return false;
+			return true;
 		}
-
 	}
 
 	bool Station::CanTakeEntity()
@@ -95,11 +73,63 @@ namespace simstudio
 		return bool(_activeEntity) == false;
 	}
 
+	void Station::_FinishManufacturing(App& app)
+	{
+		_statistics.manufactured += 1;
+		_activeState = StationStates::NON_OPERATIVE;
+
+		_TryToPassNextEntity(app);
+	}
+
+	void Station::_TryToPassNextEntity(App& app)
+	{
+
+		bool isBlocked = false;
+
+		if (app._connections.contains(_uid)) {
+			String successor_uid = app._connections[_uid];
+
+			if (app._entities.contains(successor_uid)) {
+				auto successor = app._entities[successor_uid];
+				if (successor) {
+					if (successor->TakeEntity(_activeEntity)) {
+						_activeEntity.reset();
+						_statistics.entities_out += 1;
+
+						if (_activeState == StationStates::BLOCKED) {
+							LogE << F("[{}] is now free from block", _uid);
+						}
+
+
+						_activeState = StationStates::NON_OPERATIVE;
+					}
+					else {
+						isBlocked = true;
+					}
+				}
+			}
+			else {
+				isBlocked = true;
+				LogE << successor_uid << " successor don't exists";
+			}
+		}
+		else {
+			isBlocked = true;
+			LogW << _uid << " has no accessor to send material on";
+		}
+
+		if (isBlocked) {
+			_activeState = StationStates::BLOCKED;
+			_statistics.blocked_time += 1;
+		}
+
+	}
+
 	void Station::_StartManufacturing()
 	{
 		if (_activeEntity) {
 			auto manufacturing_time = _any_operation_time.CompileSecondsLong();
-			_is_manufacturing = true;
+			_activeState = StationStates::WORKING;
 			_manufacturing_end = _activeTime + manufacturing_time;
 			_statistics.manufactured_time += manufacturing_time;
 			LogI << "Started manufacturing, will be finished at: " << _manufacturing_end;
@@ -109,6 +139,38 @@ namespace simstudio
 		}
 	}
 
+	void Station::PrintFinalStatistics(long statistics_delay, long simulation_duration)
+	{
+		LogD << "======================";
+		LogD << F("Final statistics for Station [{}]", _uid);
+
+		double manufacturing_percentage = (static_cast<double>(_statistics.manufactured_time) / static_cast<double>(simulation_duration));
+		double blocked_percentage = (static_cast<double>(_statistics.blocked_time) / static_cast<double>(simulation_duration));
+
+		LogI << "Entities in:" << _statistics.entities_in;
+		LogI << "Entities out:" << _statistics.entities_out;
+		LogI << "Manufactures count: " << _statistics.manufactured;
+		LogI << "Manufacturing percentage: " << manufacturing_percentage * 100 << "%";
+		LogI << "Blocked: " << blocked_percentage * 100 << "%";
+		LogI << "Idle: " << (1 - manufacturing_percentage - blocked_percentage) * 100 << "%";
+
+
+		if (_statistics.manufactured != 0) {
+
+			long time = _statistics.manufactured_time / _statistics.manufactured;
+
+			String time_str = TimeExpr::MakeFromSeconds(time);
+
+			LogI << "Avg manufacturing time: " << time_str;
+		}
+		else {
+			LogI << "Avg manufacturing time: " << 0;
+		}
+
+
+
+
+	}
 
 
 }

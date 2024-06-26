@@ -3,7 +3,7 @@
 
 
 	<simparams
-		simtime="2:00"
+		simtime="1:00:00"
 		/>
 
 	<entities>
@@ -21,6 +21,7 @@
 		<single a="Station_0" b="Station_1" />
 		<single a="Station_1" b="Station_2" />
 		<single a="Station_2" b="Station_3" />
+		<single a="Station_3" b="Station_4" />
 		<single a="Station_4" b="Drain_1" />
 	</connections>
 

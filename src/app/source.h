@@ -2,6 +2,7 @@
 #include "entity.h"
 #include "anynumber.h"
 
+#include "statistics/source_statistics.h"
 
 namespace simstudio {
 
@@ -18,7 +19,7 @@ namespace simstudio {
 
 		long _nextAction = LONG_MAX;
 
-		Array<Shared<Entity>> _buffer;
+		Shared<Entity> _activeEntity;
 
 
 	public:
@@ -29,6 +30,8 @@ namespace simstudio {
 		virtual void Init() override;
 		virtual void Step(App& app, Stepper& stepper) override;
 		virtual void FromXml(SafeXmlNode& node) override;
+
+		SourceStatistics _statistics;
 
 	private:
 

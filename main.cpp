@@ -20,7 +20,7 @@ int main() {
 	RegisterClasses();
 
 	App app;
-	run_directx(app);
+	//run_directx(app);
 	run_xml(app);
 
 
