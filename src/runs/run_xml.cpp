@@ -11,8 +11,11 @@
 namespace simstudio {
 	void run_xml(App& app)
 	{
-		String example_file = F("{}\\{}", GetSolutionDirectory(), "example.xml");
-		app.LoadFromXmlFile(example_file);
+
+		String example_file = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example.xml");
+		String example_file_1 = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example_1.xml");
+
+		app.LoadFromXmlFile(example_file_1);
 		app.Init();
 		app.StartSimulation();
 		app.PrintFinalStatistics();

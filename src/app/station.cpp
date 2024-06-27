@@ -56,21 +56,22 @@ namespace simstudio
 
 	bool Station::TakeEntity(Shared<Entity>& entity)
 	{
-		if (_activeEntity) {
-			LogE << _uid << " is already manufacturing something";
-			return false;
-		}
-		else {
+		if (CanTakeEntity()) {
 			_activeEntity = entity;
 			_statistics.entities_in += 1;
 			_StartManufacturing();
 			return true;
+
+		}
+		else {
+			LogE << _uid << " is already manufacturing something";
+			return false;
 		}
 	}
 
 	bool Station::CanTakeEntity()
 	{
-		return bool(_activeEntity) == false;
+		return _activeEntity == nullptr;
 	}
 
 	void Station::_FinishManufacturing(App& app)
@@ -84,39 +85,29 @@ namespace simstudio
 	void Station::_TryToPassNextEntity(App& app)
 	{
 
-		bool isBlocked = false;
+		bool isBlocked = true;
 
-		if (app._connections.contains(_uid)) {
-			String successor_uid = app._connections[_uid];
-
-			if (app._entities.contains(successor_uid)) {
-				auto successor = app._entities[successor_uid];
-				if (successor) {
-					if (successor->TakeEntity(_activeEntity)) {
-						_activeEntity.reset();
-						_statistics.entities_out += 1;
-
-						if (_activeState == StationStates::BLOCKED) {
-							LogE << F("[{}] is now free from block", _uid);
-						}
+		auto connections = app.GetConnectedEntities(_uid);
 
 
-						_activeState = StationStates::NON_OPERATIVE;
-					}
-					else {
-						isBlocked = true;
-					}
+		for (const auto& connection : connections) {
+			if (connection->TakeEntity(_activeEntity)) {
+				_activeEntity.reset();
+				_statistics.entities_out += 1;
+
+				if (_activeState == StationStates::BLOCKED) {
+					LogE << F("[{}] is now free from block", _uid);
 				}
+
+				isBlocked = false;
+				_activeState = StationStates::NON_OPERATIVE;
+
+				return;
 			}
-			else {
-				isBlocked = true;
-				LogE << successor_uid << " successor don't exists";
-			}
+
 		}
-		else {
-			isBlocked = true;
-			LogW << _uid << " has no accessor to send material on";
-		}
+
+
 
 		if (isBlocked) {
 			_activeState = StationStates::BLOCKED;

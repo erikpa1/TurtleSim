@@ -15,7 +15,7 @@ namespace simstudio
 
 		HashMap<Shared<Entity>> _entities;
 
-		HashMap<String> _connections;
+		HashMap<Array<String>> _connections;
 
 		Stepper _stepper;
 
@@ -36,6 +36,8 @@ namespace simstudio
 		void PrintFinalStatistics();
 
 		void LoadFromXmlFile(const String& path);
+
+		Array<Shared<Entity>> GetConnectedEntities(const String& who);
 	};
 
 };

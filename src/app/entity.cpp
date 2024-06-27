@@ -13,7 +13,7 @@ namespace simstudio
 	}
 	Entity::Entity()
 	{
-		_uid == Crypto::Uuid_V4();
+		_uid = Crypto::Uuid_V4();
 	}
 
 	void Entity::Init()

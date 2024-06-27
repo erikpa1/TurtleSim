@@ -60,25 +60,18 @@ namespace simstudio {
 
 	void Source::_TryMoveEntityNext(App& app)
 	{
+		auto connections = app.GetConnectedEntities(_uid);
 
-		if (app._connections.contains(_uid)) {
-			String successor_uid = app._connections[_uid];
-
-			if (app._entities.contains(successor_uid)) {
-				auto successor = app._entities[successor_uid];
-				if (successor) {
-					if (successor->TakeEntity(_activeEntity)) {
-						_activeEntity.reset();
-					}
-				}
-			}
-			else {
-				LogE << successor_uid << " successor don't exists";
+		if (connections.size() > 0) {
+			if (connections[0]->TakeEntity(_activeEntity)) {
+				_activeEntity.reset();
+				return;
 			}
 		}
 		else {
-			LogW << _uid << " has no accessor to send material on";
+			LogE << "[Source] " << _uid << " successor don't exists";
 		}
+
 
 
 	}

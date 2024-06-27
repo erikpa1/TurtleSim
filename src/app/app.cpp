@@ -73,7 +73,13 @@ namespace simstudio
 
 	void App::AddEntityConnection(String connA, String connB)
 	{
-		_connections[connA] = connB;
+		if (_connections.contains(connA)) {
+			_connections[connA].push_back(connB);
+		}
+		else {
+			_connections[connA] = { connB };
+		}
+
 	}
 
 	bool App::MoveEntity(Shared<Entity>& entity, String fromEntity, String toEntity)
@@ -170,16 +176,33 @@ namespace simstudio
 					LogE << "Connections was invalid";
 				}
 
-
 				auto factory = ClassFactory::Instance();
-
-				LogI << &factory;
 			}
 		}
 		else {
 			LogE << "Failed to open XML error id: " << doc.ErrorID();;
 		}
 
+
+	}
+
+	Array<Shared<Entity>> App::GetConnectedEntities(const String& who)
+	{
+		Array<Shared<Entity>> successors;
+
+		if (_connections.contains(who)) {
+
+			auto successor_uids = _connections[who];
+
+			for (const auto& successor_uid : successor_uids) {
+				if (_entities.contains(successor_uid)) {
+					successors.push_back(_entities[successor_uid]);
+				}
+			}
+
+		}
+
+		return successors;
 
 	}
 
