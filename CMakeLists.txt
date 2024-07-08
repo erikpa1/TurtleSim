@@ -8,12 +8,13 @@ file(GLOB_RECURSE  Simstudio_SRC
      "${CMAKE_SOURCE_DIR}/src/*.cpp"
 )
 
+
 add_executable(
         Simstudio 
         main.cpp
         run_directx.cpp
         # main_1.cpp
-${Simstudio_SRC})
+${Simstudio_SRC} "src/app/statistics/conveyor_statistics.h")
 
 #Adding Direct12
 find_library(D3D12_LIB d3d12.lib)

@@ -94,15 +94,6 @@ namespace simstudio
 
 
 
-	void App::PrintFinalStatistics()
-	{
-		LogI << "==============";
-		LogI << "Final statistics:";
-		for (const auto& iter : _entities)
-		{
-			iter.second->PrintFinalStatistics(0, _stepper._stepIndex);
-		}
-	}
 
 	void App::LoadFromXmlFile(const String& path)
 	{

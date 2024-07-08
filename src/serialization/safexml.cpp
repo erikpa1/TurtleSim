@@ -22,6 +22,15 @@ namespace simstudio {
 		}
 	}
 
+	double SafeXmlNode::GetDoubleAttrib(const String& key, double notFoud) {
+		if (_element) {
+			return _element->DoubleAttribute(key.c_str(), notFoud);
+		}
+		else {
+			return notFoud;
+		}
+	}
+
 
 	bool SafeXmlNode::GetBoolAttrib(const String& key, bool notFoud)
 	{

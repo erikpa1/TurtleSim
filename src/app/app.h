@@ -33,7 +33,6 @@ namespace simstudio
 		bool MoveEntity(Shared<Entity>& entity, String fromEntity, String toEntity);
 
 
-		void PrintFinalStatistics();
 
 		void LoadFromXmlFile(const String& path);
 

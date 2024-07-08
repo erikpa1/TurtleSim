@@ -4,6 +4,7 @@
 #include "../utils/exe_dir.h"
 #include "../utils/prelude.h"
 #include "../app/prelude.h"
+#include "../statistics/app_report_collector.h"
 
 
 
@@ -14,11 +15,13 @@ namespace simstudio {
 
 		String example_file = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example.xml");
 		String example_file_1 = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example_1.xml");
+		String example_file_2 = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example_2_conveyor.xml");
 
-		app.LoadFromXmlFile(example_file_1);
+		app.LoadFromXmlFile(example_file_2);
 		app.Init();
 		app.StartSimulation();
-		app.PrintFinalStatistics();
+
+		SaveStatisticsRecord(app);
 
 	}
 }

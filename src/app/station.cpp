@@ -64,7 +64,14 @@ namespace simstudio
 
 		}
 		else {
-			LogE << _uid << " is already manufacturing something";
+
+			if (_activeState == StationStates::BLOCKED) {
+				LogE << _uid << " can't take entity because is [blocked].";
+			}
+			else {
+				LogE << _uid << " can't take entity because is [manufacturing].";
+			}
+
 			return false;
 		}
 	}

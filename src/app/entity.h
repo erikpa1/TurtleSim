@@ -2,6 +2,8 @@
 
 #include "../prelude.h"
 
+#include "../math/vec4.h"
+
 namespace simstudio
 {
 
@@ -20,11 +22,16 @@ namespace simstudio
 	public:
 
 
+		Vec4 _pos_global;
+		Vec4 _pos_local;
+
 
 		String _name;
 		String _uid;
+		String _type;
 
 		long _activeTime = 0;
+		double _length = 1;
 
 		virtual ~Entity();
 
@@ -36,10 +43,16 @@ namespace simstudio
 		virtual void Step(App& app, Stepper& stepper);
 		virtual bool TakeEntity(Shared<Entity>& entity);
 		virtual bool CanTakeEntity();
+
+		virtual void WasTaken();
+
 		virtual void PrintFinalStatistics(long statistics_delay, long simulation_duration);
 		virtual String Type();
 
 		virtual void FromXml(SafeXmlNode& xmlNode);
+
+
+		String StringThis();
 
 	};
 

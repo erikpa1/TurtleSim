@@ -15,6 +15,7 @@ namespace simstudio {
 		factory->RegisterClass<Station>();
 		factory->RegisterClass<Drain>();
 		factory->RegisterClass<Buffer>();
+		factory->RegisterClass<Conveyor>();
 
 		LogI << &factory;
 

@@ -47,3 +47,5 @@ String ToString(T arg)
 #define FactoryType(type) \
     static String ClassType() { return type;} \
 
+
+

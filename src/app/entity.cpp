@@ -35,6 +35,11 @@ namespace simstudio
 		return false;
 	}
 
+	void Entity::WasTaken()
+	{
+		_pos_local.Nullify();
+	}
+
 	void Entity::PrintFinalStatistics(long statistics_delay, long simulation_duration)
 	{
 	}
@@ -48,7 +53,11 @@ namespace simstudio
 	{
 		_uid = xmlNode.GetStringAttrib("uid", "");
 		_name = xmlNode.GetStringAttrib("name", "");
+	}
 
+	String Entity::StringThis()
+	{
+		return F("[{}][{}]", _type, _uid);
 	}
 
 }
