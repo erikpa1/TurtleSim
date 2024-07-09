@@ -6,6 +6,7 @@
 
 
 
+
 namespace simstudio {
 
 	void RegisterClasses() {
@@ -16,6 +17,10 @@ namespace simstudio {
 		factory->RegisterClass<Drain>();
 		factory->RegisterClass<Buffer>();
 		factory->RegisterClass<Conveyor>();
+		factory->RegisterClass<Agv>();
+		factory->RegisterClass<SingleLane>();
+		factory->RegisterClass<Unloader>();
+		factory->RegisterClass<Loader>();
 
 		LogI << &factory;
 

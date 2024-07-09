@@ -9,3 +9,7 @@
 #include "stepper.h"
 #include "buffer.h"
 #include "conveyor.h"
+#include "lane_single.h"
+#include "agv.h"
+#include "loader.h"
+#include "unloader.h"

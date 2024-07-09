@@ -48,4 +48,9 @@ String ToString(T arg)
     static String ClassType() { return type;} \
 
 
+#define FactoryNew(type) \
+    static Shared<type> New() { return Share<type>();} \
+
+
+
 
