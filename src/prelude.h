@@ -29,10 +29,23 @@ using Any = std::any;
 template <typename T>
 using Shared = std::shared_ptr<T>;
 
+template <typename T>
+using EnableShare = std::enable_shared_from_this<T>;
+
+
+template <typename T>
+using Weak = std::weak_ptr<T>;
+
 template <typename T, typename... Args>
-std::shared_ptr<T> Share(Args &&...args)
+inline std::shared_ptr<T> Share(Args &&...args)
 {
 	return std::make_shared<T>(std::forward<Args>(args)...);
+}
+
+template <typename T, typename... Args>
+inline std::shared_ptr<T> DynCast(Args &&...args)
+{
+	return std::dynamic_pointer_cast<T>(std::forward<Args>(args)...);
 }
 
 template <typename T>

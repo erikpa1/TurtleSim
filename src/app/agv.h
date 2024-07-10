@@ -6,6 +6,8 @@
 namespace simstudio {
 
 
+	class Track;
+
 	enum class AgvPowerType {
 		ELECTRIC = 0,
 		PETROL = 1,
@@ -22,7 +24,7 @@ namespace simstudio {
 		double _energy_storage = 100;
 
 
-		Shared<Entity> _activeTrack;
+		Weak<Track> _activeTrack;
 
 	public:
 		static Shared<Agv>New();
@@ -32,6 +34,9 @@ namespace simstudio {
 		virtual void Init() override;
 		virtual void Step(App& app, Stepper& stepper) override;
 		virtual void FromXml(SafeXmlNode& node) override;
+
+
+		void StartRideOn(Weak<Track>& track);
 
 
 

@@ -21,6 +21,7 @@ namespace simstudio
 
 	App::App()
 	{
+		//TODO dorobit custom entities template
 		_stepper = Stepper();
 	}
 
@@ -137,6 +138,7 @@ namespace simstudio
 
 						auto entity = factory->Construct<Entity>(child_type);
 						entity->FromXml(safe_child);
+						entity->_app = this;
 						AddEntity(entity);
 
 					}

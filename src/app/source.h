@@ -18,6 +18,10 @@ namespace simstudio {
 		AnyNumber _spawn_time;
 
 		long _nextAction = LONG_MAX;
+		long _spawnLimit = -1;
+		long _spawnedCount = 0;
+
+		String _spawnEntity;
 
 		Shared<Entity> _activeEntity;
 
@@ -37,6 +41,7 @@ namespace simstudio {
 
 		void _CalculateNextAction(long currentTime);
 		void _TryMoveEntityNext(App& app);
+		Shared<Entity> _GetSpawningEntity();
 	};
 
 }

@@ -33,6 +33,8 @@ namespace simstudio
 		long _activeTime = 0;
 		double _length = 1;
 
+		App* _app = nullptr;
+
 		virtual ~Entity();
 
 	public:
