@@ -35,6 +35,19 @@ namespace simstudio
 		return false;
 	}
 
+
+	void Entity::EntityTaken(Shared<Entity>& entity)
+	{
+
+	}
+
+	void Entity::SetNewParent(Shared<Entity>& parent)
+	{
+		_pos_local.Nullify();
+		_pos_global = _pos_global;
+		_parent = parent;
+	}
+
 	void Entity::WasTaken()
 	{
 		_pos_local.Nullify();

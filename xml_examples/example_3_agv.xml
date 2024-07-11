@@ -3,7 +3,7 @@
 
 
 	<simparams
-		simtime="1:00:00"
+		simtime="10:00"
 		/>
 
 	<user_defined>
@@ -15,9 +15,9 @@
 		<source uid="Source_Agv" spawn_entity="AGV_1" spawn_limit="1" />
 
 		<single_lane uid="L1" length="5"/>
-		<single_lane uid="L2" length="2.5"/>
+		<single_lane uid="L2" length="3"/>
 		<single_lane uid="L3" length="5"/>
-		<single_lane uid="L4" length="2,5"/>
+		<single_lane uid="L4" length="3"/>
 
 
 	</entities>

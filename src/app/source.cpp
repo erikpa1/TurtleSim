@@ -104,16 +104,15 @@ namespace simstudio {
 
 	Shared<Entity> Source::_GetSpawningEntity()
 	{
-
 		Shared<Entity> entity;
 
 		if (_spawnEntity == "AGV_1") {
 			LogE << "Faking AGV_1";
-			auto tmp = Agv::New();
+			auto tmp = _app->SpawnEntity(Agv::New);
 			entity = tmp;
 		}
 		else {
-			entity = MuUnit::New();
+			entity = _app->SpawnEntity(MuUnit::New);
 		}
 
 		_spawnedCount += 1;

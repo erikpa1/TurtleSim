@@ -72,6 +72,26 @@ namespace simstudio
 		_entities[entity->_uid] = entity;
 	}
 
+	Shared<Entity> App::SpawnEntity(std::function<Shared<Entity>()> fn)
+	{
+		Shared<Entity> tmp = fn();
+		tmp->_weakThis = tmp;
+		return tmp;
+
+	}
+
+	void App::UnlinkEntity(const String& uid)
+	{
+		if (_spawnies.contains(uid)) {
+			_spawnies.erase(uid);
+		}
+	}
+
+	void App::AddSpawnedEntity(Shared<Entity>& entity)
+	{
+		_spawnies[entity->_uid] = entity;
+	}
+
 	void App::AddEntityConnection(String connA, String connB)
 	{
 		if (_connections.contains(connA)) {
@@ -100,7 +120,6 @@ namespace simstudio
 	{
 		auto factory = ClassFactory::Instance();
 
-		LogI << &factory;
 
 		SafeXml doc;
 		doc.LoadFile(path);
@@ -135,8 +154,8 @@ namespace simstudio
 						auto child_name = safe_child.GetStringAttrib("name");
 						auto child_uid = safe_child.GetStringAttrib("uid");
 
-
 						auto entity = factory->Construct<Entity>(child_type);
+						entity->_weakThis = entity;
 						entity->FromXml(safe_child);
 						entity->_app = this;
 						AddEntity(entity);

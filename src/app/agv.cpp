@@ -26,20 +26,6 @@ namespace simstudio {
 	void Agv::Step(App& app, Stepper& stepper)
 	{
 
-		if (auto activeTrack = _activeTrack.lock()) {
-			if (activeTrack) {
-				if (_pos_local._x < activeTrack->_length) {
-					_pos_local._x += this->_speed;
-
-					LogE << StringThis() << " moved " << _pos_local._x << " / " << activeTrack->_length;
-				}
-				else {
-					LogE << StringThis() << " hitted the line end";
-				}
-			}
-		}
-
-
 	}
 
 	void Agv::FromXml(SafeXmlNode& node)
@@ -47,11 +33,13 @@ namespace simstudio {
 		Entity::FromXml(node);
 	}
 
-	void Agv::StartRideOn(Weak<Track>& track)
+	void Agv::PrintFinalStatistics(long statistics_delay, long simulation_duration)
 	{
-		LogE << "Agv is riding on";
-		_activeTrack = track;
+		LogD << "======================";
+		LogD << F("Final statistics for Agv [{}]", _uid);
+		LogI << "Agv valked:" << _statistics.walked << " m";
 	}
+
 
 
 }

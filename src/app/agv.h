@@ -1,6 +1,6 @@
 #pragma once
 #include "entity.h"
-
+#include "statistics/agv_statistics.h"
 
 
 namespace simstudio {
@@ -23,8 +23,9 @@ namespace simstudio {
 		double _energy_consumption = 1;
 		double _energy_storage = 100;
 
+		AgvStatistics _statistics;
 
-		Weak<Track> _activeTrack;
+
 
 	public:
 		static Shared<Agv>New();
@@ -36,11 +37,7 @@ namespace simstudio {
 		virtual void FromXml(SafeXmlNode& node) override;
 
 
-		void StartRideOn(Weak<Track>& track);
-
-
-
-
+		virtual void PrintFinalStatistics(long statistics_delay, long simulation_duration);
 	};
 
 }

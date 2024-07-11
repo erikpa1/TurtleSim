@@ -36,10 +36,6 @@ namespace simstudio {
 			else {
 				LogE << "Unable to find constructor of class [" << type << "]";
 
-				for (const auto& iter : _constructors) {
-					LogI << "--" << iter.first;
-				}
-
 			}
 			return Share<T>();
 		}

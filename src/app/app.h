@@ -15,6 +15,9 @@ namespace simstudio
 
 		HashMap<Shared<Entity>> _entities;
 
+		HashMap<Shared<Entity>> _spawnies;
+
+
 		HashMap<Array<String>> _connections;
 
 		Stepper _stepper;
@@ -27,6 +30,13 @@ namespace simstudio
 
 		void Step();
 		void AddEntity(Shared<Entity> entity);
+
+		Shared<Entity> SpawnEntity(std::function<Shared<Entity>()> fn);
+		void UnlinkEntity(const String& uid);
+
+		void AddSpawnedEntity(Shared<Entity>& entity);
+
+
 
 		void AddEntityConnection(String connA, String connB);
 

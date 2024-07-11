@@ -11,12 +11,14 @@ namespace simstudio {
 		FactoryType("single_lane");
 		FactoryNew(SingleLane);
 
-		Weak<Agv> _activeAgv;
+		Shared<Agv> _activeAgv;
 
 		virtual void Init();
 
 		virtual bool TakeEntity(Shared<Entity>& entity) override;
 		virtual void Step(App& app, Stepper& stepper) override;
+
+		virtual void EntityTaken(Shared<Entity>& entity) override;
 
 
 	};

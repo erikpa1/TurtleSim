@@ -35,6 +35,10 @@ namespace simstudio
 
 		App* _app = nullptr;
 
+		Weak<Entity> _parent;
+
+		Weak<Entity> _weakThis;
+
 		virtual ~Entity();
 
 	public:
@@ -45,6 +49,13 @@ namespace simstudio
 		virtual void Step(App& app, Stepper& stepper);
 		virtual bool TakeEntity(Shared<Entity>& entity);
 		virtual bool CanTakeEntity();
+
+
+		virtual void EntityTaken(Shared<Entity>& entity);
+
+		virtual void SetNewParent(Shared<Entity>& parent);
+
+
 
 		virtual void WasTaken();
 

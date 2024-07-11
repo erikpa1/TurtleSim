@@ -10,6 +10,11 @@ namespace simstudio {
 	class App;
 	class SafeXmlNode;
 
+
+	enum class DistributionStrategy {
+		ROUND_ROBIN
+	};
+
 	class Source : public Entity {
 
 	public:
@@ -20,6 +25,8 @@ namespace simstudio {
 		long _nextAction = LONG_MAX;
 		long _spawnLimit = -1;
 		long _spawnedCount = 0;
+
+		int _roundRobinIndex = 0;
 
 		String _spawnEntity;
 

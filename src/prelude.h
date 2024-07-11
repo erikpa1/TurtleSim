@@ -48,6 +48,12 @@ inline std::shared_ptr<T> DynCast(Args &&...args)
 	return std::dynamic_pointer_cast<T>(std::forward<Args>(args)...);
 }
 
+template <typename T, typename... Args>
+inline std::shared_ptr<T> StaticCast(Args &&...args)
+{
+	return std::static_pointer_cast<T>(std::forward<Args>(args)...);
+}
+
 template <typename T>
 String ToString(T arg)
 {

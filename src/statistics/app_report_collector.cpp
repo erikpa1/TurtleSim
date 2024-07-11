@@ -15,9 +15,13 @@ namespace simstudio {
 		{
 			Shared<Entity> entity = iter.second;
 			entity->PrintFinalStatistics(0, app._stepper._stepIndex);
-
 		}
 
+		for (const auto& iter : app._spawnies)
+		{
+			Shared<Entity> entity = iter.second;
+			entity->PrintFinalStatistics(0, app._stepper._stepIndex);
+		}
 
 	}
 

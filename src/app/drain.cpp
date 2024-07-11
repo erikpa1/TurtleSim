@@ -1,5 +1,8 @@
 #include "drain.h"
 
+#include "app.h"
+
+
 namespace simstudio {
 	Shared<Drain> Drain::New()
 	{
@@ -9,6 +12,7 @@ namespace simstudio {
 	bool Drain::TakeEntity(Shared<Entity>& entity)
 	{
 		_statistics.received += 1;
+		_app->UnlinkEntity(entity->_uid);
 		return true;
 	}
 
