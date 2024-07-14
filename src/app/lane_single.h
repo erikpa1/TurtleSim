@@ -1,6 +1,8 @@
 #pragma once
 #include "track.h"
 
+#include "statistics/lane_statistics.h"
+
 namespace simstudio {
 
 	class Agv;
@@ -13,12 +15,21 @@ namespace simstudio {
 
 		Shared<Agv> _activeAgv;
 
+
+		LaneStatistics _statistics;
+
+	public:
+
 		virtual void Init();
 
 		virtual bool TakeEntity(Shared<Entity>& entity) override;
 		virtual void Step(App& app, Stepper& stepper) override;
 
 		virtual void EntityTaken(Shared<Entity>& entity) override;
+
+
+		virtual void PrintFinalStatistics(long statistics_delay, long simulation_duration);
+
 
 
 	};

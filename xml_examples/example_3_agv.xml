@@ -12,6 +12,11 @@
 
 	<entities>
 
+		<source uid="Source_Agv"/>
+
+		<buffer uid="InputBuffer" limit="8"/>
+		<loader uid="LoadingStation" target_buffer="InputBuffer" process_time="00:10"/>
+
 		<source uid="Source_Agv" spawn_entity="AGV_1" spawn_limit="1" />
 
 		<single_lane uid="L1" length="5"/>
@@ -20,15 +25,26 @@
 		<single_lane uid="L4" length="3"/>
 
 
+		<loader uid="UnloadingStation" target_buffer="OutputBuffer" process_time="00:10"/>
+		<buffer uid="OutputBuffer" limit="8"/>
+
+		<sink uid="Sink"/>
+
+
+
 	</entities>
 
 	<connections>
-		<single a="Source_Agv" b="L1" />
-
+		<single a="Source_Agv" b="L4" />
+		<single a="L4" b="LoadingStation" />
+		<single a="LoadingStation" b="L1" />
 		<single a="L1" b="L2" />
-		<single a="L2" b="L3" />
+		<single a="L2" b="UnloadingStation" />
+		<single a="UnloadingStation" b="L2" />
 		<single a="L3" b="L4" />
-		<single a="L4" b="L1" />
+
+		<single a="OutputBuffer" b="Sink"/>
+
 	</connections>
 
 

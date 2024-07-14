@@ -16,6 +16,8 @@ namespace simstudio {
 		auto agv = DynCast<Agv>(entity);
 
 		if (agv) {
+			_statistics._entityEntered += 1;
+
 			_activeAgv = agv;
 			LogE << StringThis() << " is taking " << entity->_uid;
 
@@ -76,6 +78,16 @@ namespace simstudio {
 		else {
 			LogE << StringThis() << " can't unlink entity, which doesn't own";
 		}
+	}
+
+	void SingleLane::PrintFinalStatistics(long statistics_delay, long simulation_duration)
+	{
+		LogD << "======================";
+		LogD << F("Final statistics for SingleLane [{}]", _uid);
+
+		LogI << "Entities in:" << _statistics._entityEntered;
+
+
 	}
 
 
