@@ -10,15 +10,29 @@
 
 namespace simstudio {
 
+	bool Unloader::CanTakeEntity()
+	{
+		return _activeEntity == nullptr;
+	}
+
 	bool Unloader::TakeEntity(Shared<Entity>& entity)
 	{
-		if (_activeEntity) {
-			return false;
-		}
-		else {
+
+		if (CanTakeEntity()) {
 			_activeEntity = entity;
+
+
+
+
+
 			return true;
 		}
+		else {
+			LogE << StringThis() << " can't take entity because is [manufacturing].";
+			return false;
+		}
+
+
 	}
 
 
@@ -32,6 +46,31 @@ namespace simstudio {
 	void Unloader::FromXml(SafeXmlNode& node)
 	{
 		Entity::FromXml(node);
+
+	}
+
+	void Unloader::_UnloadingFinished()
+	{
+		_statistics._unloaded += 1;
+		_activeState = UnloaderState::IDLE;
+		_TryToPassNextEntity();
+
+	}
+
+	void Unloader::_TryToPassNextEntity()
+	{
+		bool isBlocked = true;
+
+		auto connections = _app->GetConnectedEntities(_uid);
+
+		for (const auto& connection : connections) {
+			if (connection->TakeEntity(_activeEntity)) {
+				_activeEntity.reset();
+
+
+
+			}
+		}
 
 	}
 

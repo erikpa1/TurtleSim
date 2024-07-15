@@ -24,7 +24,7 @@ namespace simstudio {
 
 	void Loader::FromXml(SafeXmlNode& node)
 	{
-		Loader::FromXml(node);
+		Entity::FromXml(node);
 
 		_unloading_time = node.GetStringAttrib("processing_time", "");
 		_targetBuffer = node.GetStringAttrib("target_buffer", "");

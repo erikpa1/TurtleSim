@@ -14,9 +14,10 @@
 
 
 
-#include "src/external/imgui/imgui.h"
-#include "src/external/imgui/imgui_impl_win32.h"
-#include "src/external/imgui/imgui_impl_dx12.h"
+#include "external/imgui/imgui.h"
+#include "external/imgui/imgui_impl_win32.h"
+#include "external/imgui/imgui_impl_dx12.h"
+
 #include <d3d12.h>
 #include <dxgi1_4.h>
 #include <tchar.h>
