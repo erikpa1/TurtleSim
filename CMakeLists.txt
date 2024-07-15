@@ -14,11 +14,20 @@ add_executable(
         # main_1.cpp
 ${Simstudio_SRC} "src/app/statistics/conveyor_statistics.h")
 
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+    message(STATUS "Building for WebAssembly (WASM)")
+else()
+
 #Adding Direct12
 find_library(D3D12_LIB d3d12.lib)
 target_link_libraries(${PROJECT_NAME} ${D3D12_LIB})
 find_library(DXGI dxgi.lib)
 target_link_libraries(${PROJECT_NAME} ${DXGI})
+
+endif()
+
+
 
 #target_precompile_headers(Simstudio Private src/prelude.h)
 

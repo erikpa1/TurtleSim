@@ -35,6 +35,8 @@ build/
 *.a
 *.lib
 
+out/
+
 # Executables
 *.exe
 *.out
