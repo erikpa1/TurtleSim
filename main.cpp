@@ -6,7 +6,6 @@
 #include "src/utils/prelude.h"
 #include "src/runs/run_xml.h"
 
-#include "run_directx.h"
 
 #include "src/factory_registration.h"
 

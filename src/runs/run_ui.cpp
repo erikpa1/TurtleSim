@@ -1,10 +1,14 @@
 #include "run_ui.h"
 
+#if IS_WINDOWS_PLATFORM
+
 #include "../prelude.h"
 
-#include "../external/imgui/imgui.h"
+
 
 #include "../app/prelude.h"
+
+#include "../../external/imgui/imgui.h"
 
 #include "../utils/exe_dir.h"
 
@@ -81,3 +85,5 @@ namespace simstudio {
 	}
 
 }
+
+#endif
