@@ -9,7 +9,7 @@
 
 namespace simstudio {
 
-	void RegisterClasses() {
+	void RegisterClasses_OriginalName() {
 		auto factory = ClassFactory::Instance();
 
 		factory->RegisterClass<Source>();

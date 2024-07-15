@@ -12,6 +12,7 @@ def find_cpp_files(directory, main_file):
             continue
         for file in files:
             if file.endswith('.cpp'):
+                print("Adding: ", file)
                 cpp_files.append(os.path.join(root, file))
     
     # Ensure the main file is included first
@@ -24,7 +25,11 @@ def find_cpp_files(directory, main_file):
 def build_command(cpp_files, output_file):
     # Join all .cpp files with a space and form the build command
     files_str = ' '.join(cpp_files)
-    command = f"emcc {files_str} -o {output_file} -std=c++20 -msse -msse2 -msse3 -msimd128 "
+
+    build_configs1 = "-msse -msse2 -msse3 -msimd128 -pthread -s PTHREAD_POOL_SIZE=10"
+    build_configs2 = "-IS_WASM=1"
+
+    command = f"emcc {files_str} -o {output_file} -std=c++20 {build_configs1} {build_configs2} "
     return command
 
 def main():
