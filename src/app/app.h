@@ -47,6 +47,8 @@ namespace simstudio
 		void LoadFromXmlFile(const String& path);
 
 		Array<Shared<Entity>> GetConnectedEntities(const String& who);
+
+
 	};
 
 };

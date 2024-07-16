@@ -60,12 +60,21 @@ namespace simstudio
 		virtual void WasTaken();
 
 		virtual void PrintFinalStatistics(long statistics_delay, long simulation_duration);
-		virtual String Type();
 
 		virtual void FromXml(SafeXmlNode& xmlNode);
 
 
+		long GetSimSecond();
+		long GetLastStepOffset();
+
+		Array<Shared<Entity>> GetConnections();
+
 		String StringThis();
+
+		virtual Shared<Entity> PopChildEntity();
+
+		virtual int ChildrenCount();
+
 
 	};
 

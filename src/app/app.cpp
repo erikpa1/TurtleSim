@@ -52,6 +52,8 @@ namespace simstudio
 
 	void App::Step()
 	{
+		_stepper.Step();
+
 		for (const auto& iter : _entities)
 		{
 			auto& entity = iter.second;
@@ -64,7 +66,7 @@ namespace simstudio
 
 			entity->Step(*this, _stepper);
 		}
-		_stepper.Step();
+
 	}
 
 	void App::AddEntity(Shared<Entity> entity)
@@ -217,5 +219,7 @@ namespace simstudio
 		return successors;
 
 	}
+
+
 
 }

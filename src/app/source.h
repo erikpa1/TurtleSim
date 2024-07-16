@@ -36,8 +36,6 @@ namespace simstudio {
 	public:
 		static Shared<Source> New();
 
-		virtual String Type() override;
-
 		virtual void Init() override;
 		virtual void Step(App& app, Stepper& stepper) override;
 		virtual void FromXml(SafeXmlNode& node) override;

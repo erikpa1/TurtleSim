@@ -27,6 +27,8 @@ namespace simstudio {
 		bool TakeEntity(Shared<Entity>& entity);
 		bool CanTakeEntity();
 
+		Shared<Entity> PopEntity();
+
 		virtual void PrintFinalStatistics(long statistics_delay, long simulation_duration);
 
 

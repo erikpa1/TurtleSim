@@ -65,6 +65,7 @@ String ToString(T arg)
 
 #define FactoryType(type) \
     static String ClassType() { return type;} \
+    String Type() { return type;} \
 
 
 #define FactoryNew(type) \

@@ -12,10 +12,13 @@
 
 	<entities>
 
-		<source uid="Source_Agv"/>
+		<source uid="Source_1"/>
+
+		<source uid="Source_Agv" spawn_entity="AGV_1"/>
+
 
 		<buffer uid="InputBuffer" limit="8"/>
-		<loader uid="LoadingStation" target_buffer="InputBuffer" process_time="00:10"/>
+		<loader uid="LoadingStation" target_buffer="InputBuffer" operation_time="00:10"/>
 
 		<source uid="Source_Agv" spawn_entity="AGV_1" spawn_limit="1" />
 
@@ -24,23 +27,26 @@
 		<single_lane uid="L3" length="5"/>
 		<single_lane uid="L4" length="3"/>
 
+		<unloader uid="UnloadingStation" target_buffer="OutputBuffer" operation_time="00:10"/>
 
-		<loader uid="UnloadingStation" target_buffer="OutputBuffer" process_time="00:10"/>
 		<buffer uid="OutputBuffer" limit="8"/>
 
-		<sink uid="Sink"/>
+		<drain uid="Drain"/>
 
 
 
 	</entities>
 
 	<connections>
+		<single a="Source_1" b="InputBuffer" />
+
 		<single a="Source_Agv" b="L4" />
+		
 		<single a="L4" b="LoadingStation" />
 		<single a="LoadingStation" b="L1" />
 		<single a="L1" b="L2" />
 		<single a="L2" b="UnloadingStation" />
-		<single a="UnloadingStation" b="L2" />
+		<single a="UnloadingStation" b="L3" />
 		<single a="L3" b="L4" />
 
 		<single a="OutputBuffer" b="Sink"/>

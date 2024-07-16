@@ -19,11 +19,8 @@ namespace simstudio {
 			_statistics._entityEntered += 1;
 
 			_activeAgv = agv;
-			LogE << StringThis() << " is taking " << entity->_uid;
 
-			if (auto oldParent = agv->_parent.lock()) {
-				oldParent->EntityTaken(entity);
-			}
+			LogE << StringThis() << " is taking " << entity->_uid;
 
 			Shared<Entity> shared_this = _weakThis.lock();
 
@@ -58,14 +55,22 @@ namespace simstudio {
 
 				auto connections = _app->GetConnectedEntities(_uid);
 
-				if (connections.size() > 0) {
-					auto connection = connections[0];
-					auto casted = StaticCast<Entity>(_activeAgv);
-					connection->TakeEntity(casted);
+				auto casted = StaticCast<Entity>(_activeAgv);
+
+				for (const auto& connection : connections) {
+
+					if (connection->TakeEntity(casted)) {
+						_activeAgv.reset();
+						break;
+					}
 				}
+
 			}
 
-			agv_ref.Step(app, stepper);
+		}
+
+		if (_activeAgv) {
+			_activeAgv->Step(app, stepper);
 		}
 
 	}

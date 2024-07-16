@@ -19,8 +19,8 @@ namespace simstudio {
 		factory->RegisterClass<Conveyor>();
 		factory->RegisterClass<Agv>();
 		factory->RegisterClass<SingleLane>();
-		factory->RegisterClass<Unloader>();
 		factory->RegisterClass<Loader>();
+		factory->RegisterClass<Unloader>();
 
 		LogI << &factory;
 

@@ -3,17 +3,18 @@
 namespace simstudio
 {
 
-    class Stepper
-    {
+	class Stepper
+	{
 
-    public:
-        long _stepIndex = 0;
-        long _endIndex = 100;
+	public:
+		long _stepIndex = 0;
+		long _endIndex = 100;
 
-        void Step();
+		void Step();
 
-        double GetStepSecond();
+		long GetStepSecond();
+		long GetLastStepDiff();
 
-    };
+	};
 
 };

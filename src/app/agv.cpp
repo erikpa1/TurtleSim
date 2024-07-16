@@ -14,11 +14,6 @@ namespace simstudio {
 		return Share<Agv>();
 	}
 
-	String Agv::Type()
-	{
-		return Agv::ClassType();
-	}
-
 	void Agv::Init()
 	{
 	}
@@ -33,12 +28,42 @@ namespace simstudio {
 		Entity::FromXml(node);
 	}
 
+	bool Agv::TakeEntity(Shared<Entity>& entity)
+	{
+		if (CanTakeEntity()) {
+			_buffer.push_back(entity);
+			return true;
+		}
+
+		return false;
+
+	}
+
+	bool Agv::CanTakeEntity()
+	{
+		return _buffer.size() <= _limit;
+	}
+
 	void Agv::PrintFinalStatistics(long statistics_delay, long simulation_duration)
 	{
 		LogD << "======================";
 		LogD << F("Final statistics for Agv [{}]", _uid);
 		LogI << "Agv valked:" << _statistics.walked << " m";
 	}
+
+
+	Shared<Entity> Agv::PopChildEntity()
+	{
+		Shared<Entity> _poped_entity = _buffer.back();
+		_buffer.pop_back();
+		return _poped_entity;
+	}
+
+	int Agv::ChildrenCount()
+	{
+		return _buffer.size();
+	}
+
 
 
 

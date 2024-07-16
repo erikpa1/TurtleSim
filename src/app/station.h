@@ -56,8 +56,6 @@ namespace simstudio
 
 		static Shared<Station> New();
 
-		String Type();
-
 		virtual void Init();
 		virtual void Step(App& app, Stepper& stepper) override;
 

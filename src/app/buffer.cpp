@@ -58,7 +58,20 @@ namespace simstudio {
 
 	bool Buffer::CanTakeEntity()
 	{
-		return _buffer.size() < _limit;
+		return _buffer.size() <= _limit;
+	}
+
+	Shared<Entity> Buffer::PopEntity()
+	{
+		if (_buffer.size() > 0) {
+
+			Shared<Entity> _poped_entity = _buffer.back();
+			_buffer.pop_back();
+			return _poped_entity;
+
+		}
+
+		return {};
 	}
 
 	void Buffer::PrintFinalStatistics(long statistics_delay, long simulation_duration)

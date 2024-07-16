@@ -12,9 +12,6 @@ namespace simstudio {
 		return Share<Source>();
 	}
 
-	String Source::Type() {
-		return Source::ClassType();
-	}
 
 	void Source::Init()
 	{

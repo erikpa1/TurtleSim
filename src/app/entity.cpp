@@ -6,6 +6,7 @@
 #include "../serialization/prelude.h"
 #include "../utils/crypto.h"
 
+
 namespace simstudio
 {
 	Entity::~Entity()
@@ -55,11 +56,7 @@ namespace simstudio
 
 	void Entity::PrintFinalStatistics(long statistics_delay, long simulation_duration)
 	{
-	}
 
-	String Entity::Type()
-	{
-		return "entity";
 	}
 
 	void Entity::FromXml(SafeXmlNode& xmlNode)
@@ -68,9 +65,43 @@ namespace simstudio
 		_name = xmlNode.GetStringAttrib("name", "");
 	}
 
+	long Entity::GetSimSecond()
+	{
+		if (_app) {
+			return _app->_stepper.GetStepSecond();
+		}
+		return 0;
+	}
+
+	long Entity::GetLastStepOffset()
+	{
+		if (_app) {
+			return _app->_stepper.GetLastStepDiff();
+		}
+		return 0;
+	}
+
+	Array<Shared<Entity>> Entity::GetConnections()
+	{
+		if (_app) {
+			return _app->GetConnectedEntities(_uid);
+		}
+		return {};
+	}
+
 	String Entity::StringThis()
 	{
 		return F("[{}][{}]", _type, _uid);
+	}
+
+	Shared<Entity> Entity::PopChildEntity()
+	{
+		return Shared<Entity>();
+	}
+
+	int Entity::ChildrenCount()
+	{
+		return 0;
 	}
 
 }

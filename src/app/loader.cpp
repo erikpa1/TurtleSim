@@ -1,5 +1,10 @@
 #include "loader.h"
 
+#include "app.h"
+#include "buffer.h"
+#include "stepper.h"
+
+#include "../utils/time_expr.h"
 
 #include "../serialization/safexml.h"
 
@@ -12,26 +17,121 @@ namespace simstudio {
 			return false;
 		}
 		else {
+			LogE << "Loader is taking entity";
 			_activeEntity = entity;
+			_StartPicking();
 			return true;
 		}
 
 	}
 	void Loader::Step(App& app, Stepper& stepper)
 	{
-
+		if (_activeState == LoaderState::LOADING) {
+			if (_loading_end <= GetSimSecond()) {
+				_LoadActiveEntityAndLetGo();
+			}
+		}
+		else if (_activeState == LoaderState::BLOCKED) {
+			_statistics._blocked += GetLastStepOffset();
+			_LoadActiveEntityAndLetGo();
+		}
 	}
 
 	void Loader::FromXml(SafeXmlNode& node)
 	{
 		Entity::FromXml(node);
 
-		_unloading_time = node.GetStringAttrib("processing_time", "");
+		_loading_time = node.GetStringAttrib("operation_time", "");
 		_targetBuffer = node.GetStringAttrib("target_buffer", "");
+	}
+
+	void Loader::_StartPicking()
+	{
+		if (_handledEntity == nullptr) {
+			if (_activeEntity) {
+				if (_app) {
+
+					if (_app->_entities.contains(_targetBuffer)) {
+						Shared<Buffer> _buffer = StaticCast<Buffer>(_app->_entities[_targetBuffer]);
+
+						if (_buffer) {
+							auto buffer = _buffer->PopEntity();
+							if (buffer) {
+								_handledEntity = buffer;
+
+								_activeState = LoaderState::LOADING;
+
+								_loading_started = GetSimSecond();
+								_loading_end = _loading_started + TimeExpr::SecondsFromTimeString(_loading_time);
+
+								LogE << "Loader going finish unloading at: " << _loading_end;
+
+							}
+						}
+					}
+				}
+			}
+
+		}
+
 	}
 
 	void Loader::_TryPickEntryEntity()
 	{
 
+	}
+	void Loader::_LoadActiveEntityAndLetGo()
+	{
+		if (_activeEntity && _handledEntity) {
+			if (_activeEntity->TakeEntity(_handledEntity)) {
+				_statistics._loaded += 1;
+				_handledEntity.reset();
+
+				LogI << StringThis() << "loaded AGV [" << _activeEntity->_uid << "]";
+				_TrySendAgvNext();
+
+			}
+			else {
+				LogI << StringThis() << "blocked because AGV can't take entity";
+				_activeState = LoaderState::BLOCKED;
+			}
+		}
+		else {
+			LogI << StringThis() << "blocked because AGV is not there";
+			_activeState = LoaderState::BLOCKED;
+		}
+	}
+	void Loader::_TryUnblock()
+	{
+
+		if (_handledEntity == nullptr && _activeEntity) {
+			_TrySendAgvNext();
+		}
+		else if (_handledEntity && _activeEntity) {
+			_LoadActiveEntityAndLetGo();
+		}
+	}
+	bool Loader::_TrySendAgvNext()
+	{
+		auto connections = GetConnections();
+
+		bool taken = false;
+
+		for (const auto& conn : connections) {
+			if (conn->TakeEntity(_activeEntity)) {
+				LogI << StringThis() << "moved AGV [" << _activeEntity->_uid << "]";
+				_activeEntity.reset();
+				_activeState = LoaderState::IDLE;
+				taken = true;
+				break;
+			}
+		}
+
+		if (taken == false) {
+			LogE << StringThis() << "couldn't move AGV next";
+			_activeState = LoaderState::BLOCKED;
+		}
+
+		return taken;
 	}
 }

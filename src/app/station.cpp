@@ -16,15 +16,14 @@ namespace simstudio
 	{
 		LogD << "Station got somehow destructed";
 	}
+
 	Shared<Station> Station::New()
 	{
 		auto station = Shared<Station>();
 		return Share<Station>();
 	}
-	String Station::Type()
-	{
-		return "Type[Station]";
-	}
+
+
 	void Station::Init()
 	{
 	}

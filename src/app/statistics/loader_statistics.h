@@ -3,10 +3,11 @@
 namespace simstudio {
 
 
-	class UnloaderStatistics {
+
+	class LoaderStatistics {
 	public:
 
-		long _unloaded = 0;
+		long _loaded = 0;
 		long _blocked = 0;
 
 	};

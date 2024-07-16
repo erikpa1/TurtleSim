@@ -17,21 +17,15 @@ namespace simstudio {
 
 	bool Unloader::TakeEntity(Shared<Entity>& entity)
 	{
-
 		if (CanTakeEntity()) {
 			_activeEntity = entity;
-
-
-
-
-
+			_StartUnloading();
 			return true;
 		}
 		else {
-			LogE << StringThis() << " can't take entity because is [manufacturing].";
+			LogE << StringThis() << " can't take entity because is occupied.";
 			return false;
 		}
-
 
 	}
 
@@ -39,7 +33,15 @@ namespace simstudio {
 
 	void Unloader::Step(App& app, Stepper& stepper)
 	{
-
+		if (_activeState == UnloaderState::WORKING) {
+			if (_unloading_end <= GetSimSecond()) {
+				_UnloadingFinished();
+			}
+		}
+		else if (_activeState == UnloaderState::BLOCKED) {
+			_statistics._blocked += GetLastStepOffset();
+			_StartUnloading();
+		}
 
 	}
 
@@ -47,42 +49,75 @@ namespace simstudio {
 	{
 		Entity::FromXml(node);
 
+		_unloading_time = node.GetStringAttrib("operation_time", "00:00");
+
 	}
 
 	void Unloader::_UnloadingFinished()
 	{
-		_statistics._unloaded += 1;
-		_activeState = UnloaderState::IDLE;
-		_TryToPassNextEntity();
 
-	}
+		if (_app->_entities.contains(_targetBuffer)) {
 
-	void Unloader::_TryToPassNextEntity()
-	{
-		bool isBlocked = true;
+			if (_handledEntity) {
+				auto target = _app->_entities[_targetBuffer];
 
-		auto connections = _app->GetConnectedEntities(_uid);
+				if (target->TakeEntity(_handledEntity)) {
+					_handledEntity.reset();
+					_statistics._unloaded += 1;
 
-		for (const auto& connection : connections) {
-			if (connection->TakeEntity(_activeEntity)) {
-				_activeEntity.reset();
+					_StartUnloading();
+				}
+				else {
+					_activeState = UnloaderState::IDLE;
+					LogE << StringThis() << " is blocked because of target is busy";
+				}
 
 
 
 			}
 		}
+		else {
+			_activeState = UnloaderState::BLOCKED;
+			LogE << StringThis() << " is blocked because of invalid target";
+		}
+
+
 
 	}
 
-	void Unloader::_StartUnloading(Stepper& stepper)
+	void Unloader::_TryToPassNextEntity()
 	{
-		_unloading_started = stepper.GetStepSecond();
-		_unloading_end = _unloading_started + TimeExpr::SecondsFromTimeString(_unloading_time);
+		if (_activeEntity) {
+			auto connections = GetConnections();
 
-
-
+			for (const auto& connection : connections) {
+				if (connection->TakeEntity(_activeEntity)) {
+					_activeEntity.reset();
+					break;
+				}
+			}
+		}
 
 	}
+
+	void Unloader::_StartUnloading()
+	{
+		if (_activeEntity) {
+			if (_activeEntity->ChildrenCount() > 0) {
+				_activeState = UnloaderState::WORKING;
+
+				_handledEntity = _activeEntity->PopChildEntity();
+				_unloading_started = GetSimSecond();
+				_unloading_end = _unloading_started + TimeExpr::SecondsFromTimeString(_unloading_time);
+
+			}
+			else {
+				_TryToPassNextEntity();
+			}
+		}
+	}
+
+
 
 
 

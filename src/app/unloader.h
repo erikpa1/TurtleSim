@@ -8,7 +8,8 @@ namespace simstudio {
 
 	enum class UnloaderState {
 		IDLE = 0,
-		WORKING = 1
+		WORKING = 1,
+		BLOCKED = 2
 	};
 
 
@@ -27,7 +28,7 @@ namespace simstudio {
 		long _unloading_end = LONG_MAX;
 
 		Shared<Entity> _activeEntity;
-		Shared<Entity> _activePayload;
+		Shared<Entity> _handledEntity;
 
 		UnloaderStatistics _statistics;
 
@@ -47,7 +48,7 @@ namespace simstudio {
 		void _UnloadingFinished();
 		void _TryToPassNextEntity();
 
-		void _StartUnloading(Stepper& stepper);
+		void _StartUnloading();
 
 
 	};

@@ -7,7 +7,7 @@
 #include "src/runs/run_xml.h"
 
 
-//#include "src/factory_registration.h"
+#include "src/factory_registration.h"
 
 
 using namespace simstudio;
@@ -20,7 +20,7 @@ int main_wasm()
 int main() {
 #endif
 
-	//RegisterClasses_OriginalName();
+	RegisterClasses_OriginalName();
 
 	App app;
 	//run_directx(app);

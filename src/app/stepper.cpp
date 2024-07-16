@@ -6,15 +6,20 @@
 namespace simstudio
 {
 
-    void Stepper::Step()
-    {
-        LogI << "------------- Doing the step: " << _stepIndex;
-        _stepIndex += 1;
-    }
+	void Stepper::Step()
+	{
+		LogI << "------------- Doing the step: " << _stepIndex;
+		_stepIndex += 1;
+	}
 
-    double Stepper::GetStepSecond()
-    {
-        return static_cast<double>(_stepIndex);
-    }
+	long Stepper::GetStepSecond()
+	{
+		return _stepIndex;
+	}
+
+	long Stepper::GetLastStepDiff()
+	{
+		return 1;
+	}
 
 }
