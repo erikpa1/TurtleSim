@@ -9,7 +9,7 @@
 #include <format>
 #include <any>
 #include <functional>
-
+#include <tuple>
 #include "logging.h"
 
 using String = std::string;
@@ -19,6 +19,9 @@ using HashMap = std::unordered_map<std::string, T>;
 
 template <typename T>
 using Array = std::vector<T>;
+
+template <typename A, typename B>
+using Pair = std::tuple<A, B>;
 
 template <typename T>
 using Option = std::optional<T>;

@@ -19,6 +19,8 @@ namespace simstudio {
 
 		virtual bool TakeEntity(Shared<Entity>& entity) override;
 
+		virtual bool CanTakeEntity() override;
+
 		void PrintFinalStatistics(long start, long end) override;
 
 	};

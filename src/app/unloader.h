@@ -45,9 +45,12 @@ namespace simstudio {
 
 		virtual void FromXml(SafeXmlNode& node) override;
 
+		virtual void PrintFinalStatistics(long statistics_delay, long simulation_duration);
+
+	private:
+
 		void _UnloadingFinished();
 		void _TryToPassNextEntity();
-
 		void _StartUnloading();
 
 

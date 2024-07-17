@@ -27,6 +27,7 @@ namespace simstudio {
 	void Loader::Step(App& app, Stepper& stepper)
 	{
 		if (_activeState == LoaderState::LOADING) {
+			_statistics._worked += GetLastStepOffset();
 			if (_loading_end <= GetSimSecond()) {
 				_LoadActiveEntityAndLetGo();
 			}
@@ -34,6 +35,9 @@ namespace simstudio {
 		else if (_activeState == LoaderState::BLOCKED) {
 			_statistics._blocked += GetLastStepOffset();
 			_LoadActiveEntityAndLetGo();
+		}
+		else if (_activeState == LoaderState::IDLE) {
+			_statistics._idle += GetLastStepOffset();
 		}
 	}
 
@@ -43,6 +47,23 @@ namespace simstudio {
 
 		_loading_time = node.GetStringAttrib("operation_time", "");
 		_targetBuffer = node.GetStringAttrib("target_buffer", "");
+	}
+
+	void Loader::PrintFinalStatistics(long statistics_delay, long simulation_duration)
+	{
+		LogD << "======================";
+		LogD << F("Final statistics for Loader [{}]", _uid);
+
+		double blocked_percentage = (static_cast<double>(_statistics._blocked) / static_cast<double>(simulation_duration));
+		double idle_percentage = (static_cast<double>(_statistics._idle) / static_cast<double>(simulation_duration));
+		double working_percentage = (static_cast<double>(_statistics._idle) / static_cast<double>(simulation_duration));
+
+		LogI << "Loaded: " << _statistics._loaded;
+		LogI << "Blocked: " << blocked_percentage * 100 << "%";
+		LogI << "Idle: " << idle_percentage * 100 << "%";
+		LogI << "Working: " << working_percentage * 100 << "%";
+
+
 	}
 
 	void Loader::_StartPicking()
@@ -82,7 +103,9 @@ namespace simstudio {
 	}
 	void Loader::_LoadActiveEntityAndLetGo()
 	{
+
 		if (_activeEntity && _handledEntity) {
+
 			if (_activeEntity->TakeEntity(_handledEntity)) {
 				_statistics._loaded += 1;
 				_handledEntity.reset();

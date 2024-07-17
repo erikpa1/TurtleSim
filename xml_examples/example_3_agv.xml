@@ -3,7 +3,7 @@
 
 
 	<simparams
-		simtime="10:00"
+		simtime="60:00"
 		/>
 
 	<user_defined>
@@ -48,8 +48,8 @@
 		<single a="L2" b="UnloadingStation" />
 		<single a="UnloadingStation" b="L3" />
 		<single a="L3" b="L4" />
-
-		<single a="OutputBuffer" b="Sink"/>
+		
+		<single a="OutputBuffer" b="Drain"/>
 
 	</connections>
 

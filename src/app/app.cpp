@@ -197,7 +197,6 @@ namespace simstudio
 			LogE << "Failed to open XML error id: " << doc.ErrorID();;
 		}
 
-
 	}
 
 	Array<Shared<Entity>> App::GetConnectedEntities(const String& who)

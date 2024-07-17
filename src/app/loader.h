@@ -43,6 +43,9 @@ namespace simstudio {
 		virtual void Step(App& app, Stepper& stepper) override;
 		virtual void FromXml(SafeXmlNode& node) override;
 
+		virtual void PrintFinalStatistics(long statistics_delay, long simulation_duration);
+
+
 	private:
 
 

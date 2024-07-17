@@ -13,7 +13,7 @@ namespace simstudio {
 	{
 
 		String example_file = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example.xml");
-		String example_file_1 = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example_1.xml");
+		String example_file_1 = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example_1_paralel.xml");
 		String example_file_2 = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example_2_conveyor.xml");
 		String example_file_3 = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example_3_agv.xml");
 

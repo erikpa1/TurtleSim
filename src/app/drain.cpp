@@ -16,12 +16,17 @@ namespace simstudio {
 		return true;
 	}
 
+	bool Drain::CanTakeEntity()
+	{
+		return true;
+	}
+
 	void Drain::PrintFinalStatistics(long start, long end)
 	{
 		LogD << "======================";
 		LogD << F("Final statistics for Drain [{}]", _uid);
 
-		LogI << "Manufactures count: " << _statistics.received;
+		LogI << "Entities left: " << _statistics.received;
 	}
 
 }

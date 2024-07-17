@@ -2,6 +2,7 @@
 
 #include "app.h"
 #include "../serialization/prelude.h"
+#include "../utils/time_expr.h"
 
 namespace simstudio {
 	Shared<Buffer> Buffer::New()
@@ -15,10 +16,8 @@ namespace simstudio {
 
 	void Buffer::Step(App& app, Stepper& stepper)
 	{
-
 		if (_buffer.size() > 0) {
 			auto connections = app.GetConnectedEntities(_uid);
-
 			for (const auto& connection : connections) {
 
 				if (connection->CanTakeEntity()) {
@@ -26,6 +25,9 @@ namespace simstudio {
 					Shared<Entity> _poped_entity = _buffer.back();
 					_buffer.pop_back();
 					connection->TakeEntity(_poped_entity);
+				}
+				else {
+					LogE << connection->_uid << " can't take entity from buffer";
 				}
 			}
 		}
@@ -49,7 +51,7 @@ namespace simstudio {
 	{
 		if (CanTakeEntity()) {
 			_buffer.push_back(entity);
-			_statistics.SetPeak(_buffer.size());
+			_statistics.SetPeak(GetSimSecond(), _buffer.size());
 			return true;
 		}
 
@@ -86,7 +88,10 @@ namespace simstudio {
 		LogI << "Blocked: " << blocked_percentage * 100 << "%";
 		LogI << "Empty: " << empty_percentage * 100 << "%";
 
-
+		LogI << "Peaks:";
+		for (const auto& [at, peak] : _statistics._peaks) {
+			LogI << "--Peak at: [" << TimeExpr::MakeFromSeconds(at) << "] capacity required: [" << peak << "]";
+		}
 	}
 
 }

@@ -13,7 +13,12 @@ namespace simstudio {
 		long _blocked_time = 0;
 		long _empty_time = 0;
 
-		void SetPeak(long newPeak);
+		Array<Pair<long, long>> _peaks;
+
+		void SetPeak(long second, long newPeak);
+
+
+
 
 	};
 

@@ -18,6 +18,7 @@ namespace simstudio {
 	bool Unloader::TakeEntity(Shared<Entity>& entity)
 	{
 		if (CanTakeEntity()) {
+			LogE << "Taking agv to unload" << entity->_name;
 			_activeEntity = entity;
 			_StartUnloading();
 			return true;
@@ -50,7 +51,15 @@ namespace simstudio {
 		Entity::FromXml(node);
 
 		_unloading_time = node.GetStringAttrib("operation_time", "00:00");
+		_targetBuffer = node.GetStringAttrib("target_buffer", "");
 
+	}
+
+	void Unloader::PrintFinalStatistics(long statistics_delay, long simulation_duration)
+	{
+		LogD << "======================";
+		LogD << F("Final statistics for Unloader [{}]", _uid);
+		LogI << "Unloaded: " << _statistics._unloaded;
 	}
 
 	void Unloader::_UnloadingFinished()
