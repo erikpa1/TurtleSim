@@ -68,6 +68,11 @@ namespace simstudio {
 		_document->LoadFile(path.c_str());
 
 	}
+	void SafeXml::LoadString(const String& xmlString)
+	{
+		_document = Share<XMLDocument>();
+		_document->Parse(xmlString.c_str());
+	}
 	int SafeXml::ErrorID()
 	{
 		if (_document) {

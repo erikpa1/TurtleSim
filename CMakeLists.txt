@@ -18,6 +18,24 @@ else()
     )
 endif()
 
+# Add some multithreaded build support =====================================================================================================
+#MARK_AS_ADVANCED(MULTITHREADED_BUILD)
+#SET(MULTITHREADED_BUILD ON CACHE BOOL "Parallel build with as many threads as possible!")
+#if(MULTITHREADED_BUILD)
+#    if(${CMAKE_GENERATOR} MATCHES "Unix Makefiles")
+#            file(COPY ${ApproxMVBB_ROOT_DIR}/cmake/parallelmake.sh DESTINATION ${PROJECT_BINARY_DIR}
+#                FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
+#                NO_SOURCE_PERMISSIONS
+#            )
+#            SET(CMAKE_MAKE_PROGRAM "${PROJECT_BINARY_DIR}/parallelmake.sh")
+#            MESSAGE(STATUS "Set make program to ${PROJECT_BINARY_DIR}/parallelmake.sh")
+#    elseif(MSVC)
+#      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" "/MP")
+#      MESSAGE(STATUS "Added parallel build arguments to CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
+#    endif()
+#endif()
+# ========================================================================================================================================
+
 add_executable(
         Simstudio 
         main.cpp
@@ -25,6 +43,7 @@ add_executable(
 ${Simstudio_SRC}
 ${Simstudio_WinExterna_SRC}
 )
+
 
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")

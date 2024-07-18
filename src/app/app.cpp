@@ -117,14 +117,27 @@ namespace simstudio
 
 
 
+	void App::LoadFromXmlString(const String& xmlString)
+	{
+		SafeXml doc;
+		doc.LoadString(xmlString);
+		LoadFromSafeXmlNode(doc);
+	}
 
 	void App::LoadFromXmlFile(const String& path)
 	{
-		auto factory = ClassFactory::Instance();
 
 
 		SafeXml doc;
 		doc.LoadFile(path);
+		LoadFromSafeXmlNode(doc);
+
+
+	}
+
+	void App::LoadFromSafeXmlNode(SafeXml& doc)
+	{
+		auto factory = ClassFactory::Instance();
 
 		if (doc.ErrorID() == 0) {
 
@@ -196,7 +209,6 @@ namespace simstudio
 		else {
 			LogE << "Failed to open XML error id: " << doc.ErrorID();;
 		}
-
 	}
 
 	Array<Shared<Entity>> App::GetConnectedEntities(const String& who)

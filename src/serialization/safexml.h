@@ -18,12 +18,12 @@ namespace simstudio {
 
 	public:
 
-		SafeXmlNode(tinyxml2::XMLElement * element);
+		SafeXmlNode(tinyxml2::XMLElement* element);
 
-		int GetIntAttrib(const String& key, int notFoud=0);
-		double GetDoubleAttrib(const String& key, double notFoud=0);
-		bool GetBoolAttrib(const String& key, bool notFoud=false);
-		String GetStringAttrib(const String& key, String notFound="");
+		int GetIntAttrib(const String& key, int notFoud = 0);
+		double GetDoubleAttrib(const String& key, double notFoud = 0);
+		bool GetBoolAttrib(const String& key, bool notFoud = false);
+		String GetStringAttrib(const String& key, String notFound = "");
 
 	};
 
@@ -37,6 +37,7 @@ namespace simstudio {
 
 
 		void LoadFile(const String& path);
+		void LoadString(const String& xmlString);
 		int ErrorID();
 
 

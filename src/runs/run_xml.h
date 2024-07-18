@@ -7,5 +7,7 @@ namespace simstudio {
 
 	void run_xml(App& app);
 
+	void run_wasm_string_xml(App& app);
+
 
 }

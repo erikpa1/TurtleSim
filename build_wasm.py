@@ -21,7 +21,8 @@ def build_command(cpp_files, output_file):
     # Join all .cpp files with a space and form the build command
     files_str = ' '.join(cpp_files)
 
-    build_configs1 = "-msse -msse2 -msse3 -msimd128 -pthread -s PTHREAD_POOL_SIZE=10"
+    #build_configs1 = "-msse -msse2 -msse3 -msimd128 -pthread -s PTHREAD_POOL_SIZE=10"
+    build_configs1 =""
     build_configs2 = "-IS_WASM=1"
 
     command = f"emcc {files_str} -o {output_file} -std=c++20 {build_configs1} {build_configs2} "
@@ -29,7 +30,7 @@ def build_command(cpp_files, output_file):
 
 def main():
     # Specify the output file name
-    output_file = "SimStudio.js"
+    output_file = "SimStudio.html"
     
 
 

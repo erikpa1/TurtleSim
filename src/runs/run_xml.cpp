@@ -7,8 +7,11 @@
 #include "../statistics/app_report_collector.h"
 
 
+#include "wasm_test.h"
+
 
 namespace simstudio {
+
 	void run_xml(App& app)
 	{
 
@@ -24,4 +27,19 @@ namespace simstudio {
 		SaveStatisticsRecord(app);
 
 	}
+
+	void run_wasm_string_xml(App& app)
+	{
+		app.LoadFromXmlString(WasmExamples::Xml1());
+		app.Init();
+		app.StartSimulation();
+
+		SaveStatisticsRecord(app);
+
+	}
+
+
+
+
+
 }
