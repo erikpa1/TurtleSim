@@ -21,8 +21,8 @@ int main() {
 
 	App app;
 	//run_directx(app);
-	//run_xml(app);
-	run_wasm_string_xml(app);
+	run_xml(app);
+	//run_wasm_string_xml(app);
 
 	return 0;
 }

@@ -20,7 +20,7 @@ namespace simstudio {
 		String example_file_2 = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example_2_conveyor.xml");
 		String example_file_3 = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example_3_agv.xml");
 
-		app.LoadFromXmlFile(example_file_3);
+		app.LoadFromXmlFile(example_file_1);
 		app.Init();
 		app.StartSimulation();
 

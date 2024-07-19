@@ -19,12 +19,10 @@ namespace simstudio {
 		if (_buffer.size() > 0) {
 			auto connections = app.GetConnectedEntities(_uid);
 			for (const auto& connection : connections) {
+				Shared<Entity> poped_entity = _buffer.back();
 
-				if (connection->CanTakeEntity()) {
-
-					Shared<Entity> _poped_entity = _buffer.back();
+				if (connection->TakeEntity(poped_entity)) {
 					_buffer.pop_back();
-					connection->TakeEntity(_poped_entity);
 				}
 				else {
 					LogE << connection->_uid << " can't take entity from buffer";
