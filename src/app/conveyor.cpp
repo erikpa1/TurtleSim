@@ -28,7 +28,10 @@ namespace simstudio {
 		short entities_taken = 0;
 
 
-		for (auto& mu : _buffer) {
+		//Tuna sa to foreachuje od konca - ale malo by to fungovat na dany mod
+		for (auto it = _buffer.rbegin(); it != _buffer.rend(); ++it) {
+			auto mu = *it;
+
 			auto& localPos = mu->_pos_local;
 
 			if (localPos._x >= _length) {
@@ -41,11 +44,12 @@ namespace simstudio {
 				}
 			}
 			else {
-				localPos._x += (_speed * 1);
+				localPos._x += (_speed * GetLastStepOffset());
 				LogI << mu->StringThis() << " is on: " << localPos._x << "/" << _length;
 			}
 		}
 
+		//Removing poped entities
 		for (short i = 0; i < entities_taken; i++) {
 			_buffer.pop_back();
 			_statistics._items_left += 1;
@@ -66,7 +70,8 @@ namespace simstudio {
 
 	bool Conveyor::TakeEntity(Shared<Entity>& entity)
 	{
-		if (_buffer.size() < _limit) {
+
+		if (CanTakeEntity()) {
 			_statistics._items_entered += 1;
 			_buffer.push_back(entity);
 			entity->WasTaken();
@@ -82,7 +87,7 @@ namespace simstudio {
 
 	bool Conveyor::CanTakeEntity()
 	{
-		return false;
+		return (_limit == -1) || (_buffer.size() <= _limit);
 	}
 
 	void Conveyor::PrintFinalStatistics(long statistics_delay, long simulation_duration)

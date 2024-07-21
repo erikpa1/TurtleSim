@@ -8,7 +8,7 @@ namespace simstudio {
 
 	public:
 
-		long _limit = LONG_MAX;
+		long _limit = -1;
 
 		double _speed = 1;
 

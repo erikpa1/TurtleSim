@@ -1,6 +1,5 @@
 <app>
-	<name>Example app</name>
-
+	<name value="Example app"/>
 
 	<simparams
 		simtime="60:00"
@@ -41,14 +40,14 @@
 		<single a="Source_1" b="InputBuffer" />
 
 		<single a="Source_Agv" b="L4" />
-		
+
 		<single a="L4" b="LoadingStation" />
 		<single a="LoadingStation" b="L1" />
 		<single a="L1" b="L2" />
 		<single a="L2" b="UnloadingStation" />
 		<single a="UnloadingStation" b="L3" />
 		<single a="L3" b="L4" />
-		
+
 		<single a="OutputBuffer" b="Drain"/>
 
 	</connections>
