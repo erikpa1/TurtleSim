@@ -9,7 +9,7 @@
 
 namespace simstudio {
 
-	void RegisterClasses_OriginalName() {
+	void RegisterClasses() {
 		auto factory = ClassFactory::Instance();
 
 		factory->RegisterClass<Source>();
@@ -21,6 +21,7 @@ namespace simstudio {
 		factory->RegisterClass<SingleLane>();
 		factory->RegisterClass<Loader>();
 		factory->RegisterClass<Unloader>();
+		factory->RegisterClass<Warehouse>();
 
 		LogI << &factory;
 

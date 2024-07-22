@@ -89,6 +89,17 @@ namespace simstudio
 		return {};
 	}
 
+	Shared<Entity> Entity::GetEntity(String& uid)
+	{
+		if (_app) {
+			if (_app->_entities.contains(uid)) {
+				return _app->_entities[uid];
+			}
+		}
+
+		return Shared<Entity>();
+	}
+
 	String Entity::StringThis()
 	{
 		return F("[{}][{}]", _type, _uid);

@@ -1,0 +1,44 @@
+<app>
+	<name>Example app</name>
+
+
+	<simparams
+		simtime="10:00"
+		/>
+
+	<entities>
+
+		<warehouse uid="Warehouse_1"/>
+
+		<source name="Source_1" uid="Source_1" spawn_time="uniform(5, 15)" />
+		<station name="Station_0" warehouse="Warehouse_1" uid="Station_0" operation_time="uniform(5, 12)" />
+		<station name="Station_1" uid="Station_1" operation_time="uniform(5, 13)" />
+
+		<station name="Station_2_a" uid="Station_2_a" operation_time="uniform(5, 14)" />
+		<station name="Station_2_b" uid="Station_2_b" operation_time="uniform(5, 14)" />
+
+		<buffer name="Buffer_1" uid="Buffer_1" limit="500" />
+
+		<station name="Station_3" uid="Station_3" operation_time="uniform(5, 11)" />
+		<station name="Station_4" uid="Station_4" operation_time="uniform(10, 15)" />
+		<drain name="Drain_1" uid="Drain_1" />
+	</entities>
+
+	<connections>
+		<single a="Source_1" b="Station_0" />
+		<single a="Station_0" b="Station_1" />
+
+		<single a="Station_1" b="Station_2_a" />
+		<single a="Station_1" b="Station_2_b" />
+
+		<single a="Station_2_a" b="Buffer_1" />
+		<single a="Station_2_b" b="Buffer_1" />
+
+		<single a="Buffer_1" b="Station_3" />
+
+		<single a="Station_3" b="Station_4" />
+		<single a="Station_4" b="Drain_1" />
+	</connections>
+
+
+</app>

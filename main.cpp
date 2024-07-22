@@ -17,7 +17,7 @@ using namespace simstudio;
 int main() {
 
 
-	RegisterClasses_OriginalName();
+	RegisterClasses();
 
 	App app;
 	//run_directx(app);

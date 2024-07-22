@@ -71,6 +71,8 @@ namespace simstudio
 
 		Array<Shared<Entity>> GetConnections();
 
+		Shared<Entity>  GetEntity(String& uid);
+
 		String StringThis();
 
 		virtual Shared<Entity> PopChildEntity();

@@ -75,10 +75,9 @@ String ToString(T arg)
     static Shared<type> New() { return Share<type>();} \
 
 
-
-
 #ifdef _WIN32
 #define IS_WINDOWS_PLATFORM 1
 #else
 #define IS_WINDOWS_PLATFORM 0
 #endif
+

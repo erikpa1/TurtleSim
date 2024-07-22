@@ -85,11 +85,12 @@ namespace simstudio {
 
 		LogI << "Blocked: " << blocked_percentage * 100 << "%";
 		LogI << "Empty: " << empty_percentage * 100 << "%";
+		LogI << "Peak: " << _statistics._peak;
 
-		LogI << "Peaks:";
-		for (const auto& [at, peak] : _statistics._peaks) {
-			LogI << "--Peak at: [" << TimeExpr::MakeFromSeconds(at) << "] capacity required: [" << peak << "]";
-		}
+		//LogI << "Peaks:";
+		//for (const auto& [at, peak] : _statistics._peaks) {
+		//	LogI << "--Peak at: [" << TimeExpr::MakeFromSeconds(at) << "] capacity required: [" << peak << "]";
+		//}
 	}
 
 }

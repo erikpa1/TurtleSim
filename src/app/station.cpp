@@ -4,6 +4,7 @@
 #include "app.h"
 
 #include <iomanip>  
+#include "warehouse.h"
 
 
 #include "../serialization/prelude.h"
@@ -50,6 +51,7 @@ namespace simstudio
 	{
 		Entity::FromXml(node);
 		_any_operation_time._strValue = node.GetStringAttrib("operation_time", _any_operation_time._strValue);
+		_warehouse = node.GetStringAttrib("warehouse", "");
 
 	}
 
@@ -84,6 +86,7 @@ namespace simstudio
 	{
 		_statistics.manufactured += 1;
 		_activeState = StationStates::NON_OPERATIVE;
+		_AddMaterialConsumption();
 
 		_TryToPassNextEntity(app);
 	}
@@ -119,6 +122,34 @@ namespace simstudio
 			_activeState = StationStates::BLOCKED;
 			_statistics.blocked_time += 1;
 		}
+	}
+
+	bool Station::_AddMaterialConsumption()
+	{
+
+		if (_warehouse != "") {
+
+			auto entity = GetEntity(_warehouse);
+
+			if (auto warehouse = StaticCast<Warehouse>(entity)) {
+
+				Array<WarehouseMaterialRequest> request;
+
+				String mat = "Material_1";
+				request.push_back(WarehouseMaterialRequest::New(mat, 2));
+
+				mat = "Material_2";
+				request.push_back(WarehouseMaterialRequest::New(mat, 3));
+
+
+				return warehouse->TryPickMaterial(request);
+			}
+			else {
+				LogE << StringThis() << "warehouse was invalid";
+			}
+		}
+
+		return true;
 
 	}
 

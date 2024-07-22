@@ -40,6 +40,7 @@ namespace simstudio
 		long _manufacturing_end = LONG_MAX;
 
 		String _operation_time_input = "00:00";
+		String _warehouse;
 
 
 		long _manufacturing_started = 0;
@@ -71,6 +72,8 @@ namespace simstudio
 		void _StartManufacturing();
 		void _FinishManufacturing(App& app);
 		void _TryToPassNextEntity(App& app);
+
+		bool _AddMaterialConsumption();
 
 	};
 
