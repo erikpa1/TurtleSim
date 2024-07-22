@@ -28,12 +28,12 @@
 
 	<connections>
 		<single a="Source_1" b="Station_0" />
-		<single a="Station_0" b="Station_1" />
+		<single a="Station_0" b="Conveyor_1" />
 
-		<single a="Station_1" b="Conveyor_1" />
+		<single a="Conveyor_1" b="Station_1" />
 
-		<single a="Conveyor_1" b="Station_2_a" />
-		<single a="Conveyor_1" b="Station_2_b" />
+		<single a="Station_1" b="Station_2_a" />
+		<single a="Station_1" b="Station_2_b" />
 
 		<single a="Station_2_a" b="Conveyor_2" />
 		<single a="Station_2_b" b="Conveyor_2" />
