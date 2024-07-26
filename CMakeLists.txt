@@ -12,11 +12,15 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
         file(GLOB_RECURSE  Simstudio_WinExterna_SRC
          "${CMAKE_SOURCE_DIR}/empty/*.cpp"
     )
+
+
 else()
     file(GLOB_RECURSE  Simstudio_WinExterna_SRC
          "${CMAKE_SOURCE_DIR}/external/*.cpp"
     )
 endif()
+
+
 
 # Add some multithreaded build support =====================================================================================================
 #MARK_AS_ADVANCED(MULTITHREADED_BUILD)
@@ -39,6 +43,7 @@ endif()
 add_executable(
         Simstudio 
         main.cpp
+        run_directx.cpp
         # main_1.cpp
 ${Simstudio_SRC}
 ${Simstudio_WinExterna_SRC}

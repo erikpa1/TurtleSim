@@ -12,6 +12,10 @@
 
 using namespace simstudio;
 
+#if IS_WINDOWS_PLATFORM
+#include "run_directx.h"
+#endif
+
 
 
 int main() {
@@ -20,8 +24,11 @@ int main() {
 	RegisterClasses();
 
 	App app;
-	//run_directx(app);
-	run_xml(app);
+
+#if IS_WINDOWS_PLATFORM
+	run_directx(app);
+#endif
+	//run_xml(app);
 	//run_wasm_string_xml(app);
 
 	return 0;

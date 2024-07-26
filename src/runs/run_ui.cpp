@@ -13,6 +13,7 @@
 #include "../utils/exe_dir.h"
 
 
+
 using namespace ImGui;
 
 namespace simstudio {
@@ -73,6 +74,10 @@ namespace simstudio {
 
 
 		ImGui::SameLine();
+
+
+
+
 
 		_draw_entites(app._entities);
 

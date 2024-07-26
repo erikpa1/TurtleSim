@@ -31,12 +31,12 @@
 #pragma comment(lib, "dxguid.lib")
 #endif
 
-#include "src/external/imgui/imgui_internal.h"
+#include "external/imgui/imgui_internal.h"
 
 
 #include "src/app/app.h"
 #include "src/runs/run_ui.h"
-
+#include "src/ui/uiapp.h"
 
 
 struct FrameContext
@@ -135,6 +135,8 @@ int run_directx(simstudio::App& app)
 
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
+	simstudio::UiApp uiApp;
+
 	// Main loop
 	bool done = false;
 	while (!done)
@@ -165,7 +167,10 @@ int run_directx(simstudio::App& app)
 		ImGui_ImplWin32_NewFrame();
 
 
-		simstudio::run_ui(app);
+		uiApp.StartDrawing();
+
+
+		//simstudio::run_ui(app);
 
 
 
