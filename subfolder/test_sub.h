@@ -1,0 +1,5 @@
+
+
+namespace subfolder {
+	void Subfolder();
+}

@@ -40,6 +40,8 @@ endif()
 #endif()
 # ========================================================================================================================================
 
+#add_library(subfolder STATIC ...)
+
 add_executable(
         Simstudio 
         main.cpp
@@ -48,6 +50,8 @@ add_executable(
 ${Simstudio_SRC}
 ${Simstudio_WinExterna_SRC}
 )
+
+
 
 
 
