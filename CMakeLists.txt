@@ -40,7 +40,8 @@ endif()
 #endif()
 # ========================================================================================================================================
 
-#add_library(subfolder STATIC ...)
+#add_subdirectory(subfolder)
+
 
 add_executable(
         Simstudio 

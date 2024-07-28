@@ -7,7 +7,6 @@
 #include "../../external/imgui/imgui.h"
 
 
-
 namespace simstudio {
 
 	void UiApp::StartDrawing()
