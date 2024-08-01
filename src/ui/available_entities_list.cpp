@@ -1,64 +1,87 @@
+
 #include "../app/prelude.h"
 #include "available_entities_list.h"
-
+#include "../prelude.h"
 
 #if IS_WINDOWS_PLATFORM
 #include "../../external/imgui/imgui.h"
+#include "../utils/class_factory.h"
+#include "../utils/crypto.h"
+
+#include "uiapp.h"
+#include "../app/prelude.h"
 
 
 namespace simstudio {
 
 	void AvailableEntitiesList::Draw()
 	{
+
 		if (ImGui::TreeNode("Process modeling")) {
-			ImGui::Button("Source");
-			ImGui::Button("Station");
-			ImGui::Button("Buffer");
-			ImGui::Button("Drain");
-			ImGui::Button("Loader");
-			ImGui::Button("Split");
-			ImGui::Button("Merge");
-			ImGui::Button("Router");
+			_AddAndDrawEntityIfValid("Source", "source");
+			_AddAndDrawEntityIfValid("Buffer", "buffer");
+			_AddAndDrawEntityIfValid("Drain", "drain");
+			_AddAndDrawEntityIfValid("Loader", "loader");
+			_AddAndDrawEntityIfValid("Split", "split");
+			_AddAndDrawEntityIfValid("Merge", "merge");
+			_AddAndDrawEntityIfValid("Router", "router");
+
 			ImGui::TreePop();
 		}
 
 		if (ImGui::TreeNode("Transport")) {
-			ImGui::Button("Conveyor");
-			ImGui::Button("Single lane");
+			_AddAndDrawEntityIfValid("Conveyor", "conveyor");
+			_AddAndDrawEntityIfValid("Single lane", "singlelane");
 			ImGui::TreePop();
 		}
 
 		if (ImGui::TreeNode("Logistics")) {
-			ImGui::Button("Warehouse");
-			ImGui::Button("Andon system");
-			ImGui::Button("Canban sytem");
-			ImGui::Button("Canban");
+			_AddAndDrawEntityIfValid("Warehouse", "warehosue");
+			//_AddAndDrawEntityIfValid("Andon system", "ad");
+			//_AddAndDrawEntityIfValid("Canban sytem", "warehosue");
+			//_AddAndDrawEntityIfValid("Canban", "warehosue");
 			ImGui::TreePop();
 		}
 
 		if (ImGui::TreeNode("Energy")) {
-			ImGui::Button("Solar collectors");
-			ImGui::Button("Wind Turbine");
-			ImGui::Button("Electricity grid");
+			_AddAndDrawEntityIfValid("Solar collectors", "solarcollector");
 			ImGui::TreePop();
 		}
 
 		if (ImGui::TreeNode("Data")) {
-			ImGui::Button("Python Script");
-			ImGui::Button("List");
-			ImGui::Button("Table");
+			_AddAndDrawEntityIfValid("Function", "function");
+			_AddAndDrawEntityIfValid("List", "list");
+			_AddAndDrawEntityIfValid("Table", "table");
 			ImGui::TreePop();
 		}
 
 		if (ImGui::TreeNode("Vehicles")) {
-			ImGui::Button("Agv");
+			_AddAndDrawEntityIfValid("Agv", "agv");
 			ImGui::TreePop();
 
 		}
+	}
 
+	void AvailableEntitiesList::_AddAndDrawEntityIfValid(const String& lang, const String& type)
+	{
+		if (ImGui::Button(lang.c_str())) {
+			_AddEntityOfType(type);
+		}
+	}
 
+	void AvailableEntitiesList::_AddEntityOfType(const String& type)
+	{
+		if (_app) {
+			const auto entity = ClassFactory::Instance()->Construct<Entity>(type);
+			if (entity) {
+				entity->_name = F("{}_{}", type, 0);
+				entity->_uid = Crypto::Uuid_V4();
 
+				_app->_app->AddEntity(entity);
 
+				LogI << "Successfully added entity";
+			}
+		}
 	}
 }
 

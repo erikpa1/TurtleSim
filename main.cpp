@@ -26,9 +26,9 @@ int main() {
 	App app;
 
 #if IS_WINDOWS_PLATFORM
-	//run_directx(app);
+	run_directx(app);
 #endif
-	run_xml(app);
+	//run_xml(app);
 	//run_wasm_string_xml(app);
 
 	return 0;

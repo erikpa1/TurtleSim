@@ -1,6 +1,6 @@
 #include "uiapp.h"
 
-#include "available_entities_list.h"
+
 #include "node_editor.h"
 
 
@@ -8,6 +8,15 @@
 
 
 namespace simstudio {
+
+	UiApp::UiApp()
+	{
+		_app = Share<App>();
+
+		_hierarchy._app = this;
+		_avlEntities._app = this;
+		_entityProperties._app = this;
+	}
 
 	void UiApp::StartDrawing()
 	{
@@ -30,9 +39,7 @@ namespace simstudio {
 	{
 		ImGui::Begin("Available entities", &_leftBarActive, ImGuiWindowFlags_MenuBar);
 
-
-		AvailableEntitiesList::Draw();
-
+		_avlEntities.Draw();
 
 		//Ending begin
 		ImGui::End();
@@ -45,6 +52,7 @@ namespace simstudio {
 		ImGui::Text("This is place for you nodes");
 
 		NodeEditor::Draw();
+		_hierarchy.Draw();
 
 		//Ending begin
 		ImGui::End();
@@ -55,7 +63,7 @@ namespace simstudio {
 	{
 		ImGui::Begin("Properties", &_leftBarActive);
 
-		ImGui::Text("This is place for your properties");
+		_entityProperties.Draw();
 
 		//Ending begin
 		ImGui::End();

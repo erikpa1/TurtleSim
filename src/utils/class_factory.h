@@ -40,6 +40,8 @@ namespace simstudio {
 			return Share<T>();
 		}
 
+
+
 	};
 
 }
