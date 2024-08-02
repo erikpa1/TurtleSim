@@ -5,7 +5,7 @@
 #include "entities_hierarchy.h"
 #include "available_entities_list.h"
 #include "entity_properties.h"
-
+#include "app_controls.h"
 
 namespace simstudio {
 
@@ -27,10 +27,13 @@ namespace simstudio {
 		void _DrawRightBar();
 
 
+
+
+
 		EntitiesHierarchy _hierarchy;
 		AvailableEntitiesList _avlEntities;
 		EntityPropertiesView _entityProperties;
-
+		AppControls _appControls;
 
 
 	public:

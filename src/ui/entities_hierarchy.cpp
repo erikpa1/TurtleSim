@@ -3,7 +3,7 @@
 
 #include "../app/prelude.h"
 
-#if IS_WINDOWS_PLATFORM
+
 
 #include "../../external/imgui/imgui.h"
 #include "uiapp.h"
@@ -37,8 +37,3 @@ namespace simstudio {
 
 
 
-
-
-
-
-#endif

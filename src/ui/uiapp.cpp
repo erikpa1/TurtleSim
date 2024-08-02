@@ -11,8 +11,7 @@ namespace simstudio {
 
 	UiApp::UiApp()
 	{
-		_app = Share<App>();
-
+		_appControls._app = this;
 		_hierarchy._app = this;
 		_avlEntities._app = this;
 		_entityProperties._app = this;
@@ -23,9 +22,13 @@ namespace simstudio {
 
 		ImGui::NewFrame();
 
-		_DrawLeftBar();
-		_DrawMiddleBar();
-		_DrawRightBar();
+		_appControls.Draw();
+
+		if (_app) {
+			_DrawLeftBar();
+			_DrawMiddleBar();
+			_DrawRightBar();
+		}
 
 
 		// Rendering
@@ -38,6 +41,7 @@ namespace simstudio {
 	void UiApp::_DrawLeftBar()
 	{
 		ImGui::Begin("Available entities", &_leftBarActive, ImGuiWindowFlags_MenuBar);
+
 
 		_avlEntities.Draw();
 
@@ -68,4 +72,6 @@ namespace simstudio {
 		//Ending begin
 		ImGui::End();
 	}
+
+
 }

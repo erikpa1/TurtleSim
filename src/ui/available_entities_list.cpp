@@ -3,7 +3,7 @@
 #include "available_entities_list.h"
 #include "../prelude.h"
 
-#if IS_WINDOWS_PLATFORM
+
 #include "../../external/imgui/imgui.h"
 #include "../utils/class_factory.h"
 #include "../utils/crypto.h"
@@ -93,4 +93,3 @@ namespace simstudio {
 
 
 
-#endif
