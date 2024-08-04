@@ -1,21 +1,21 @@
 cmake_minimum_required(VERSION 3.20)
-project(Simstudio)
+project(SimStudioPlayer)
 
 
 set(CMAKE_CXX_STANDARD 23)
 
-file(GLOB_RECURSE  Simstudio_SRC
+file(GLOB_RECURSE  SimStudioPlayer_SRC
      "${CMAKE_SOURCE_DIR}/src/*.cpp"
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten") 
 
-        file(GLOB_RECURSE  Simstudio_WinExterna_SRC
+        file(GLOB_RECURSE  SimStudioPlayer_WinExterna_SRC
          "${CMAKE_SOURCE_DIR}/empty/*.cpp"
     )
 
 else()
-    file(GLOB_RECURSE  Simstudio_WinExterna_SRC
+    file(GLOB_RECURSE  SimStudioPlayer_WinExterna_SRC
          "${CMAKE_SOURCE_DIR}/external/*.cpp"
     )
 endif()
@@ -43,33 +43,32 @@ endif()
 
 
 add_executable(
-        Simstudio 
+        SimStudioPlayer 
         main.cpp
         run_directx.cpp
         # main_1.cpp
-${Simstudio_SRC}
-${Simstudio_WinExterna_SRC}
+${SimStudioPlayer_SRC}
+${SimStudioPlayer_WinExterna_SRC}
 )
 
 
 
-
+target_include_directories(SimStudioPlayer PRIVATE ${CMAKE_SOURCE_DIR}/SimStudio)
+target_link_libraries(SimStudioPlayer PRIVATE SimStudio)
+add_subdirectory(SimStudio)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
     message(STATUS "xxx--------Building for WebAssembly (WASM)")
 else()
     message(STATUS "xxx--------Building for windows")
 
-#Adding Direct12
-find_library(D3D12_LIB d3d12.lib)
-target_link_libraries(${PROJECT_NAME} ${D3D12_LIB})
-find_library(DXGI dxgi.lib)
-target_link_libraries(${PROJECT_NAME} ${DXGI})
+    target_include_directories(SimStudioPlayer PRIVATE ${CMAKE_SOURCE_DIR}/external)
+    target_link_libraries(SimStudioPlayer PRIVATE ImGui)
+    add_subdirectory(external/imgui)
 
 endif()
 
 
+#target_precompile_headers(SimStudioPlayer Private src/prelude.h)
 
-#target_precompile_headers(Simstudio Private src/prelude.h)
-
-target_compile_options(Simstudio PRIVATE "/bigobj")
+target_compile_options(SimStudioPlayer PRIVATE "/bigobj")

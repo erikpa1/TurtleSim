@@ -1,6 +1,6 @@
 #include "node_editor.h"
 
-#include "../../external/imgui/imgui.h"
+#include "imgui/imgui.h"
 
 
 

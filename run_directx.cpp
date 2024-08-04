@@ -14,9 +14,9 @@
 
 
 
-#include "external/imgui/imgui.h"
-#include "external/imgui/imgui_impl_win32.h"
-#include "external/imgui/imgui_impl_dx12.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_win32.h"
+#include "imgui/imgui_impl_dx12.h"
 
 #include <d3d12.h>
 #include <dxgi1_4.h>
@@ -31,7 +31,7 @@
 #pragma comment(lib, "dxguid.lib")
 #endif
 
-#include "external/imgui/imgui_internal.h"
+#include "imgui/imgui_internal.h"
 
 
 #include "src/app/app.h"

@@ -4,7 +4,7 @@
 
 #include "components/FileDialog.h"
 
-#include "../../external/imgui/imgui.h"
+#include "imgui/imgui.h"
 
 
 
