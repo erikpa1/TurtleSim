@@ -20,6 +20,7 @@ namespace simstudio {
 
 		void _StartNewProject();
 		void _OpenProject();
+		void _SaveProject();
 
 
 	};
