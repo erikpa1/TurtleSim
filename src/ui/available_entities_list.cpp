@@ -20,6 +20,7 @@ namespace simstudio {
 	void AvailableEntitiesList::Draw()
 	{
 
+
 		if (ImGui::TreeNode("Process modeling")) {
 			_AddAndDrawEntityIfValid("Source", "source");
 			_AddAndDrawEntityIfValid("Buffer", "buffer");

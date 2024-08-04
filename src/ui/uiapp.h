@@ -6,6 +6,7 @@
 #include "available_entities_list.h"
 #include "entity_properties.h"
 #include "app_controls.h"
+#include "node_editor.h"
 
 namespace simstudio {
 
@@ -34,6 +35,7 @@ namespace simstudio {
 		AvailableEntitiesList _avlEntities;
 		EntityPropertiesView _entityProperties;
 		AppControls _appControls;
+		NodeEditor _nodeEditor;
 
 
 	public:

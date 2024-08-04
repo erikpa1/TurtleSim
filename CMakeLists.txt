@@ -14,6 +14,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
          "${CMAKE_SOURCE_DIR}/empty/*.cpp"
     )
 
+
 else()
     file(GLOB_RECURSE  SimStudioPlayer_WinExterna_SRC
          "${CMAKE_SOURCE_DIR}/external/*.cpp"
@@ -63,8 +64,13 @@ else()
     message(STATUS "xxx--------Building for windows")
 
     target_include_directories(SimStudioPlayer PRIVATE ${CMAKE_SOURCE_DIR}/external)
+    #Imgui import
     target_link_libraries(SimStudioPlayer PRIVATE ImGui)
     add_subdirectory(external/imgui)
+
+    #imgui diagrams import
+    target_link_libraries(SimStudioPlayer PRIVATE ImGuiBlueprint)
+    add_subdirectory(external/imgui_blueprints)
 
 endif()
 

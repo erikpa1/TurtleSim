@@ -17,3 +17,7 @@ target_include_directories(ImGuiBlueprint PUBLIC
 )
 
 
+target_include_directories(ImGuiBlueprint PRIVATE ${CMAKE_SOURCE_DIR}/external)
+target_link_libraries(ImGuiBlueprint PRIVATE ImGui)
+
+

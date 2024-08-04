@@ -15,7 +15,7 @@
 // This version only supports UNICODE.
 
 struct IUnknown;
-#include "dxerr.h"
+#include "../include/dxerr.h"
 
 #include <stdio.h>
 

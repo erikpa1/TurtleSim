@@ -55,7 +55,7 @@ namespace simstudio {
 
 		ImGui::Text("This is place for you nodes");
 
-		NodeEditor::Draw();
+		_nodeEditor.Draw();
 		_hierarchy.Draw();
 
 		//Ending begin
