@@ -9,6 +9,7 @@
 
 #include "src/factory_registration.h"
 
+#include "src/serialization/safejson.h"
 
 using namespace simstudio;
 
@@ -19,6 +20,9 @@ using namespace simstudio;
 
 
 int main() {
+
+	SafeJson json;
+	json.ParseString("");
 
 
 	RegisterClasses();

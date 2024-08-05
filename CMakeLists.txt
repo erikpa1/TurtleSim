@@ -8,6 +8,7 @@ file(GLOB_RECURSE  SimStudioPlayer_SRC
      "${CMAKE_SOURCE_DIR}/src/*.cpp"
 )
 
+
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten") 
 
         file(GLOB_RECURSE  SimStudioPlayer_WinExterna_SRC
@@ -58,21 +59,28 @@ target_include_directories(SimStudioPlayer PRIVATE ${CMAKE_SOURCE_DIR}/SimStudio
 target_link_libraries(SimStudioPlayer PRIVATE SimStudio)
 add_subdirectory(SimStudio)
 
+target_include_directories(SimStudioPlayer PRIVATE ${CMAKE_SOURCE_DIR}/external)
+
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
     message(STATUS "xxx--------Building for WebAssembly (WASM)")
 else()
     message(STATUS "xxx--------Building for windows")
 
-    target_include_directories(SimStudioPlayer PRIVATE ${CMAKE_SOURCE_DIR}/external)
     #Imgui import
-    target_link_libraries(SimStudioPlayer PRIVATE ImGui)
     add_subdirectory(external/imgui)
+    target_link_libraries(SimStudioPlayer PRIVATE ImGui)
+
 
     #imgui diagrams import
-    target_link_libraries(SimStudioPlayer PRIVATE ImGuiBlueprint)
     add_subdirectory(external/imgui_blueprints)
+    target_link_libraries(SimStudioPlayer PRIVATE ImGuiBlueprint)
+
 
 endif()
+
+add_subdirectory(external/simpleson)
+target_link_libraries(SimStudioPlayer PRIVATE simpleson)
+
 
 
 #target_precompile_headers(SimStudioPlayer Private src/prelude.h)
