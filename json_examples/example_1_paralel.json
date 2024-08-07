@@ -1,0 +1,330 @@
+{
+    "uid": "example_model_parallel",
+    "name": "M1 - Parallel connection",
+    "simparams": {
+        "simtime": "10:00"
+    },
+    "entities": [
+        {
+            "name": "Source_0",
+            "uid": "3675f0e6-e6d0-4ab7-a236-1bab0b4d640f",
+            "description": "",
+            "color": "#d13742",
+            "metaclazz": "system_entity",
+            "clazz": "base",
+            "tags": "",
+            "user_data": {},
+            "position": [
+                -0.8507723803018441,
+                0,
+                0.24123458812998977
+            ],
+            "scale": [
+                1,
+                1,
+                1
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "parent": "",
+            "type": "source",
+            "model": "example_model_parallel",
+            "spawn_time": "uniform(5, 15)",
+            "spawn_limit": -1,
+            "spawn_entity": ""
+        },
+        {
+            "name": "Station_0",
+            "uid": "a31c0009-3c05-4630-985a-6f1877d050ea",
+            "description": "",
+            "color": "#d13742",
+            "metaclazz": "system_entity",
+            "clazz": "base",
+            "tags": "",
+            "user_data": {},
+            "position": [
+                2.9429632210241383,
+                0,
+                0.44170798423491353
+            ],
+            "scale": [
+                1,
+                1,
+                1
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "parent": "",
+            "type": "station",
+            "model": "example_model_parallel",
+            "operation_time": "uniform(5, 12)"
+        },
+        {
+            "name": "Station_2_a",
+            "uid": "7d9b14f7-bc57-4097-bd4e-7efd279893ba",
+            "description": "",
+            "color": "#d13742",
+            "metaclazz": "system_entity",
+            "clazz": "base",
+            "tags": "",
+            "user_data": {},
+            "position": [
+                10.620396794040063,
+                0,
+                -2.966433762569541
+            ],
+            "scale": [
+                1,
+                1,
+                1
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "parent": "",
+            "type": "station",
+            "model": "example_model_parallel",
+            "operation_time": "uniform(5, 14)"
+        },
+        {
+            "name": "Station_2_b",
+            "uid": "12ac2cff-baa2-4c9d-b387-6dc5c273eae8",
+            "description": "",
+            "color": "#d13742",
+            "metaclazz": "system_entity",
+            "clazz": "base",
+            "tags": "",
+            "user_data": {},
+            "position": [
+                10.874300210188196,
+                0,
+                2.4832037737844086
+            ],
+            "scale": [
+                1,
+                1,
+                1
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "parent": "",
+            "type": "station",
+            "model": "example_model_parallel",
+            "operation_time": "uniform(5, 14)"
+        },
+        {
+            "name": "Station_1",
+            "uid": "d0d0469c-4aba-4477-ad2d-b9b009f040b7",
+            "description": "",
+            "color": "#d13742",
+            "metaclazz": "system_entity",
+            "clazz": "base",
+            "tags": "",
+            "user_data": {},
+            "position": [
+                6.848486647282881,
+                0,
+                0.33241434372382833
+            ],
+            "scale": [
+                1,
+                1,
+                1
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "parent": "",
+            "type": "station",
+            "model": "example_model_parallel",
+            "operation_time": "uniform(5, 13)"
+        },
+        {
+            "name": "Buffer_1",
+            "uid": "c521cdb3-ad85-47d4-991b-7f948a283a08",
+            "description": "",
+            "color": "#d13742",
+            "metaclazz": "system_entity",
+            "clazz": "base",
+            "tags": "",
+            "user_data": {},
+            "position": [
+                14.069917060301462,
+                0,
+                0.2269552997152737
+            ],
+            "scale": [
+                1,
+                1,
+                1
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "parent": "",
+            "type": "buffer",
+            "model": "example_model_parallel",
+            "limit": 500
+        },
+        {
+            "name": "Station_3",
+            "uid": "29c4e142-615a-4835-a27d-f58a6aab587d",
+            "description": "",
+            "color": "#d13742",
+            "metaclazz": "system_entity",
+            "clazz": "base",
+            "tags": "",
+            "user_data": {},
+            "position": [
+                17.051176105121456,
+                0,
+                0.10725976102248132
+            ],
+            "scale": [
+                1,
+                1,
+                1
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "parent": "",
+            "type": "station",
+            "model": "example_model_parallel",
+            "operation_time": "uniform(5, 11)"
+        },
+        {
+            "name": "Station_4",
+            "uid": "6f055c3c-8afc-4eef-b5cb-f40586e1d383",
+            "description": "",
+            "color": "#d13742",
+            "metaclazz": "system_entity",
+            "clazz": "base",
+            "tags": "",
+            "user_data": {},
+            "position": [
+                19.988292606588306,
+                0,
+                0.12449917148624505
+            ],
+            "scale": [
+                1,
+                1,
+                1
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "parent": "",
+            "type": "station",
+            "model": "example_model_parallel",
+            "operation_time": "uniform(10, 15)"
+        },
+        {
+            "name": "Drain_1",
+            "uid": "7488d910-040e-41d2-963d-534593360a93",
+            "description": "",
+            "color": "#d13742",
+            "metaclazz": "system_entity",
+            "clazz": "base",
+            "tags": "",
+            "user_data": {},
+            "position": [
+                23.674449109487433,
+                0,
+                0.09440095067837707
+            ],
+            "scale": [
+                1,
+                1,
+                1
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "parent": "",
+            "type": "drain",
+            "model": "example_model_parallel"
+        }
+    ],
+    "connections": [
+        {
+            "uid": "3675f0e6-e6d0-4ab7-a236-1bab0b4d640f",
+            "model": "example_model_parallel",
+            "b": [
+                "a31c0009-3c05-4630-985a-6f1877d050ea"
+            ]
+        },
+        {
+            "uid": "a31c0009-3c05-4630-985a-6f1877d050ea",
+            "model": "example_model_parallel",
+            "b": [
+                "d0d0469c-4aba-4477-ad2d-b9b009f040b7"
+            ]
+        },
+        {
+            "uid": "d0d0469c-4aba-4477-ad2d-b9b009f040b7",
+            "model": "example_model_parallel",
+            "b": [
+                "7d9b14f7-bc57-4097-bd4e-7efd279893ba",
+                "12ac2cff-baa2-4c9d-b387-6dc5c273eae8"
+            ]
+        },
+        {
+            "uid": "12ac2cff-baa2-4c9d-b387-6dc5c273eae8",
+            "model": "example_model_parallel",
+            "b": [
+                "c521cdb3-ad85-47d4-991b-7f948a283a08"
+            ]
+        },
+        {
+            "uid": "7d9b14f7-bc57-4097-bd4e-7efd279893ba",
+            "model": "example_model_parallel",
+            "b": [
+                "c521cdb3-ad85-47d4-991b-7f948a283a08"
+            ]
+        },
+        {
+            "uid": "c521cdb3-ad85-47d4-991b-7f948a283a08",
+            "model": "example_model_parallel",
+            "b": [
+                "29c4e142-615a-4835-a27d-f58a6aab587d"
+            ]
+        },
+        {
+            "uid": "29c4e142-615a-4835-a27d-f58a6aab587d",
+            "model": "example_model_parallel",
+            "b": [
+                "6f055c3c-8afc-4eef-b5cb-f40586e1d383"
+            ]
+        },
+        {
+            "uid": "6f055c3c-8afc-4eef-b5cb-f40586e1d383",
+            "model": "example_model_parallel",
+            "b": [
+                "7488d910-040e-41d2-963d-534593360a93"
+            ]
+        }
+    ]
+}

@@ -20,11 +20,6 @@ using namespace simstudio;
 
 
 int main() {
-
-	SafeJson json;
-	json.ParseString("");
-
-
 	RegisterClasses();
 
 	App app;

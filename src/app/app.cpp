@@ -12,6 +12,8 @@
 #include "../external/tinyxml2.h"
 #include "../serialization/safexml.h"
 
+#include "../serialization/safejson.h"
+
 
 using namespace tinyxml2;
 
@@ -211,6 +213,7 @@ namespace simstudio
 		}
 	}
 
+
 	Array<Shared<Entity>> App::GetConnectedEntities(const String& who)
 	{
 		Array<Shared<Entity>> successors;
@@ -224,10 +227,18 @@ namespace simstudio
 					successors.push_back(_entities[successor_uid]);
 				}
 			}
-
 		}
-
 		return successors;
+
+	}
+
+	void App::SaveToJson(SafeJson& jobj)
+	{
+		jobj.WriteString("name", "some model");
+		jobj.WriteString("uid", "0001-3322-3949");
+		jobj.WriteString("created_at", "now");
+		jobj.WriteString("last_save", "tommoroow");
+
 
 	}
 

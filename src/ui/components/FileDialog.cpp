@@ -69,6 +69,10 @@ namespace simstudio {
 		ofn.lpstrInitialDir = NULL;
 		ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_OVERWRITEPROMPT;
 
+
+		char currentDir[MAX_PATH];
+		GetCurrentDirectory(MAX_PATH, currentDir);
+
 		// Display the Save As dialog box 
 		if (GetSaveFileName(&ofn) == TRUE)
 		{
@@ -95,5 +99,7 @@ namespace simstudio {
 		{
 			LogE << "Save file dialog was canceled or an error occurred.";
 		}
+
+		SetCurrentDirectory(currentDir);
 	}
 }

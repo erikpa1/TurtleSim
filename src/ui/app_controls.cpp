@@ -6,9 +6,9 @@
 
 #include "imgui/imgui.h"
 
-
-
 #include "../app/app.h"
+
+#include "../serialization/safejson.h"
 
 namespace simstudio {
 	void AppControls::Draw()
@@ -63,7 +63,9 @@ namespace simstudio {
 
 	void AppControls::_SaveProject()
 	{
-		FileDialog::SaveJsonFile("{\"data\": \"Some data\"}");
+		SafeJson json;
+		_app->_app->SaveToJson(json);
+		FileDialog::SaveJsonFile(json.Dump());
 	}
 
 

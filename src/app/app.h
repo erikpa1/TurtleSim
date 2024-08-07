@@ -8,6 +8,7 @@ namespace simstudio
 
 	class Entity;
 	class SafeXml;
+	class SafeJson;
 
 	class App
 	{
@@ -44,11 +45,17 @@ namespace simstudio
 		bool MoveEntity(Shared<Entity>& entity, String fromEntity, String toEntity);
 
 
+
+		Array<Shared<Entity>> GetConnectedEntities(const String& who);
+
+	public:
+		//Serializatoins
 		void LoadFromXmlString(const String& xmlString);
 		void LoadFromXmlFile(const String& path);
 		void LoadFromSafeXmlNode(SafeXml& doc);
 
-		Array<Shared<Entity>> GetConnectedEntities(const String& who);
+		void SaveToJson(SafeJson& jobj);
+
 
 
 	};
