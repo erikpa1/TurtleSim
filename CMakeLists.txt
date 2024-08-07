@@ -9,6 +9,7 @@ file(GLOB_RECURSE  SimStudioPlayer_SRC
 )
 
 
+
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten") 
 
         file(GLOB_RECURSE  SimStudioPlayer_WinExterna_SRC
