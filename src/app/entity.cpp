@@ -6,12 +6,15 @@
 #include "../serialization/prelude.h"
 #include "../utils/crypto.h"
 
+#include "../serialization/safejson.h"
+
 
 namespace simstudio
 {
 	Entity::~Entity()
 	{
 	}
+
 	Entity::Entity()
 	{
 		_uid = Crypto::Uuid_V4();
@@ -113,6 +116,22 @@ namespace simstudio
 	int Entity::ChildrenCount()
 	{
 		return 0;
+	}
+
+	Shared<SafeJson> Entity::ToJson()
+	{
+
+		const auto json = Share<SafeJson>();
+
+		const auto& json_ref = json.get();
+		json_ref->WriteString("uid", this->_uid);
+		json_ref->WriteString("name", this->_name);
+		json_ref->WriteString("type", this->_type);
+		json_ref->WriteFloat3("position", 0, 0, 0);
+		json_ref->WriteFloat3("scale", 1, 1, 1);
+
+
+		return json;
 	}
 
 }

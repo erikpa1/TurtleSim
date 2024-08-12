@@ -51,6 +51,23 @@ namespace simstudio {
 
 	void UiApp::_DrawMiddleBar()
 	{
+
+
+		// Retrieve the current viewport
+		//ImGuiViewport* viewport = ImGui::GetMainViewport();
+
+		// Set the next window position to the top-left corner of the viewport
+		//ImGui::SetNextWindowPos(viewport->Pos);
+
+		// Set the next window size to match the viewport size
+		//ImGui::SetNextWindowSize(viewport->Size);
+
+		// Optionally remove title bar, borders, and other window decorations
+		//ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize |
+		//	ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse |
+		//	ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+
+
 		ImGui::Begin("Canvas", &_leftBarActive, ImGuiWindowFlags_MenuBar);
 
 		ImGui::Text("This is place for you nodes");

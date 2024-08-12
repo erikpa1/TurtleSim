@@ -234,14 +234,22 @@ namespace simstudio
 
 	void App::SaveToJson(SafeJson& jobj)
 	{
-		jobj.WriteString("name", "some model");
+		jobj.WriteString("name", "Some model");
 		jobj.WriteString("uid", "0001-3322-3949");
 		jobj.WriteString("created_at", "now");
 		jobj.WriteString("last_save", "tommoroow");
 
+		SafeJson entities;
+
+		Array<Shared<SafeJson>> entities_jarray;
+
+		for (const auto& iter : this->_entities) {
+			entities_jarray.push_back(iter.second->ToJson());
+
+		}
+
+		jobj.WriteJsonArray("entities", entities_jarray);
 
 	}
-
-
 
 }

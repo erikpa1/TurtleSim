@@ -24,6 +24,7 @@ namespace simstudio {
 		if (ImGui::TreeNode("Process modeling")) {
 			_AddAndDrawEntityIfValid("Source", "source");
 			_AddAndDrawEntityIfValid("Buffer", "buffer");
+			_AddAndDrawEntityIfValid("Station", "station");
 			_AddAndDrawEntityIfValid("Drain", "drain");
 			_AddAndDrawEntityIfValid("Loader", "loader");
 			_AddAndDrawEntityIfValid("Split", "split");

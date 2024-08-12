@@ -13,6 +13,7 @@ namespace simstudio
 	class App;
 
 	class SafeXmlNode;
+	class SafeJson;
 
 	class Entity
 	{
@@ -78,6 +79,9 @@ namespace simstudio
 		virtual Shared<Entity> PopChildEntity();
 
 		virtual int ChildrenCount();
+
+
+		virtual Shared<SafeJson> ToJson();
 
 
 	};

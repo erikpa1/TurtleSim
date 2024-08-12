@@ -42,10 +42,19 @@ namespace simstudio {
 
 		void WriteString(const String& key, const String& value);
 		void WriteFloat(const String& key, float value);
+		void WriteFloat3(const String& key, float x, float y, float z);
 		void WriteDouble(const String& key, double value);
+		void WriteDouble3(const String& key, double x, double y, double z);
 		void WriteInt(const String& key, int value);
 		void WriteLong(const String& key, long value);
 		void WriteBoolean(const String& key, bool value);
+
+		void WriteJson(const String& key, const SafeJson& another);
+		void WriteJsonArray(const String& key, const Array<Shared<SafeJson>>& another);
+
+		int GetKeysLength();
+
+
 
 
 		String Dump();
