@@ -18,6 +18,9 @@ namespace simstudio {
 			if (ImGui::BeginMenu("Project"))
 			{
 
+				if (ImGui::MenuItem("Open")) {
+					_OpenProject();
+				}
 
 				bool canSave = _app->_app ? true : false;
 
@@ -28,9 +31,7 @@ namespace simstudio {
 				if (ImGui::MenuItem("New", "CTRL+N")) {
 					_StartNewProject();
 				}
-				if (ImGui::MenuItem("Open")) {
-					_OpenProject();
-				}
+
 
 				if (ImGui::MenuItem("Recent")) {
 
@@ -59,6 +60,12 @@ namespace simstudio {
 
 	void AppControls::_OpenProject()
 	{
+		const auto data = FileDialog::ReadFileString("json");
+
+		if (data == "") {
+
+		}
+
 	}
 
 	void AppControls::_SaveProject()

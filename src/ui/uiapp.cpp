@@ -83,11 +83,15 @@ namespace simstudio {
 	void UiApp::_DrawRightBar()
 	{
 		ImGui::Begin("Properties", &_leftBarActive);
-
 		_entityProperties.Draw();
-
 		//Ending begin
 		ImGui::End();
+
+		ImGui::Begin("Console", &_leftBarActive);
+		_console.Draw();
+		ImGui::End();
+	
+
 	}
 
 

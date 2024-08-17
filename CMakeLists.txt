@@ -8,7 +8,6 @@ file(GLOB_RECURSE  SimStudioPlayer_SRC
      "${CMAKE_SOURCE_DIR}/src/*.cpp"
 )
 
-
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten") 
 
         file(GLOB_RECURSE  SimStudioPlayer_WinExterna_SRC
@@ -56,7 +55,9 @@ ${SimStudioPlayer_WinExterna_SRC}
 
 target_include_directories(SimStudioPlayer PRIVATE ${CMAKE_SOURCE_DIR}/SimStudio)
 target_link_libraries(SimStudioPlayer PRIVATE SimStudio)
+
 add_subdirectory(SimStudio)
+
 
 target_include_directories(SimStudioPlayer PRIVATE ${CMAKE_SOURCE_DIR}/external)
 

@@ -102,4 +102,38 @@ namespace simstudio {
 
 		SetCurrentDirectory(currentDir);
 	}
+	String FileDialog::ReadFileString(const String& forcedExtension)
+	{
+		OPENFILENAME ofn;       // common dialog box structure
+		char szFile[1024] = { 0 };       // buffer for file name
+		HWND hwnd = nullptr;    // owner window (nullptr if there isn't one)
+		HANDLE hf;              // file handle
+
+		// Initialize OPENFILENAME
+		ZeroMemory(&ofn, sizeof(ofn));
+		ofn.lStructSize = sizeof(ofn);
+		ofn.hwndOwner = hwnd;
+		ofn.lpstrFile = szFile;
+		ofn.nMaxFile = sizeof(szFile);
+		ofn.lpstrFilter = ("All Files\0*.*\0" + forcedExtension + "\0*." + forcedExtension + "\0").c_str();
+		ofn.nFilterIndex = 1;
+		ofn.lpstrFileTitle = nullptr;
+		ofn.nMaxFileTitle = 0;
+		ofn.lpstrInitialDir = nullptr;
+		ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+		// Display the Open dialog box.
+		if (GetOpenFileName(&ofn) == TRUE)
+		{
+			std::ifstream file(ofn.lpstrFile);
+			if (file.is_open())
+			{
+				std::stringstream buffer;
+				buffer << file.rdbuf();
+				return buffer.str();
+			}
+		}
+
+		return String(); // Return an empty string if no file was selected or if an error occurred
+	}
 }
