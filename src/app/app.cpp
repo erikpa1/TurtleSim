@@ -213,6 +213,10 @@ namespace simstudio
 		}
 	}
 
+	void App::FromJson(SafeJson& jobj)
+	{
+	}
+
 
 	Array<Shared<Entity>> App::GetConnectedEntities(const String& who)
 	{

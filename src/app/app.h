@@ -54,6 +54,8 @@ namespace simstudio
 		void LoadFromXmlFile(const String& path);
 		void LoadFromSafeXmlNode(SafeXml& doc);
 
+		void FromJson(SafeJson& jobj);
+
 		void SaveToJson(SafeJson& jobj);
 
 

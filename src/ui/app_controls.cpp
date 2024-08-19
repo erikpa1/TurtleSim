@@ -62,9 +62,14 @@ namespace simstudio {
 	{
 		const auto data = FileDialog::ReadFileString("json");
 
-		if (data == "") {
+		SafeJson json;
+		json.ParseString(data);
 
-		}
+		_app->_app = Share<App>();
+		_app->_app->LoadFromSafeXmlNode(json);
+
+
+
 
 	}
 
