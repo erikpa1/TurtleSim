@@ -6,7 +6,7 @@
 
 #include "imgui/imgui.h"
 
-#include "../app/app.h"
+#include "../app/world.h"
 
 #include "../serialization/safejson.h"
 
@@ -22,7 +22,7 @@ namespace simstudio {
 					_OpenProject();
 				}
 
-				bool canSave = _app->_app ? true : false;
+				bool canSave = _app->_world ? true : false;
 
 				if (ImGui::MenuItem("Save", "CTRL+S", nullptr, canSave)) {
 					_SaveProject();
@@ -55,29 +55,29 @@ namespace simstudio {
 
 	void AppControls::_StartNewProject()
 	{
-		_app->_app = Share<App>();
+		_app->_world = Share<World>();
 	}
 
 	void AppControls::_OpenProject()
 	{
-		const auto data = FileDialog::ReadFileString("json");
+		const auto data = FileDialog::ReadFileString(FileDialog::GetJsonExtension());
 
-		SafeJson json;
-		json.ParseString(data);
+		if (data != "") {
 
-		_app->_app = Share<App>();
-		_app->_app->LoadFromSafeXmlNode(json);
+			SafeJson json;
+			json.ParseString(data);
 
-
-
-
+			_app->_world = Share<World>();
+			_app->_world->FromJson(json);
+		}
 	}
 
 	void AppControls::_SaveProject()
 	{
 		SafeJson json;
-		_app->_app->SaveToJson(json);
-		FileDialog::SaveJsonFile(json.Dump());
+		_app->_world->SaveToJson(json);
+
+		FileDialog::SaveJsonFile(json.Dump(), "simstudio.json");
 	}
 
 

@@ -1,6 +1,6 @@
 #include "agv.h"
 
-#include "app.h"
+#include "world.h"
 #include "stepper.h"
 #include "track.h"
 
@@ -18,7 +18,7 @@ namespace simstudio {
 	{
 	}
 
-	void Agv::Step(App& app, Stepper& stepper)
+	void Agv::Step(World& app, Stepper& stepper)
 	{
 
 	}

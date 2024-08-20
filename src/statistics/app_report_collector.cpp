@@ -5,7 +5,7 @@
 
 namespace simstudio {
 
-	void SaveStatisticsRecord(App& app)
+	void SaveStatisticsRecord(World& app)
 	{
 		LogI << "==============";
 		LogI << "Final statistics:";

@@ -1,6 +1,6 @@
 
 
-#include "app.h"
+#include "world.h"
 #include "entity.h"
 
 #include "stepper.h"
@@ -21,13 +21,13 @@ using namespace tinyxml2;
 namespace simstudio
 {
 
-	App::App()
+	World::World()
 	{
 		//TODO dorobit custom entities template
 		_stepper = Stepper();
 	}
 
-	void App::Init()
+	void World::Init()
 	{
 		for (const auto& iter : _entities)
 		{
@@ -35,7 +35,7 @@ namespace simstudio
 		}
 	}
 
-	void App::PrintEntities()
+	void World::PrintEntities()
 	{
 		for (const auto& iter : _entities)
 		{
@@ -43,7 +43,7 @@ namespace simstudio
 		}
 	}
 
-	void App::StartSimulation()
+	void World::StartSimulation()
 	{
 		LogD << "Starting simulation with duration: " << _stepper._endIndex;
 
@@ -52,7 +52,7 @@ namespace simstudio
 		}
 	}
 
-	void App::Step()
+	void World::Step()
 	{
 		_stepper.Step();
 
@@ -71,12 +71,12 @@ namespace simstudio
 
 	}
 
-	void App::AddEntity(Shared<Entity> entity)
+	void World::AddEntity(Shared<Entity> entity)
 	{
 		_entities[entity->_uid] = entity;
 	}
 
-	Shared<Entity> App::SpawnEntity(std::function<Shared<Entity>()> fn)
+	Shared<Entity> World::SpawnEntity(std::function<Shared<Entity>()> fn)
 	{
 		Shared<Entity> tmp = fn();
 		tmp->_weakThis = tmp;
@@ -84,19 +84,19 @@ namespace simstudio
 
 	}
 
-	void App::UnlinkEntity(const String& uid)
+	void World::UnlinkEntity(const String& uid)
 	{
 		if (_spawnies.contains(uid)) {
 			_spawnies.erase(uid);
 		}
 	}
 
-	void App::AddSpawnedEntity(Shared<Entity>& entity)
+	void World::AddSpawnedEntity(Shared<Entity>& entity)
 	{
 		_spawnies[entity->_uid] = entity;
 	}
 
-	void App::AddEntityConnection(String connA, String connB)
+	void World::AddEntityConnection(String connA, String connB)
 	{
 		if (_connections.contains(connA)) {
 			_connections[connA].push_back(connB);
@@ -107,7 +107,7 @@ namespace simstudio
 
 	}
 
-	bool App::MoveEntity(Shared<Entity>& entity, String fromEntity, String toEntity)
+	bool World::MoveEntity(Shared<Entity>& entity, String fromEntity, String toEntity)
 	{
 		LogD << "Moving entity from: " << fromEntity << " to " << toEntity;
 
@@ -119,14 +119,14 @@ namespace simstudio
 
 
 
-	void App::LoadFromXmlString(const String& xmlString)
+	void World::LoadFromXmlString(const String& xmlString)
 	{
 		SafeXml doc;
 		doc.LoadString(xmlString);
 		LoadFromSafeXmlNode(doc);
 	}
 
-	void App::LoadFromXmlFile(const String& path)
+	void World::LoadFromXmlFile(const String& path)
 	{
 
 
@@ -137,19 +137,19 @@ namespace simstudio
 
 	}
 
-	void App::LoadFromSafeXmlNode(SafeXml& doc)
+	void World::LoadFromSafeXmlNode(SafeXml& doc)
 	{
 		auto factory = ClassFactory::Instance();
 
 		if (doc.ErrorID() == 0) {
 
-			auto node_app = doc._document->FirstChildElement("app");
+			auto node_World = doc._document->FirstChildElement("World");
 
 
-			if (node_app) {
+			if (node_World) {
 
 
-				auto simparams = node_app->FirstChildElement("simparams");
+				auto simparams = node_World->FirstChildElement("simparams");
 
 				if (simparams) {
 					SafeXmlNode safe_sim_params(simparams);
@@ -158,7 +158,7 @@ namespace simstudio
 				}
 
 
-				auto entities = node_app->FirstChildElement("entities");
+				auto entities = node_World->FirstChildElement("entities");
 
 				if (entities) {
 
@@ -174,7 +174,7 @@ namespace simstudio
 						auto entity = factory->Construct<Entity>(child_type);
 						entity->_weakThis = entity;
 						entity->FromXml(safe_child);
-						entity->_app = this;
+						entity->_world = this;
 						AddEntity(entity);
 
 					}
@@ -183,7 +183,7 @@ namespace simstudio
 					LogE << "Entities was invalid";
 				}
 
-				auto connections = node_app->FirstChildElement("connections");
+				auto connections = node_World->FirstChildElement("connections");
 
 				if (connections) {
 					for (auto child = connections->FirstChildElement(); child != nullptr; child = child->NextSiblingElement()) {
@@ -213,12 +213,12 @@ namespace simstudio
 		}
 	}
 
-	void App::FromJson(SafeJson& jobj)
+	void World::FromJson(SafeJson& jobj)
 	{
 	}
 
 
-	Array<Shared<Entity>> App::GetConnectedEntities(const String& who)
+	Array<Shared<Entity>> World::GetConnectedEntities(const String& who)
 	{
 		Array<Shared<Entity>> successors;
 
@@ -236,7 +236,7 @@ namespace simstudio
 
 	}
 
-	void App::SaveToJson(SafeJson& jobj)
+	void World::SaveToJson(SafeJson& jobj)
 	{
 		jobj.WriteString("name", "Some model");
 		jobj.WriteString("uid", "0001-3322-3949");

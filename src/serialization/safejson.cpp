@@ -1,8 +1,8 @@
 
-#include "json.h"
+
 #include "safejson.h"
 
-using namespace json;
+
 
 #define WRITE_WITH_CONDITION(key, value, condition) \
     if (this->optimizeSpace) {                      \
@@ -19,13 +19,14 @@ namespace simstudio {
 
 	void SafeJson::ParseString(const String& str)
 	{
-		_internal = json::jobject::parse(str);
+		_internal1 = nlohmann::json::parse(str);
 	}
 
 	String SafeJson::GetString(const String& key, const String& notFound)
 	{
-		if (_internal.has_key(key)) {
-			return (String)_internal[key];
+		_internal1.contains(key);
+		if (_internal1.contains(key)) {
+			return (String)_internal1[key];
 		}
 		else {
 			return notFound;
@@ -34,8 +35,8 @@ namespace simstudio {
 
 	int SafeJson::GetInt(const String& key, int notFound)
 	{
-		if (_internal.has_key(key)) {
-			return (int)_internal[key];
+		if (_internal1.contains(key)) {
+			return (int)_internal1[key];
 		}
 		else {
 			return notFound;

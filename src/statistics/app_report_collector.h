@@ -5,9 +5,9 @@
 
 namespace simstudio {
 
-	class App;
+	class World;
 
-	void SaveStatisticsRecord(App &app);
+	void SaveStatisticsRecord(World &app);
 
 
 

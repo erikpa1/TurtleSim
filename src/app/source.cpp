@@ -1,6 +1,6 @@
 #include "source.h"
 #include "stepper.h"
-#include "app.h"
+#include "world.h"
 #include "mu.h"
 #include "agv.h"
 #include "../serialization/prelude.h"
@@ -18,7 +18,7 @@ namespace simstudio {
 		_CalculateNextAction(0);
 	}
 
-	void Source::Step(App& app, Stepper& stepper)
+	void Source::Step(World& app, Stepper& stepper)
 	{
 		if (_activeEntity == nullptr) {
 
@@ -81,7 +81,7 @@ namespace simstudio {
 
 	}
 
-	void Source::_TryMoveEntityNext(App& app)
+	void Source::_TryMoveEntityNext(World& app)
 	{
 		auto connections = app.GetConnectedEntities(_uid);
 
@@ -105,15 +105,15 @@ namespace simstudio {
 
 		if (_spawnEntity == "AGV_1") {
 			LogE << "Faking AGV_1";
-			auto tmp = _app->SpawnEntity(Agv::New);
+			auto tmp = _world->SpawnEntity(Agv::New);
 			entity = tmp;
 		}
 		else {
-			entity = _app->SpawnEntity(MuUnit::New);
+			entity = _world->SpawnEntity(MuUnit::New);
 		}
 
 		_spawnedCount += 1;
-		entity->_app = _app;
+		entity->_world = _world;
 		_statistics.spawned_entities += 1;
 		return entity;
 

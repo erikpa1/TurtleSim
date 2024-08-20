@@ -16,7 +16,7 @@ namespace simstudio {
 	{
 		if (_app) {
 
-			for (const auto& pair : _app->_app->_entities) {
+			for (const auto& pair : _app->_world->_entities) {
 				auto& entity = pair.second;
 
 				if (ImGui::Button(entity->_name.c_str())) {

@@ -37,7 +37,7 @@ namespace simstudio {
 		static Shared<Source> New();
 
 		virtual void Init() override;
-		virtual void Step(App& app, Stepper& stepper) override;
+		virtual void Step(World& app, Stepper& stepper) override;
 		virtual void FromXml(SafeXmlNode& node) override;
 
 		SourceStatistics _statistics;
@@ -45,7 +45,7 @@ namespace simstudio {
 	private:
 
 		void _CalculateNextAction(long currentTime);
-		void _TryMoveEntityNext(App& app);
+		void _TryMoveEntityNext(World& app);
 		Shared<Entity> _GetSpawningEntity();
 	};
 

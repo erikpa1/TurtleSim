@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../app/app.h"
+#include "../app/world.h"
 
 #include "entities_hierarchy.h"
 #include "available_entities_list.h"
@@ -41,7 +41,7 @@ namespace simstudio {
 
 
 	public:
-		Shared<App> _app;
+		Shared<World> _world;
 		Shared<Entity> _activeEntity;
 
 	};

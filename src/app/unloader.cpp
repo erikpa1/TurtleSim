@@ -1,7 +1,7 @@
 #include "unloader.h"
 
 #include "stepper.h"
-#include "app.h"
+#include "world.h"
 
 #include "../utils/time_expr.h"
 
@@ -32,7 +32,7 @@ namespace simstudio {
 
 
 
-	void Unloader::Step(App& app, Stepper& stepper)
+	void Unloader::Step(World& app, Stepper& stepper)
 	{
 		if (_activeState == UnloaderState::WORKING) {
 			if (_unloading_end <= GetSimSecond()) {
@@ -65,10 +65,10 @@ namespace simstudio {
 	void Unloader::_UnloadingFinished()
 	{
 
-		if (_app->_entities.contains(_targetBuffer)) {
+		if (_world->_entities.contains(_targetBuffer)) {
 
 			if (_handledEntity) {
-				auto target = _app->_entities[_targetBuffer];
+				auto target = _world->_entities[_targetBuffer];
 
 				if (target->TakeEntity(_handledEntity)) {
 					_handledEntity.reset();

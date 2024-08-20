@@ -1,6 +1,6 @@
 #include "lane_single.h"
 #include "agv.h"
-#include "app.h"
+#include "world.h"
 
 namespace simstudio {
 
@@ -35,7 +35,7 @@ namespace simstudio {
 
 	}
 
-	void SingleLane::Step(App& app, Stepper& stepper)
+	void SingleLane::Step(World& app, Stepper& stepper)
 	{
 		if (_activeAgv) {
 			auto& agv_ref = *_activeAgv.get();
@@ -53,7 +53,7 @@ namespace simstudio {
 			}
 			else {
 
-				auto connections = _app->GetConnectedEntities(_uid);
+				auto connections = _world->GetConnectedEntities(_uid);
 
 				auto casted = StaticCast<Entity>(_activeAgv);
 

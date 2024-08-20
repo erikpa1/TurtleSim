@@ -17,7 +17,7 @@
 using namespace ImGui;
 
 namespace simstudio {
-	void run_ui(App& app)
+	void run_ui(World& app)
 	{
 
 		_draw(app);
@@ -42,7 +42,7 @@ namespace simstudio {
 
 	}
 
-	void _draw(App& app)
+	void _draw(World& app)
 	{
 		static float f = 0.0f;
 		static int counter = 0;

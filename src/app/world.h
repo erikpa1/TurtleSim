@@ -10,10 +10,10 @@ namespace simstudio
 	class SafeXml;
 	class SafeJson;
 
-	class App
+	class World
 	{
 	public:
-		App();
+		World();
 
 		HashMap<Shared<Entity>> _entities;
 

@@ -1,7 +1,7 @@
 #pragma once
 
 namespace simstudio {
-	class App;
+	class World;
 }
 
-int run_directx(simstudio::App& app);
+int run_directx(simstudio::World& app);

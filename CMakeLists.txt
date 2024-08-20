@@ -76,10 +76,8 @@ else()
     target_link_libraries(SimStudioPlayer PRIVATE ImGuiBlueprint)
 
 
-endif()
 
-add_subdirectory(external/simpleson)
-target_link_libraries(SimStudioPlayer PRIVATE simpleson)
+endif()
 
 
 

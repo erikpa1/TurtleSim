@@ -1,6 +1,6 @@
 #include "loader.h"
 
-#include "app.h"
+#include "world.h"
 #include "buffer.h"
 #include "stepper.h"
 
@@ -24,7 +24,7 @@ namespace simstudio {
 		}
 
 	}
-	void Loader::Step(App& app, Stepper& stepper)
+	void Loader::Step(World& app, Stepper& stepper)
 	{
 		if (_activeState == LoaderState::LOADING) {
 			_statistics._worked += GetLastStepOffset();
@@ -70,10 +70,10 @@ namespace simstudio {
 	{
 		if (_handledEntity == nullptr) {
 			if (_activeEntity) {
-				if (_app) {
+				if (_world) {
 
-					if (_app->_entities.contains(_targetBuffer)) {
-						Shared<Buffer> _buffer = StaticCast<Buffer>(_app->_entities[_targetBuffer]);
+					if (_world->_entities.contains(_targetBuffer)) {
+						Shared<Buffer> _buffer = StaticCast<Buffer>(_world->_entities[_targetBuffer]);
 
 						if (_buffer) {
 							auto buffer = _buffer->PopEntity();

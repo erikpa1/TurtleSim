@@ -3,11 +3,12 @@
 
 namespace simstudio {
 
-	class App;
+	class World;
+	class World;
 
-	void run_xml(App& app);
+	void run_xml(World& app);
 
-	void run_wasm_string_xml(App& app);
+	void run_wasm_string_xml(World& app);
 
 
 }

@@ -58,7 +58,7 @@ namespace simstudio
 		static Shared<Station> New();
 
 		virtual void Init();
-		virtual void Step(App& app, Stepper& stepper) override;
+		virtual void Step(World& app, Stepper& stepper) override;
 
 		virtual void PrintFinalStatistics(long statistics_delay, long simulation_duration);
 
@@ -70,8 +70,8 @@ namespace simstudio
 
 	private:
 		void _StartManufacturing();
-		void _FinishManufacturing(App& app);
-		void _TryToPassNextEntity(App& app);
+		void _FinishManufacturing(World& app);
+		void _TryToPassNextEntity(World& app);
 
 		bool _AddMaterialConsumption();
 

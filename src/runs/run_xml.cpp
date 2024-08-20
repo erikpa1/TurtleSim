@@ -12,7 +12,7 @@
 
 namespace simstudio {
 
-	void run_xml(App& app)
+	void run_xml(World& world)
 	{
 
 		String example_file = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example.xml");
@@ -21,21 +21,21 @@ namespace simstudio {
 		String example_file_3 = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example_3_agv.xml");
 		String example_file_4 = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example_4_warehouse.xml");
 
-		app.LoadFromXmlFile(example_file_4);
-		app.Init();
-		app.StartSimulation();
+		world.LoadFromXmlFile(example_file_4);
+		world.Init();
+		world.StartSimulation();
 
-		SaveStatisticsRecord(app);
+		SaveStatisticsRecord(world);
 
 	}
 
-	void run_wasm_string_xml(App& app)
+	void run_wasm_string_xml(World& world)
 	{
-		app.LoadFromXmlString(WasmExamples::Xml1());
-		app.Init();
-		app.StartSimulation();
+		world.LoadFromXmlString(WasmExamples::Xml1());
+		world.Init();
+		world.StartSimulation();
 
-		SaveStatisticsRecord(app);
+		SaveStatisticsRecord(world);
 
 	}
 

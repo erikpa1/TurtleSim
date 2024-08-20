@@ -2,6 +2,7 @@
 
 #include "src/prelude.h"
 
+#include "src/app/world.h"
 #include "src/app/prelude.h"
 #include "src/utils/prelude.h"
 #include "src/runs/run_xml.h"
@@ -22,10 +23,10 @@ using namespace simstudio;
 int main() {
 	RegisterClasses();
 
-	App app;
+	World world;
 
 #if IS_WINDOWS_PLATFORM
-	run_directx(app);
+	run_directx(world);
 #endif
 	//run_xml(app);
 	//run_wasm_string_xml(app);

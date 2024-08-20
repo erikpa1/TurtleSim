@@ -1,5 +1,5 @@
 
-#include "simpleson/json.h"
+
 #include "nlohmann/json.hpp"
 
 #include "../prelude.h"
@@ -19,16 +19,6 @@ namespace simstudio {
 		//Loading
 		void ParseString(const String& str);
 
-
-		template<typename T>
-		T GetValue(const String& key, T notFound) {
-			if (this->_internal.has_key(key)) {
-				return (T)this->_internal[key];
-			}
-			else {
-
-			}
-		}
 
 		String GetString(const String& key, const String& notFound);
 		int GetInt(const String& key, int notFound);
@@ -62,7 +52,6 @@ namespace simstudio {
 
 	private:
 
-		json::jobject _internal;
 		nlohmann::json _internal1;
 	};
 

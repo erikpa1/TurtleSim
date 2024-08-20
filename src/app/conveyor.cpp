@@ -1,6 +1,6 @@
 #include "conveyor.h"
 
-#include "app.h"
+#include "world.h"
 
 #include "../serialization/safexml.h"
 
@@ -20,7 +20,7 @@ namespace simstudio {
 	{
 	}
 
-	void Conveyor::Step(App& app, Stepper& stepper)
+	void Conveyor::Step(World& app, Stepper& stepper)
 	{
 
 		Array<Entity> _toBeDeleted;

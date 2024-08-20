@@ -24,7 +24,7 @@ namespace simstudio {
 
 		_appControls.Draw();
 
-		if (_app) {
+		if (_world) {
 			_DrawLeftBar();
 			_DrawMiddleBar();
 			_DrawRightBar();

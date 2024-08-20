@@ -82,7 +82,7 @@ namespace simstudio {
 				entity->_name = F("{}_{}", type, 0);
 				entity->_uid = Crypto::Uuid_V4();
 
-				_app->_app->AddEntity(entity);
+				_app->_world->AddEntity(entity);
 
 				LogI << "Successfully added entity";
 			}

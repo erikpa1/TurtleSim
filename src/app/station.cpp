@@ -1,7 +1,7 @@
 
 #include "station.h"
 #include "stepper.h"
-#include "app.h"
+#include "world.h"
 
 #include <iomanip>  
 #include "warehouse.h"
@@ -30,7 +30,7 @@ namespace simstudio
 	}
 
 
-	void Station::Step(App& app, Stepper& stepper)
+	void Station::Step(World& app, Stepper& stepper)
 	{
 		if (_activeState == StationStates::WORKING)
 		{
@@ -82,7 +82,7 @@ namespace simstudio
 		return _activeEntity == nullptr;
 	}
 
-	void Station::_FinishManufacturing(App& app)
+	void Station::_FinishManufacturing(World& app)
 	{
 		_statistics.manufactured += 1;
 		_activeState = StationStates::NON_OPERATIVE;
@@ -91,7 +91,7 @@ namespace simstudio
 		_TryToPassNextEntity(app);
 	}
 
-	void Station::_TryToPassNextEntity(App& app)
+	void Station::_TryToPassNextEntity(World& app)
 	{
 
 		bool isBlocked = true;

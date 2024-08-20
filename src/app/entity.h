@@ -10,7 +10,7 @@ namespace simstudio
 {
 
 	class Stepper;
-	class App;
+	class World;
 
 	class SafeXmlNode;
 	class SafeJson;
@@ -36,7 +36,7 @@ namespace simstudio
 		long _activeTime = 0;
 		double _length = 1;
 
-		App* _app = nullptr;
+		World * _world = nullptr;
 
 		Weak<Entity> _parent;
 
@@ -49,7 +49,7 @@ namespace simstudio
 		Entity();
 
 		virtual void Init();
-		virtual void Step(App& app, Stepper& stepper);
+		virtual void Step(World& app, Stepper& stepper);
 		virtual bool TakeEntity(Shared<Entity>& entity);
 		virtual bool CanTakeEntity();
 

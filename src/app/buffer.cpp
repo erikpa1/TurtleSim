@@ -1,6 +1,6 @@
 #include "buffer.h"
 
-#include "app.h"
+#include "world.h"
 #include "../serialization/prelude.h"
 #include "../utils/time_expr.h"
 
@@ -14,7 +14,7 @@ namespace simstudio {
 
 	}
 
-	void Buffer::Step(App& app, Stepper& stepper)
+	void Buffer::Step(World& app, Stepper& stepper)
 	{
 		if (_buffer.size() > 0) {
 			auto connections = app.GetConnectedEntities(_uid);

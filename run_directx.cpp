@@ -34,7 +34,7 @@
 #include "imgui/imgui_internal.h"
 
 
-#include "src/app/app.h"
+#include "src/app/world.h"
 #include "src/runs/run_ui.h"
 #include "src/ui/uiapp.h"
 
@@ -75,7 +75,7 @@ FrameContext* WaitForNextFrameResources();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 // Main code
-int run_directx(simstudio::App& app)
+int run_directx(simstudio::World& app)
 {
 	// Create application window
 	//ImGui_ImplWin32_EnableDpiAwareness();

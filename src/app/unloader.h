@@ -41,7 +41,7 @@ namespace simstudio {
 
 		virtual bool TakeEntity(Shared<Entity>& entity) override;
 
-		virtual void Step(App& app, Stepper& stepper) override;
+		virtual void Step(World& app, Stepper& stepper) override;
 
 		virtual void FromXml(SafeXmlNode& node) override;
 

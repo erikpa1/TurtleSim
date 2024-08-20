@@ -5,10 +5,20 @@
 #include <iostream>
 #include <fstream>
 
+#include <locale>
+#include <codecvt>
+#include <string>
+
 
 
 
 namespace simstudio {
+
+	std::wstring ConvertToWstring(const String& data) {
+		std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+		return converter.from_bytes(data);
+
+	}
 
 	WString ConvertLPSTRToWString(LPSTR lpstr)
 	{
@@ -83,9 +93,10 @@ namespace simstudio {
 			const auto filePath = ConvertLPSTRToWString(ofn.lpstrFile);
 
 
-			std::ofstream outfile(filePath);
+			std::ofstream outfile(filePath + ConvertToWstring(forcedExtension));
 			if (outfile.is_open())
 			{
+
 				outfile << jsonData;
 				outfile.close();
 				LogI << "File saved to: " << ofn.lpstrFile;
@@ -115,7 +126,7 @@ namespace simstudio {
 		ofn.hwndOwner = hwnd;
 		ofn.lpstrFile = szFile;
 		ofn.nMaxFile = sizeof(szFile);
-		ofn.lpstrFilter = ("All Files\0*.*\0" + forcedExtension + "\0*." + forcedExtension + "\0").c_str();
+		ofn.lpstrFilter = forcedExtension.c_str();
 		ofn.nFilterIndex = 1;
 		ofn.lpstrFileTitle = nullptr;
 		ofn.nMaxFileTitle = 0;

@@ -1,7 +1,7 @@
 
 #include "entity.h"
 #include "stepper.h"
-#include "app.h"
+#include "world.h"
 
 #include "../serialization/prelude.h"
 #include "../utils/crypto.h"
@@ -24,7 +24,7 @@ namespace simstudio
 	{
 	}
 
-	void Entity::Step(App& app, Stepper& stepper)
+	void Entity::Step(World& app, Stepper& stepper)
 	{
 	}
 
@@ -70,33 +70,33 @@ namespace simstudio
 
 	long Entity::GetSimSecond()
 	{
-		if (_app) {
-			return _app->_stepper.GetStepSecond();
+		if (_world) {
+			return _world->_stepper.GetStepSecond();
 		}
 		return 0;
 	}
 
 	long Entity::GetLastStepOffset()
 	{
-		if (_app) {
-			return _app->_stepper.GetLastStepDiff();
+		if (_world) {
+			return _world->_stepper.GetLastStepDiff();
 		}
 		return 0;
 	}
 
 	Array<Shared<Entity>> Entity::GetConnections()
 	{
-		if (_app) {
-			return _app->GetConnectedEntities(_uid);
+		if (_world) {
+			return _world->GetConnectedEntities(_uid);
 		}
 		return {};
 	}
 
 	Shared<Entity> Entity::GetEntity(String& uid)
 	{
-		if (_app) {
-			if (_app->_entities.contains(uid)) {
-				return _app->_entities[uid];
+		if (_world) {
+			if (_world->_entities.contains(uid)) {
+				return _world->_entities[uid];
 			}
 		}
 

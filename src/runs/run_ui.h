@@ -7,10 +7,10 @@
 namespace simstudio {
 
 
-	class App;
+	class World;
 
-	void run_ui(App& app);
-	void _draw(App& app);
+	void run_ui(World& app);
+	void _draw(World& app);
 }
 
 #endif
