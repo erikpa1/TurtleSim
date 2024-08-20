@@ -19,7 +19,14 @@ namespace simstudio {
 
 	void SafeJson::ParseString(const String& str)
 	{
-		_internal1 = nlohmann::json::parse(str);
+		try {
+			_internal1 = nlohmann::json::parse(str);
+		}
+		catch (const std::exception& exc4)
+		{
+			LogE << exc4.what();
+		}
+
 	}
 
 	String SafeJson::GetString(const String& key, const String& notFound)
@@ -123,7 +130,7 @@ namespace simstudio {
 
 	String SafeJson::Dump()
 	{
-		return _internal1.dump(4, 4, true);
+		return _internal1.dump(4, ' ', true);
 	}
 
 

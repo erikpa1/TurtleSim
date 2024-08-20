@@ -60,9 +60,10 @@ namespace simstudio {
 
 	void AppControls::_OpenProject()
 	{
-		const auto data = FileDialog::ReadFileString(FileDialog::GetJsonExtension());
+		const auto data = FileDialog::ReadFileString("");//FileDialog::GetJsonExtension()
 
 		if (data != "") {
+			LogE << data;
 
 			SafeJson json;
 			json.ParseString(data);
@@ -77,7 +78,7 @@ namespace simstudio {
 		SafeJson json;
 		_app->_world->SaveToJson(json);
 
-		FileDialog::SaveJsonFile(json.Dump(), "simstudio.json");
+		FileDialog::SaveJsonFile(json.Dump(), ".simstudio.json");
 	}
 
 
