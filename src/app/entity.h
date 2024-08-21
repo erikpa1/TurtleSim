@@ -20,7 +20,10 @@ namespace simstudio
 
 
 	public:
-		FactoryType("entity")
+
+		static String ClassType() { return "entity"; }
+		virtual String Type() { return _type; }
+
 
 	public:
 
@@ -31,12 +34,12 @@ namespace simstudio
 
 		String _name;
 		String _uid;
-		String _type;
+		String _type = "entity";
 
 		long _activeTime = 0;
 		double _length = 1;
 
-		World * _world = nullptr;
+		World* _world = nullptr;
 
 		Weak<Entity> _parent;
 
@@ -58,8 +61,6 @@ namespace simstudio
 
 		virtual void SetNewParent(Shared<Entity>& parent);
 
-
-
 		virtual void WasTaken();
 
 		virtual void PrintFinalStatistics(long statistics_delay, long simulation_duration);
@@ -72,7 +73,7 @@ namespace simstudio
 
 		Array<Shared<Entity>> GetConnections();
 
-		Shared<Entity>  GetEntity(String& uid);
+		Shared<Entity> GetEntity(String& uid);
 
 		String StringThis();
 
@@ -82,6 +83,7 @@ namespace simstudio
 
 
 		virtual Shared<SafeJson> ToJson();
+		virtual void FromJson(const Shared<SafeJson>& json);
 
 
 	};

@@ -1,6 +1,6 @@
 
 #include "../app/prelude.h"
-#include "available_entities_list.h"
+#include "ViewAvailableEntities.h"
 #include "../prelude.h"
 
 
@@ -84,7 +84,7 @@ namespace simstudio {
 
 				_app->_world->AddEntity(entity);
 
-				LogI << "Successfully added entity";
+				LogI << "Successfully added entity: [" << entity->Type() << "][" << entity->_type << "]";
 			}
 		}
 	}

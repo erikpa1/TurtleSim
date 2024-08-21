@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include "entity.h"
 #include "statistics/buffer_statistics.h"
 
@@ -9,7 +10,9 @@ namespace simstudio {
 
 	public:
 
-		long _limit = 8;
+		Long _limit = 8;
+		Long _criticalLimit = -1;
+
 		Array<Shared<Entity>> _buffer;
 
 		BufferStatistics _statistics;
@@ -18,11 +21,13 @@ namespace simstudio {
 
 		FactoryType("buffer");
 
+
 		static Shared<Buffer> New();
 
 		virtual void Init();
 		virtual void Step(World& app, Stepper& stepper) override;
 		virtual void FromXml(SafeXmlNode& node) override;
+
 
 		bool TakeEntity(Shared<Entity>& entity);
 		bool CanTakeEntity();
@@ -31,6 +36,8 @@ namespace simstudio {
 
 		virtual void PrintFinalStatistics(long statistics_delay, long simulation_duration);
 
+		Shared<SafeJson> ToJson() override;
+		void FromJson(const Shared<SafeJson> & json) override;
 
 
 	};

@@ -92,8 +92,15 @@ namespace simstudio {
 
 			const auto filePath = ConvertLPSTRToWString(ofn.lpstrFile);
 
+			const auto extension = ConvertToWstring(forcedExtension);
 
-			std::ofstream outfile(filePath + ConvertToWstring(forcedExtension));
+			std::wstring finalPath = filePath;
+
+			if (finalPath.find(extension) == String::npos) {
+				finalPath += extension;
+			}
+
+			std::ofstream outfile(finalPath);
 			if (outfile.is_open())
 			{
 

@@ -3,7 +3,7 @@
 #include "../app/world.h"
 
 #include "entities_hierarchy.h"
-#include "available_entities_list.h"
+#include "ViewAvailableEntities.h"
 #include "entity_properties.h"
 #include "app_controls.h"
 #include "node_editor.h"

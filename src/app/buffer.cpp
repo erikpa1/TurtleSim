@@ -5,10 +5,12 @@
 #include "../utils/time_expr.h"
 
 namespace simstudio {
+
 	Shared<Buffer> Buffer::New()
 	{
 		return Share<Buffer>();
 	}
+
 	void Buffer::Init()
 	{
 
@@ -42,6 +44,23 @@ namespace simstudio {
 	{
 		Entity::FromXml(node);
 		_limit = node.GetIntAttrib("limit", 8);
+
+	}
+
+	Shared<SafeJson> Buffer::ToJson()
+	{
+		auto tmp = Entity::ToJson();
+		tmp->WriteLong("limit", _limit);
+		tmp->WriteLong("criticalLimit", _criticalLimit);
+		return tmp;
+	}
+
+	void Buffer::FromJson(const Shared<SafeJson>& json)
+	{
+		Entity::FromJson(json);
+
+		_limit = json->GetLong("limit", _limit);
+		_criticalLimit = json->GetLong("criticalLimit", _criticalLimit);
 
 	}
 

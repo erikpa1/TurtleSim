@@ -28,6 +28,9 @@ namespace simstudio {
 				ImGui::Text(entity->_name.c_str());
 				ImGui::Text(entity->_uid.c_str());
 
+				_dispatcher.Draw();
+
+
 			}
 			else {
 				ImGui::Text("No active entity");
@@ -38,6 +41,12 @@ namespace simstudio {
 		}
 
 
+	}
+
+	void EntityPropertiesView::SetApp(UiApp* app)
+	{
+		_app = app;
+		_dispatcher._app = app;
 	}
 
 }

@@ -14,7 +14,8 @@ namespace simstudio {
 		_appControls._app = this;
 		_hierarchy._app = this;
 		_avlEntities._app = this;
-		_entityProperties._app = this;
+
+		_entityProperties.SetApp(this);
 	}
 
 	void UiApp::StartDrawing()

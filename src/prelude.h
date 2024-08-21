@@ -68,8 +68,9 @@ String ToString(T arg)
 
 
 #define FactoryType(type) \
+	String _type = type;  \
     static String ClassType() { return type;} \
-    String Type() { return type;} \
+    String Type() override { return _type;} \
 
 
 #define FactoryNew(type) \
@@ -82,3 +83,4 @@ String ToString(T arg)
 #define IS_WINDOWS_PLATFORM 0
 #endif
 
+using Long = long long;

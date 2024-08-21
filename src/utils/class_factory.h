@@ -31,6 +31,7 @@ namespace simstudio {
 			auto it = _constructors.find(type);
 			if (it != _constructors.end()) {
 				Shared<T> tmp = std::static_pointer_cast<T>(it->second());
+				LogI << "Constructing class of type: [" << tmp->_type << "]";
 				return tmp;
 			}
 			else {

@@ -6,7 +6,6 @@
 #include "../serialization/prelude.h"
 #include "../utils/crypto.h"
 
-#include "../serialization/safejson.h"
 
 
 namespace simstudio
@@ -120,18 +119,27 @@ namespace simstudio
 
 	Shared<SafeJson> Entity::ToJson()
 	{
-
 		const auto json = Share<SafeJson>();
 
-		const auto& json_ref = json.get();
-		json_ref->WriteString("uid", this->_uid);
-		json_ref->WriteString("name", this->_name);
-		json_ref->WriteString("type", this->_type);
-		json_ref->WriteFloat3("position", 0, 0, 0);
-		json_ref->WriteFloat3("scale", 1, 1, 1);
+		auto json_ref = *json;
 
+		json_ref.WriteString("uid", this->_uid);
+		json_ref.WriteString("name", this->_name);
+		json_ref.WriteString("type", this->_type);
+		json_ref.WriteFloat3("position", 0, 0, 0);
+		json_ref.WriteFloat3("scale", 1, 1, 1);
 
 		return json;
 	}
+
+	void Entity::FromJson(const Shared<SafeJson>& json)
+	{
+		auto json_ref = *json;
+
+		_uid = json_ref.GetString("uid", _uid);
+		_name = json_ref.GetString("name", _name);
+
+	}
+
 
 }

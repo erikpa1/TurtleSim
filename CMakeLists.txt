@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 project(SimStudioPlayer)
 
-
 set(CMAKE_CXX_STANDARD 23)
 
 file(GLOB_RECURSE  SimStudioPlayer_SRC
@@ -9,7 +8,6 @@ file(GLOB_RECURSE  SimStudioPlayer_SRC
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten") 
-
         file(GLOB_RECURSE  SimStudioPlayer_WinExterna_SRC
          "${CMAKE_SOURCE_DIR}/empty/*.cpp"
     )
