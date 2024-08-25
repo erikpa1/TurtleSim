@@ -52,12 +52,44 @@ namespace simstudio {
 
 	long SafeJson::GetLong(const String& key, long notFound)
 	{
-		return 0;
+		if (_internal1.contains(key)) {
+			return (int)_internal1[key];
+		}
+		else {
+			return notFound;
+		}
 	}
 
 	double SafeJson::GetDouble(const String& key, double notFound)
 	{
-		return 0;
+		//TODO prepisat tieto duplicity do makra
+		if (_internal1.contains(key)) {
+			return (int)_internal1[key];
+		}
+		else {
+			return notFound;
+		}
+	}
+
+	Array<Shared<SafeJson>> SafeJson::GetObjectArray(const String& key)
+	{
+		if (_internal1.contains(key) && _internal1[key].is_array()) {
+
+			Array<Shared<SafeJson>> result;
+
+			nlohmann::json dataArray = _internal1[key];
+
+			for (const auto& item : dataArray) {
+				auto tmp = Share<SafeJson>();
+				tmp->FromNlohmann(item);
+				result.push_back(tmp);
+			}
+
+			return result;
+		}
+		else {
+			return {};
+		}
 	}
 
 	void SafeJson::WriteString(const String& key, const String& value)
@@ -131,6 +163,11 @@ namespace simstudio {
 	String SafeJson::Dump()
 	{
 		return _internal1.dump(4, ' ', true);
+	}
+
+	void SafeJson::FromNlohmann(nlohmann::json obj)
+	{
+		_internal1 = obj;
 	}
 
 

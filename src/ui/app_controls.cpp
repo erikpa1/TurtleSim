@@ -63,8 +63,6 @@ namespace simstudio {
 		const auto data = FileDialog::ReadFileString("");//FileDialog::GetJsonExtension()
 
 		if (data != "") {
-			LogE << data;
-
 			SafeJson json;
 			json.ParseString(data);
 

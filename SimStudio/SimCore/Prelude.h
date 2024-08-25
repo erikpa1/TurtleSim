@@ -68,7 +68,6 @@ String ToString(T arg)
 
 
 #define FactoryType(type) \
-	String _type = type;  \
     static String ClassType() { return type;} \
     String Type() override { return _type;} \
 

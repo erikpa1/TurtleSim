@@ -36,6 +36,9 @@ namespace simstudio {
 
 		_appControls.Draw();
 
+		ImGui::Begin("Root", &_leftBarActive); ImGui::End();
+
+
 		if (_world) {
 			_DrawLeftBar();
 			_DrawMiddleBar();
@@ -84,8 +87,9 @@ namespace simstudio {
 
 		ImGui::Text("This is place for you nodes");
 
-		//_nodeEditor.Draw();
 		_hierarchy.Draw();
+		_nodeEditor.Draw();
+
 
 		//Ending begin
 		ImGui::End();

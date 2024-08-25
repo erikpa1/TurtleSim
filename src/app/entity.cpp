@@ -121,13 +121,11 @@ namespace simstudio
 	{
 		const auto json = Share<SafeJson>();
 
-		auto json_ref = *json;
-
-		json_ref.WriteString("uid", this->_uid);
-		json_ref.WriteString("name", this->_name);
-		json_ref.WriteString("type", this->_type);
-		json_ref.WriteFloat3("position", 0, 0, 0);
-		json_ref.WriteFloat3("scale", 1, 1, 1);
+		json->WriteString("uid", this->_uid);
+		json->WriteString("name", this->_name);
+		json->WriteString("type", Type());
+		json->WriteFloat3("position", 0, 0, 0);
+		json->WriteFloat3("scale", 1, 1, 1);
 
 		return json;
 	}

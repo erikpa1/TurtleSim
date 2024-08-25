@@ -3,6 +3,9 @@ project(SimStudioPlayer)
 
 set(CMAKE_CXX_STANDARD 23)
 
+# Enable solution folders in Visual Studio and Folders in Xcode
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
 file(GLOB_RECURSE  SimStudioPlayer_SRC
      "${CMAKE_SOURCE_DIR}/src/*.cpp"
 )

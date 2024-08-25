@@ -9,6 +9,6 @@ namespace simstudio {
 	{
 		bool isOpen = true;
 
-		ImGui::ShowDebugLogWindow(&isOpen);
+
 	}
 }

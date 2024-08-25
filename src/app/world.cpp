@@ -213,9 +213,7 @@ namespace simstudio
 		}
 	}
 
-	void World::FromJson(SafeJson& jobj)
-	{
-	}
+
 
 
 	Array<Shared<Entity>> World::GetConnectedEntities(const String& who)
@@ -233,6 +231,27 @@ namespace simstudio
 			}
 		}
 		return successors;
+
+	}
+
+	void World::FromJson(SafeJson& jobj)
+	{
+		auto factory = ClassFactory::Instance();
+
+		const auto entities = jobj.GetObjectArray("entities");
+
+		LogE << entities.size();
+
+		for (const auto& entity_json : entities) {
+			auto child_type = entity_json->GetString("type", "entity");
+
+			auto entity = factory->Construct<Entity>(child_type);
+			entity->_weakThis = entity;
+			entity->FromJson(entity_json);
+			entity->_world = this;
+			AddEntity(entity);
+
+		}
 
 	}
 

@@ -20,10 +20,14 @@ namespace simstudio {
 		void ParseString(const String& str);
 
 
+
 		String GetString(const String& key, const String& notFound);
 		int GetInt(const String& key, int notFound);
 		long GetLong(const String& key, long notFound);
 		double GetDouble(const String& key, double notFound);
+
+		Array<Shared<SafeJson>> GetObjectArray(const String& key);
+
 
 
 	public:
@@ -53,6 +57,11 @@ namespace simstudio {
 	private:
 
 		nlohmann::json _internal1;
+	
+	private:
+
+		void FromNlohmann(nlohmann::json obj);
+	
 	};
 
 }
