@@ -2,7 +2,7 @@
 
 #if IS_WINDOWS_PLATFORM
 
-#include "../prelude.h"
+#include "SimCore/Prelude.h"
 
 
 

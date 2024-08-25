@@ -2,7 +2,7 @@
 
 
 #include "imgui_blueprints/imgui_node_editor.h"
-#include "../prelude.h"
+#include "SimCore/Prelude.h"
 
 namespace ed = ax::NodeEditor;
 

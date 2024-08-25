@@ -1,6 +1,7 @@
 #pragma once
 #include "../../app/prelude.h"
-#include "../../prelude.h"
+
+#include "SimCore/Prelude.h"
 
 namespace simstudio {
 

@@ -4,6 +4,7 @@
 #include "../serialization/prelude.h"
 #include "../utils/time_expr.h"
 
+
 namespace simstudio {
 
 	Shared<Buffer> Buffer::New()

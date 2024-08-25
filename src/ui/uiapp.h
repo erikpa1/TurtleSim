@@ -44,6 +44,12 @@ namespace simstudio {
 		Shared<World> _world;
 		Shared<Entity> _activeEntity;
 
+
+	private:
+
+		void _CreateDefaultLayout();
+		void _DrawOverlay();
+
 	};
 
 

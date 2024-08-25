@@ -7,10 +7,15 @@
 #include "imgui/imgui.h"
 
 
+#include "../app/world.h"
+
 namespace simstudio {
 
 	UiApp::UiApp()
 	{
+
+		_world = Share<World>();
+
 		_appControls._app = this;
 		_hierarchy._app = this;
 		_avlEntities._app = this;
@@ -22,6 +27,12 @@ namespace simstudio {
 	{
 
 		ImGui::NewFrame();
+
+
+		ImGui::DockSpace(ImGui::GetID("Dockspace"), ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
+
+		_DrawOverlay();
+
 
 		_appControls.Draw();
 
@@ -73,7 +84,7 @@ namespace simstudio {
 
 		ImGui::Text("This is place for you nodes");
 
-		_nodeEditor.Draw();
+		//_nodeEditor.Draw();
 		_hierarchy.Draw();
 
 		//Ending begin
@@ -91,8 +102,31 @@ namespace simstudio {
 		ImGui::Begin("Console", &_leftBarActive);
 		_console.Draw();
 		ImGui::End();
-	
 
+
+	}
+
+	void UiApp::_CreateDefaultLayout()
+	{
+
+
+	}
+
+	void UiApp::_DrawOverlay()
+	{
+		ImVec2 display_size = ImGui::GetIO().DisplaySize;
+		float screen_width = display_size.x;
+		float screen_height = display_size.y;
+
+		//ImGui::SetNextWindowPos(ImVec2(0, 0)); // Set window position to top-left corner
+		//ImGui::SetNextWindowSize(ImVec2(screen_width, screen_height)); // Make the window size equal to screen size
+		// ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove
+		ImGui::Begin("Root");
+		//ImGui::Begin("Root", nullptr, ImGuiWindowFlags_NoTitleBar  | ImGuiWindowFlags_NoBackground);
+
+		// Your ImGui drawing code here, e.g., rendering a HUD, overlay, etc.
+
+		ImGui::End();
 	}
 
 

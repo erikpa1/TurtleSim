@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../prelude.h"
+#include "SimCore/Prelude.h"
 #include "./entity_properties/DrawPropertiesDispatcher.h"
 
 namespace simstudio {

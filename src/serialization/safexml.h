@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../prelude.h"
+#include "SimCore/Prelude.h"
 
 namespace tinyxml2 {
 	class XMLDocument;

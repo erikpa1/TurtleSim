@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "src/prelude.h"
+#include "SimCore/Prelude.h"
 
 #include "src/app/world.h"
 #include "src/app/prelude.h"

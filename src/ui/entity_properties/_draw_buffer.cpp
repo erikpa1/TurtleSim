@@ -4,6 +4,13 @@
 
 #include "../../app/prelude.h"
 
+#include "SimCore/Prelude.h"
+
+
+
+
+
+
 
 namespace simstudio {
 	void DrawBuffer(Shared<World>& world, Shared<Buffer>& entity) {

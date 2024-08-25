@@ -1,11 +1,8 @@
 
 #include "../app/prelude.h"
 #include "ViewAvailableEntities.h"
-#include "../prelude.h"
 
-
-#include "../prelude.h"
-
+#include "SimCore/Prelude.h"
 
 #include "imgui/imgui.h"
 #include "../utils/class_factory.h"

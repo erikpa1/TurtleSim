@@ -50,11 +50,10 @@ ${SimStudioPlayer_WinExterna_SRC}
 )
 
 
-
+#Imgui import
+add_subdirectory(SimStudio/SimCore)
+target_link_libraries(SimStudioPlayer PRIVATE SimCore)
 target_include_directories(SimStudioPlayer PRIVATE ${CMAKE_SOURCE_DIR}/SimStudio)
-target_link_libraries(SimStudioPlayer PRIVATE SimStudio)
-
-add_subdirectory(SimStudio)
 
 
 target_include_directories(SimStudioPlayer PRIVATE ${CMAKE_SOURCE_DIR}/external)
