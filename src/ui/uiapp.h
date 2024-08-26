@@ -24,6 +24,8 @@ namespace simstudio {
 
 		bool _leftBarActive = true;
 
+		void _DrawDock();
+
 		void _DrawLeftBar();
 		void _DrawMiddleBar();
 		void _DrawRightBar();
@@ -49,6 +51,8 @@ namespace simstudio {
 
 		void _CreateDefaultLayout();
 		void _DrawOverlay();
+
+		bool _isFirst = false;
 
 	};
 

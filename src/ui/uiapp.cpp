@@ -5,9 +5,29 @@
 
 
 #include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
 
 
 #include "../app/world.h"
+
+void SetupDockingLayout()
+{
+	ImGuiID dockspace_id = ImGui::GetID("MyDockspace");
+
+	ImGui::DockBuilderRemoveNode(dockspace_id); // Clear any existing layout
+	ImGui::DockBuilderAddNode(dockspace_id, ImGuiDockNodeFlags_DockSpace); // Create new docking node
+
+	ImGuiID dock_main_id = dockspace_id;
+	ImGuiID dock_id_left = ImGui::DockBuilderSplitNode(dock_main_id, ImGuiDir_Left, 0.20f, nullptr, &dock_main_id);
+	ImGuiID dock_id_right = ImGui::DockBuilderSplitNode(dock_main_id, ImGuiDir_Right, 0.20f, nullptr, &dock_main_id);
+
+	// Dock the windows
+	ImGui::DockBuilderDockWindow("Hierarchy", dock_id_left);
+	ImGui::DockBuilderDockWindow("Inspector", dock_id_right);
+	ImGui::DockBuilderDockWindow("Scene", dock_main_id);
+
+	ImGui::DockBuilderFinish(dockspace_id); // Finish building the layout
+}
 
 namespace simstudio {
 
@@ -25,19 +45,25 @@ namespace simstudio {
 
 	void UiApp::StartDrawing()
 	{
+		ImGui::NewFrame();
+		_DrawDock();
+		// Rendering
+		ImGui::Render();
+		ImGui::UpdatePlatformWindows();
+		return;
 
 		ImGui::NewFrame();
 
 
-		ImGui::DockSpace(ImGui::GetID("Dockspace"), ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
 
 		_DrawOverlay();
 
 
 		_appControls.Draw();
 
-		ImGui::Begin("Root", &_leftBarActive); ImGui::End();
+		ImGui::Begin("Root", &_leftBarActive);
 
+		ImGui::DockSpace(ImGui::GetID("Root"), ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode); ImGui::End();
 
 		if (_world) {
 			_DrawLeftBar();
@@ -53,6 +79,76 @@ namespace simstudio {
 
 
 	}
+	void UiApp::_DrawDock()
+	{
+
+		// Set window flags (optional)
+		ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
+
+
+		static bool isFirst = true;
+
+
+		if (isFirst) {
+			isFirst = false;
+
+			auto tmpSize = ImGui::GetIO().DisplaySize;
+			tmpSize.x = tmpSize.x / 2;
+			tmpSize.y = tmpSize.y / 2;
+			// Create a full-screen window for the docking space
+
+			ImGui::SetNextWindowPos(ImVec2(40, 40));
+			ImGui::SetNextWindowSize(tmpSize);
+
+
+		}
+
+
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+		ImGui::Begin("DockSpace Demo", nullptr, window_flags);
+		ImGui::PopStyleVar(2);
+
+		// Create the actual dock space
+		ImGuiID dockspace_id = ImGui::GetID("MyDockspace");
+		ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
+
+		ImGuiID parent_node = ImGui::DockBuilderAddNode();
+		ImGui::DockBuilderSetNodePos(parent_node, ImGui::GetWindowPos());
+		ImGui::DockBuilderSetNodeSize(parent_node, ImGui::GetWindowSize());
+		ImGuiID nodeA;
+		ImGuiID nodeB;
+		ImGui::DockBuilderSplitNode(parent_node, ImGuiDir_Up, 0.8f, &nodeB, &nodeA);
+
+		ImGui::DockBuilderDockWindow("A", nodeA);
+		ImGui::DockBuilderDockWindow("B", nodeB);
+
+
+		ImGui::End();
+
+
+		ImGui::SetNextWindowDockID(nodeA, ImGuiCond_Always);
+		ImGui::SetNextWindowSize(ImVec2(200, 600));
+		ImGui::Begin("Hierarchy");
+		ImGui::Text("This is the Hierarchy panel.");
+		ImGui::End();
+
+		ImGui::SetNextWindowDockID(nodeB, ImGuiCond_Always);
+		ImGui::SetNextWindowSize(ImVec2(200, 600));
+		ImGui::Begin("Inspector");
+		ImGui::Text("This is the Inspector panel.");
+		ImGui::End();
+
+		ImGui::SetNextWindowDockID(dockspace_id, ImGuiCond_Always);
+		ImGui::SetNextWindowSize(ImVec2(800, 600));
+		ImGui::Begin("Scene");
+		ImGui::Text("This is the Scene view.");
+		ImGui::End();
+
+
+	}
+
+
 	void UiApp::_DrawLeftBar()
 	{
 		ImGui::Begin("Available entities", &_leftBarActive, ImGuiWindowFlags_MenuBar);
