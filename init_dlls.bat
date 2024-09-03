@@ -1,0 +1,1 @@
+treba sem dat nech nakopiru dllky z SDL

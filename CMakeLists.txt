@@ -16,9 +16,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
     )
     
 else()
-    file(GLOB_RECURSE  SimStudioPlayer_WinExterna_SRC
-         "${CMAKE_SOURCE_DIR}/external/*.cpp"
-    )
+
 
 endif()
 
@@ -81,8 +79,7 @@ else()
     find_package(SDL2 REQUIRED PATHS ${SDL2_DIR})
     include_directories(${SDL2_INCLUDE_DIRS})
     target_link_libraries(SimStudioPlayer PUBLIC ${SDL2_LIBRARIES})
-
-
+    
 
 endif()
 

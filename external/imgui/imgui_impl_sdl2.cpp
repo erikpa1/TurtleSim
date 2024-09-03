@@ -520,10 +520,10 @@ static bool ImGui_ImplSDL2_Init(SDL_Window* window, SDL_Renderer* renderer, void
     bd->WantUpdateMonitors = true;
 
     ImGuiPlatformIO& platform_io = ImGui::GetPlatformIO();
-    platform_io.Platform_SetClipboardTextFn = ImGui_ImplSDL2_SetClipboardText;
-    platform_io.Platform_GetClipboardTextFn = ImGui_ImplSDL2_GetClipboardText;
-    platform_io.Platform_ClipboardUserData = nullptr;
-    platform_io.Platform_SetImeDataFn = ImGui_ImplSDL2_PlatformSetImeData;
+    //platform_io.Platform_SetClipboardTextFn = ImGui_ImplSDL2_SetClipboardText;
+    //platform_io.Platform_GetClipboardTextFn = ImGui_ImplSDL2_GetClipboardText;
+    //platform_io.Platform_ClipboardUserData = nullptr;
+    //platform_io.Platform_SetImeDataFn = ImGui_ImplSDL2_PlatformSetImeData;
 #ifdef __EMSCRIPTEN__
     platform_io.Platform_OpenInShellFn = [](ImGuiContext*, const char* url) { ImGui_ImplSDL2_EmscriptenOpenURL(url); return true; };
 #endif
