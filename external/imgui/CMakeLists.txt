@@ -23,3 +23,11 @@ find_library(D3D12_LIB d3d12.lib)
 target_link_libraries(${PROJECT_NAME} ${D3D12_LIB})
 find_library(DXGI dxgi.lib)
 target_link_libraries(${PROJECT_NAME} ${DXGI})
+
+
+#importing SDL
+set(SDL2_DIR ${CMAKE_SOURCE_DIR}/../SDL2)
+find_package(SDL2 REQUIRED PATHS ${SDL2_DIR})
+
+include_directories(${SDL2_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${SDL2_LIBRARIES})

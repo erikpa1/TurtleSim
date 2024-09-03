@@ -48,9 +48,9 @@ add_executable(
         SimStudioPlayer 
         main.cpp
         run_directx.cpp
-        # main_1.cpp
-${SimStudioPlayer_SRC}
-${SimStudioPlayer_WinExterna_SRC}
+        run_sdl.cpp
+    ${SimStudioPlayer_SRC}
+    ${SimStudioPlayer_WinExterna_SRC}
 )
 
 
@@ -75,6 +75,12 @@ else()
     #imgui diagrams import
     add_subdirectory(external/imgui_blueprints)
     target_link_libraries(SimStudioPlayer PRIVATE ImGuiBlueprint)
+
+    #importing SDL
+    set(SDL2_DIR ${CMAKE_SOURCE_DIR}/external/SDL2)
+    find_package(SDL2 REQUIRED PATHS ${SDL2_DIR})
+    include_directories(${SDL2_INCLUDE_DIRS})
+    target_link_libraries(SimStudioPlayer PUBLIC ${SDL2_LIBRARIES})
 
 
 
