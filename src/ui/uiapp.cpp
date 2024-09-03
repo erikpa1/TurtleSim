@@ -45,12 +45,12 @@ namespace simstudio {
 
 	void UiApp::StartDrawing()
 	{
-		ImGui::NewFrame();
-		_DrawDock();
+		//ImGui::NewFrame();
+		//_DrawDock();
 		// Rendering
-		ImGui::Render();
-		ImGui::UpdatePlatformWindows();
-		return;
+		//ImGui::Render();
+		//ImGui::UpdatePlatformWindows();
+		//return;
 
 		ImGui::NewFrame();
 

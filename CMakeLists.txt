@@ -19,6 +19,7 @@ else()
     file(GLOB_RECURSE  SimStudioPlayer_WinExterna_SRC
          "${CMAKE_SOURCE_DIR}/external/*.cpp"
     )
+
 endif()
 
 

@@ -9,6 +9,7 @@ file(GLOB SIMSTUDIOCORE_SOURCES
     ${SIMSTUDIOCORE_DIR}/*.cpp
 )
 
+
 # Create an ImGui library target
 add_library(SimCore STATIC ${SIMSTUDIOCORE_SOURCES} "logging.cpp" "logging.h")
 
