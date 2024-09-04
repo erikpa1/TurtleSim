@@ -9,6 +9,7 @@
 #include "../app/world.h"
 
 #include "../serialization/safejson.h"
+#include "../serialization/safexml.h"
 
 namespace simstudio {
 	void AppControls::Draw()
@@ -18,8 +19,11 @@ namespace simstudio {
 			if (ImGui::BeginMenu("Project"))
 			{
 
-				if (ImGui::MenuItem("Open")) {
-					_OpenProject();
+				if (ImGui::MenuItem("Open JSON")) {
+					_OpenProjectJSON();
+				}
+				if (ImGui::MenuItem("Open XML")) {
+					_OpenProjectXML();
 				}
 
 				bool canSave = _app->_world ? true : false;
@@ -58,9 +62,9 @@ namespace simstudio {
 		_app->_world = Share<World>();
 	}
 
-	void AppControls::_OpenProject()
+	void AppControls::_OpenProjectJSON()
 	{
-		const auto data = FileDialog::ReadFileString("");//FileDialog::GetJsonExtension()
+		const auto data = FileDialog::ReadFileString(".json");//FileDialog::GetJsonExtension()
 
 		if (data != "") {
 			SafeJson json;
@@ -68,6 +72,22 @@ namespace simstudio {
 
 			_app->_world = Share<World>();
 			_app->_world->FromJson(json);
+
+			LogI << "Successfully loaded from JSON";
+		}
+	}
+
+	void AppControls::_OpenProjectXML()
+	{
+		const auto path = FileDialog::GetFilePath(".xml");//FileDialog::GetJsonExtension()
+		LogE << path;
+		if (path != "") {
+			SafeXml xml;
+			xml.LoadFile(path);
+
+			_app->_world = Share<World>();
+			_app->_world->LoadFromSafeXmlNode(xml);
+			LogI << "Successfully loaded from XML";
 		}
 	}
 

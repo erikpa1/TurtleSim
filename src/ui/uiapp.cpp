@@ -40,6 +40,8 @@ namespace simstudio {
 			LogD << "Created Imgui INI file";
 		}
 
+
+
 	}
 
 
@@ -85,6 +87,13 @@ namespace simstudio {
 		ImGui::UpdatePlatformWindows();
 
 
+	}
+
+	void UiApp::AfterImguiInit()
+	{
+		//Premena musi byt static, pretoze c_str neprezije destrukciu stringu....
+		static const String initFile = F("{}\\{}", GetExecutionDirectory(), "imgui.ini");
+		ImGui::GetIO().IniFilename = initFile.c_str();
 	}
 
 	void UiApp::_DrawDock()

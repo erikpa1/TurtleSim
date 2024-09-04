@@ -11,6 +11,22 @@ namespace simstudio {
 
 
 
+	class SafeXml {
+
+	public:
+		Shared< tinyxml2::XMLDocument> _document;
+
+	public:
+
+
+		void LoadFile(const String& path);
+		void LoadString(const String& xmlString);
+		int ErrorID();
+
+
+	};
+
+
 	class SafeXmlNode {
 
 	public:
@@ -28,27 +44,6 @@ namespace simstudio {
 	};
 
 
-	class SafeXml {
-
-	public:
-		Shared< tinyxml2::XMLDocument> _document;
-
-	public:
-
-
-		void LoadFile(const String& path);
-		void LoadString(const String& xmlString);
-		int ErrorID();
-
-
-
-
-
-
-
-
-
-	};
 
 
 

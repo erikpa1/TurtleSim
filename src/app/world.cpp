@@ -15,7 +15,7 @@
 #include "../serialization/safejson.h"
 
 
-using namespace tinyxml2;
+
 
 
 namespace simstudio
@@ -141,6 +141,7 @@ namespace simstudio
 	{
 		auto factory = ClassFactory::Instance();
 
+
 		if (doc.ErrorID() == 0) {
 
 			auto node_World = doc._document->FirstChildElement("World");
@@ -160,9 +161,13 @@ namespace simstudio
 
 				auto entities = node_World->FirstChildElement("entities");
 
+
+
 				if (entities) {
 
 					for (auto child = entities->FirstChildElement(); child != nullptr; child = child->NextSiblingElement()) {
+
+						LogE << "Loading entity" << child->Name();
 
 						auto child_type = child->Name();
 

@@ -20,7 +20,8 @@ namespace simstudio {
 	private:
 
 		void _StartNewProject();
-		void _OpenProject();
+		void _OpenProjectJSON();
+		void _OpenProjectXML();
 		void _SaveProject();
 
 
