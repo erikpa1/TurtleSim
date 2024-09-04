@@ -45,7 +45,7 @@ endif()
 add_executable(
         SimStudioPlayer 
         main.cpp
-        run_directx.cpp
+        
         run_sdl.cpp
     ${SimStudioPlayer_SRC}
     ${SimStudioPlayer_WinExterna_SRC}
@@ -88,3 +88,23 @@ endif()
 #target_precompile_headers(SimStudioPlayer Private src/prelude.h)
 
 target_compile_options(SimStudioPlayer PRIVATE "/bigobj")
+
+
+# Define the DLL files you want to copy
+set(DLL_FILES
+    "${CMAKE_SOURCE_DIR}/external/SDL2/lib/x64/SDL2.dll"
+)
+
+
+# Specify the output directory (usually where your executables are located)
+set(OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/Debug")
+
+# Create a custom command to copy the DLL files
+foreach(DLL ${DLL_FILES})
+    add_custom_command(
+        TARGET ${PROJECT_NAME} PRE_BUILD 
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${DLL}
+        ${OUTPUT_DIRECTORY}
+    )
+endforeach()

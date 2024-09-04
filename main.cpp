@@ -12,10 +12,11 @@
 
 #include "src/serialization/safejson.h"
 
+
 using namespace simstudio;
 
 #if IS_WINDOWS_PLATFORM
-#include "run_directx.h"
+
 #include "run_sdl.h"
 #endif
 
@@ -24,11 +25,10 @@ using namespace simstudio;
 int main() {
 	RegisterClasses();
 
-	World world;
 
 #if IS_WINDOWS_PLATFORM
-	//run_directx(world);
-	run_sdl(world);
+
+	run_sdl();
 #endif
 	//run_xml(app);
 	//run_wasm_string_xml(app);

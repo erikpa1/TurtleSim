@@ -19,8 +19,7 @@
 #include <stdio.h>
 #include <SDL.h>
 
-#include "src/app/world.h"
-#include "src/runs/run_ui.h"
+
 #include "src/ui/uiapp.h"
 
 #if !SDL_VERSION_ATLEAST(2,0,17)
@@ -28,8 +27,9 @@
 #endif
 
 // Main code
-int run_sdl(simstudio::World& app)
+int run_sdl()
 {
+	simstudio::UiApp::LoadDefaultImguiIni();
 	// Setup SDL
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)
 	{

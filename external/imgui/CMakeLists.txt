@@ -8,6 +8,7 @@ file(GLOB IMGUI_SOURCES
     ${IMGUI_DIR}/*.cpp
 )
 
+
 # Create an ImGui library target
 add_library(ImGui STATIC ${IMGUI_SOURCES})
 

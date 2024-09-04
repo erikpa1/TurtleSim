@@ -16,9 +16,13 @@ namespace simstudio {
 
 	public:
 
+		static void LoadDefaultImguiIni();
+
 		UiApp();
 
 		void StartDrawing();
+
+
 
 	private:
 

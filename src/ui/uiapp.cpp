@@ -10,26 +10,38 @@
 
 #include "../app/world.h"
 
-void SetupDockingLayout()
-{
-	ImGuiID dockspace_id = ImGui::GetID("MyDockspace");
+#include "../utils/exe_dir.h"
 
-	ImGui::DockBuilderRemoveNode(dockspace_id); // Clear any existing layout
-	ImGui::DockBuilderAddNode(dockspace_id, ImGuiDockNodeFlags_DockSpace); // Create new docking node
 
-	ImGuiID dock_main_id = dockspace_id;
-	ImGuiID dock_id_left = ImGui::DockBuilderSplitNode(dock_main_id, ImGuiDir_Left, 0.20f, nullptr, &dock_main_id);
-	ImGuiID dock_id_right = ImGui::DockBuilderSplitNode(dock_main_id, ImGuiDir_Right, 0.20f, nullptr, &dock_main_id);
+#include <fstream>
 
-	// Dock the windows
-	ImGui::DockBuilderDockWindow("Hierarchy", dock_id_left);
-	ImGui::DockBuilderDockWindow("Inspector", dock_id_right);
-	ImGui::DockBuilderDockWindow("Scene", dock_main_id);
-
-	ImGui::DockBuilderFinish(dockspace_id); // Finish building the layout
-}
+#include "imguiini.h"
 
 namespace simstudio {
+
+
+	void UiApp::LoadDefaultImguiIni()
+	{
+		const  String initFile = F("{}\\{}", GetExecutionDirectory(), "imgui.ini");
+
+		std::ifstream f(initFile.c_str());
+
+		if (f.good() == false) {
+			std::ofstream outFile(initFile);
+
+			if (!outFile) {
+				LogE << "Error opening file for writing: " << initFile;
+			}
+			else {
+				outFile << INIF_FILE;
+				outFile.close();
+			}
+
+			LogD << "Created Imgui INI file";
+		}
+
+	}
+
 
 	UiApp::UiApp()
 	{
@@ -73,8 +85,8 @@ namespace simstudio {
 		ImGui::UpdatePlatformWindows();
 
 
-
 	}
+
 	void UiApp::_DrawDock()
 	{
 
