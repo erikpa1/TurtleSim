@@ -54,23 +54,19 @@ namespace simstudio {
 
 		ImGui::NewFrame();
 
-
+		_appControls.Draw();
 
 		_DrawOverlay();
 
 
-		_appControls.Draw();
 
-		ImGui::Begin("Root", &_leftBarActive);
 
-		ImGui::DockSpace(ImGui::GetID("Root"), ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode); ImGui::End();
 
 		if (_world) {
 			_DrawLeftBar();
 			_DrawMiddleBar();
 			_DrawRightBar();
 		}
-
 
 		// Rendering
 		ImGui::Render();
@@ -215,17 +211,24 @@ namespace simstudio {
 	void UiApp::_DrawOverlay()
 	{
 		ImVec2 display_size = ImGui::GetIO().DisplaySize;
+
+		const auto paddings = ImGui::GetStyle().FramePadding;
+
+		float menuBarHeight = (paddings.y * 2.0f + ImGui::GetFontSize()) / 2;
+
 		float screen_width = display_size.x;
 		float screen_height = display_size.y;
 
-		//ImGui::SetNextWindowPos(ImVec2(0, 0)); // Set window position to top-left corner
-		//ImGui::SetNextWindowSize(ImVec2(screen_width, screen_height)); // Make the window size equal to screen size
-		// ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove
-		ImGui::Begin("Root");
-		//ImGui::Begin("Root", nullptr, ImGuiWindowFlags_NoTitleBar  | ImGuiWindowFlags_NoBackground);
+		ImGui::SetNextWindowPos(ImVec2(0 - (paddings.x * 2), 0 + menuBarHeight)); // Set window position to top-left corner
+		ImGui::SetNextWindowSize(ImVec2(screen_width + (paddings.x * 4), screen_height)); // Make the window size equal to screen size
+		//ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove
+		//ImGui::Begin("Root");
+		const auto flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+		ImGui::Begin("Root", nullptr, flags);
 
 		// Your ImGui drawing code here, e.g., rendering a HUD, overlay, etc.
 
+		ImGui::DockSpace(ImGui::GetID("Root"), ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
 		ImGui::End();
 	}
 
