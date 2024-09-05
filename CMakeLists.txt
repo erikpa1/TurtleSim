@@ -14,12 +14,10 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
         file(GLOB_RECURSE  SimStudioPlayer_WinExterna_SRC
          "${CMAKE_SOURCE_DIR}/empty/*.cpp"
     )
-    
+   
 else()
 
-
 endif()
-
 
 # Add some multithreaded build support =====================================================================================================
 #MARK_AS_ADVANCED(MULTITHREADED_BUILD)

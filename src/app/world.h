@@ -31,6 +31,7 @@ namespace simstudio
 		void StartSimulation();
 
 		void Step();
+
 		void AddEntity(Shared<Entity> entity);
 
 		Shared<Entity> SpawnEntity(std::function<Shared<Entity>()> fn);

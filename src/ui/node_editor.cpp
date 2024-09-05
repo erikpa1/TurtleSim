@@ -2,7 +2,7 @@
 
 #include "imgui/imgui.h"
 
-
+#include "uiapp.h"
 
 
 
@@ -33,13 +33,23 @@ namespace simstudio {
 		ed::EndNode();
 	}
 
+	void NodeEditor::SetApp(UiApp* app)
+	{
+		_app = app;
+
+		_controls.SetApp(app);
+		_states.SetApp(app);
+
+	}
+
 	void NodeEditor::Draw()
 	{
+		_controls.Draw();
+		_states.Draw();
 
-		auto& io = ImGui::GetIO();
 
-		ImGui::Text("FPS: %.2f (%.2gms)", io.Framerate, io.Framerate ? 1000.0f / io.Framerate : 0.0f);
 
+		return;
 		ImGui::Separator();
 
 		ed::SetCurrentEditor(_context);
@@ -50,7 +60,12 @@ namespace simstudio {
 		ed::SetCurrentEditor(nullptr);
 
 
+	}
 
+	void NodeEditor::Update()
+	{
+		_controls.Update();
+		_states.Update();
 	}
 
 

@@ -21,6 +21,9 @@
 
 
 #include "src/ui/uiapp.h"
+#include "src/ui/FontManager.h"
+
+using namespace simstudio;
 
 #if !SDL_VERSION_ATLEAST(2,0,17)
 #error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function
@@ -93,7 +96,8 @@ int run_sdl()
 	//io.Fonts->AddFontFromFileTTF("../../misc/fonts/DroidSans.ttf", 16.0f);
 	//io.Fonts->AddFontFromFileTTF("../../misc/fonts/Roboto-Medium.ttf", 16.0f);
 	//io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
-	ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\Arial.ttf", 18.0f, nullptr, io.Fonts->GetGlyphRangesDefault());
+
+	ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\Arial.ttf", 18.0f, nullptr, FontManager::GetSkCzRanges());
 	//IM_ASSERT(font != nullptr);
 
 	// Our state
@@ -128,11 +132,13 @@ int run_sdl()
 			continue;
 		}
 
+		uiApp.Update();
+
 		// Start the Dear ImGui frame
 		ImGui_ImplSDLRenderer2_NewFrame();
 		ImGui_ImplSDL2_NewFrame();
 
-		uiApp.StartDrawing();
+		uiApp.Draw();
 
 
 		SDL_RenderSetScale(renderer, io.DisplayFramebufferScale.x, io.DisplayFramebufferScale.y);

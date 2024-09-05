@@ -54,10 +54,11 @@ namespace simstudio {
 		_hierarchy._app = this;
 		_avlEntities._app = this;
 
+		_nodeEditor.SetApp(this);
 		_entityProperties.SetApp(this);
 	}
 
-	void UiApp::StartDrawing()
+	void UiApp::Draw()
 	{
 		//ImGui::NewFrame();
 		//_DrawDock();
@@ -74,8 +75,6 @@ namespace simstudio {
 
 
 
-
-
 		if (_world) {
 			_DrawLeftBar();
 			_DrawMiddleBar();
@@ -86,7 +85,11 @@ namespace simstudio {
 		ImGui::Render();
 		ImGui::UpdatePlatformWindows();
 
+	}
 
+	void UiApp::Update()
+	{
+		_nodeEditor.Update();
 	}
 
 	void UiApp::AfterImguiInit()

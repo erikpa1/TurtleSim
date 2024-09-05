@@ -7,7 +7,7 @@
 #include "entity_properties.h"
 #include "app_controls.h"
 #include "node_editor.h"
-#include "console.h"                  
+#include "console.h"    
 
 namespace simstudio {
 
@@ -21,7 +21,8 @@ namespace simstudio {
 
 		UiApp();
 
-		void StartDrawing();
+		void Draw();
+		void Update();
 
 
 
