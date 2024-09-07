@@ -3,12 +3,14 @@ project(SimStudioPlayer)
 
 set(CMAKE_CXX_STANDARD 23)
 
+
 # Enable solution folders in Visual Studio and Folders in Xcode
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 file(GLOB_RECURSE  SimStudioPlayer_SRC
      "${CMAKE_SOURCE_DIR}/src/*.cpp"
 )
+
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten") 
         file(GLOB_RECURSE  SimStudioPlayer_WinExterna_SRC
@@ -50,7 +52,9 @@ add_executable(
 )
 
 
-#Imgui import
+
+
+#Sim studio import
 add_subdirectory(SimStudio/SimCore)
 target_link_libraries(SimStudioPlayer PRIVATE SimCore)
 target_include_directories(SimStudioPlayer PRIVATE ${CMAKE_SOURCE_DIR}/SimStudio)
@@ -63,9 +67,17 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
 else()
     message(STATUS "xxx--------Building for windows")
 
-    #Imgui import
-    add_subdirectory(external/imgui)
-    target_link_libraries(SimStudioPlayer PRIVATE ImGui)
+
+    # Set ImGui path
+    set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/external/imgui)
+
+    file(IMGUI_CPP_RECURSE  SimStudioPlayer_SRC
+         "${IMGUI_DIR}/*.cpp"
+    )
+
+    add_library(SimStudioPlayer STATIC ${IMGUI_CPP_RECURSE})
+
+
 
 
     #imgui diagrams import
@@ -92,6 +104,7 @@ target_compile_options(SimStudioPlayer PRIVATE "/bigobj")
 set(DLL_FILES
     "${CMAKE_SOURCE_DIR}/external/SDL2/lib/x64/SDL2.dll"
 )
+
 
 
 # Specify the output directory (usually where your executables are located)
