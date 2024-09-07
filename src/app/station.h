@@ -66,6 +66,8 @@ namespace simstudio
 		virtual bool TakeEntity(Shared<Entity>& entity) override;
 		virtual bool CanTakeEntity() override;
 
+		int GetStateInt() override;
+
 
 
 	private:

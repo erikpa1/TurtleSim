@@ -82,6 +82,20 @@ namespace simstudio
 		return _activeEntity == nullptr;
 	}
 
+    int Station::GetStateInt()
+	{
+		if (_activeState == StationStates::WORKING)
+		{
+			return 1;
+		}
+		else if (_activeState == StationStates::BLOCKED) {
+			return 2;
+		}
+		else {
+			return 0;
+		}
+	}
+
 	void Station::_FinishManufacturing(World& app)
 	{
 		_statistics.manufactured += 1;

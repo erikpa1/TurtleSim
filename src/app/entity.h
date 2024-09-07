@@ -56,6 +56,7 @@ namespace simstudio
 		virtual bool TakeEntity(Shared<Entity>& entity);
 		virtual bool CanTakeEntity();
 
+		virtual int GetStateInt();
 
 		virtual void EntityTaken(Shared<Entity>& entity);
 

@@ -38,6 +38,11 @@ namespace simstudio
 		return false;
 	}
 
+	int Entity::GetStateInt()
+	{
+		return 0;
+	}
+
 
 	void Entity::EntityTaken(Shared<Entity>& entity)
 	{

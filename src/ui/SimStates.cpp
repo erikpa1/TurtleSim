@@ -23,7 +23,7 @@ namespace simstudio {
 
 		enum ContentsType { CT_Text, CT_FillButton };
 		static ImGuiTableFlags flags = ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg;
-		static bool display_headers = false;
+		static bool display_headers = true;
 		static int contents_type = CT_Text;
 
 		if (ImGui::BeginTable("table1", 3, flags))
@@ -48,16 +48,22 @@ namespace simstudio {
 			{
 				const auto& entity = iter.second;
 
+				ImGui::TableSetColumnIndex(0);
+
 				ImGui::TableNextRow();
-				for (int column = 0; column < 1; column++)
+				for (int column = 0; column < 3; column++)
 				{
 					ImGui::TableSetColumnIndex(column);
 					char buf[32];
 					sprintf(buf, "Hello %d,%d", column, row);
-					if (contents_type == CT_Text)
+					if (contents_type == CT_Text) {
 						ImGui::TextUnformatted(buf);
-					else if (contents_type == CT_FillButton)
+					}
+
+					else if (contents_type == CT_FillButton) {
 						ImGui::Button(buf, ImVec2(-FLT_MIN, 0.0f));
+					}
+
 				}
 
 				row += 1;
