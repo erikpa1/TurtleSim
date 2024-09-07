@@ -3,7 +3,6 @@ project(SimStudioPlayer)
 
 set(CMAKE_CXX_STANDARD 23)
 
-
 # Enable solution folders in Visual Studio and Folders in Xcode
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -11,15 +10,16 @@ file(GLOB_RECURSE  SimStudioPlayer_SRC
      "${CMAKE_SOURCE_DIR}/src/*.cpp"
 )
 
-
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten") 
         file(GLOB_RECURSE  SimStudioPlayer_WinExterna_SRC
          "${CMAKE_SOURCE_DIR}/empty/*.cpp"
     )
-   
+    
 else()
 
+
 endif()
+
 
 # Add some multithreaded build support =====================================================================================================
 #MARK_AS_ADVANCED(MULTITHREADED_BUILD)
@@ -52,40 +52,30 @@ add_executable(
 )
 
 
-
-
-#Sim studio import
+#Imgui import
 add_subdirectory(SimStudio/SimCore)
 target_link_libraries(SimStudioPlayer PRIVATE SimCore)
 target_include_directories(SimStudioPlayer PRIVATE ${CMAKE_SOURCE_DIR}/SimStudio)
 
 
-target_include_directories(SimStudioPlayer PRIVATE ${CMAKE_SOURCE_DIR}/external)
+target_include_directories(SimStudioPlayer PRIVATE ${CMAKE_SOURCE_DIR}/TurtleSim_External)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
     message(STATUS "xxx--------Building for WebAssembly (WASM)")
 else()
     message(STATUS "xxx--------Building for windows")
 
-
-    # Set ImGui path
-    set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/external/imgui)
-
-    file(IMGUI_CPP_RECURSE  SimStudioPlayer_SRC
-         "${IMGUI_DIR}/*.cpp"
-    )
-
-    add_library(SimStudioPlayer STATIC ${IMGUI_CPP_RECURSE})
-
-
+    #Imgui import
+    add_subdirectory(TurtleSim_External/imgui)
+    target_link_libraries(SimStudioPlayer PRIVATE ImGui)
 
 
     #imgui diagrams import
-    add_subdirectory(external/imgui_blueprints)
+    add_subdirectory(TurtleSim_External/imgui_blueprints)
     target_link_libraries(SimStudioPlayer PRIVATE ImGuiBlueprint)
 
     #importing SDL
-    set(SDL2_DIR ${CMAKE_SOURCE_DIR}/external/SDL2)
+    set(SDL2_DIR ${CMAKE_SOURCE_DIR}/TurtleSim_External/SDL2)
     find_package(SDL2 REQUIRED PATHS ${SDL2_DIR})
     include_directories(${SDL2_INCLUDE_DIRS})
     target_link_libraries(SimStudioPlayer PUBLIC ${SDL2_LIBRARIES})
@@ -102,9 +92,8 @@ target_compile_options(SimStudioPlayer PRIVATE "/bigobj")
 
 # Define the DLL files you want to copy
 set(DLL_FILES
-    "${CMAKE_SOURCE_DIR}/external/SDL2/lib/x64/SDL2.dll"
+    "${CMAKE_SOURCE_DIR}/TurtleSim_External/SDL2/lib/x64/SDL2.dll"
 )
-
 
 
 # Specify the output directory (usually where your executables are located)

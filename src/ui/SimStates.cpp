@@ -5,6 +5,8 @@
 #include "imgui/imgui.h"
 #include "uiapp.h"
 
+#include "../app/prelude.h"
+
 namespace simstudio {
 
 	void SimStates::SetApp(UiApp* app)
@@ -28,18 +30,26 @@ namespace simstudio {
 		{
 			// Display headers so we can inspect their interaction with borders
 			// (Headers are not the main purpose of this section of the demo, so we are not elaborating on them now. See other sections for details)
+
+			const auto& entites = _app->_world->_entities;
+
 			if (display_headers)
 			{
-				ImGui::TableSetupColumn("One");
-				ImGui::TableSetupColumn("Two");
-				ImGui::TableSetupColumn("Three");
+				for (const auto& iter : entites) {
+					ImGui::TableSetupColumn(iter.second->_name.c_str());
+				}
 				ImGui::TableHeadersRow();
 			}
 
-			for (int row = 0; row < 5; row++)
+
+
+			int row = 0;
+			for (const auto& iter : entites)
 			{
+				const auto& entity = iter.second;
+
 				ImGui::TableNextRow();
-				for (int column = 0; column < 3; column++)
+				for (int column = 0; column < 1; column++)
 				{
 					ImGui::TableSetColumnIndex(column);
 					char buf[32];
@@ -49,6 +59,8 @@ namespace simstudio {
 					else if (contents_type == CT_FillButton)
 						ImGui::Button(buf, ImVec2(-FLT_MIN, 0.0f));
 				}
+
+				row += 1;
 			}
 			ImGui::EndTable();
 		}

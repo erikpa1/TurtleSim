@@ -16,7 +16,7 @@ namespace simstudio {
 	}
 	void SimulationControls::Draw()
 	{
-		if (ImGui::BeginMainMenuBar())
+		if (ImGui::BeginMenuBar())
 		{
 			if (ImGui::BeginMenu("Simulation"))
 			{
@@ -26,7 +26,7 @@ namespace simstudio {
 				ImGui::EndMenu();
 			}
 
-			ImGui::EndMainMenuBar();
+			ImGui::EndMenuBar();
 		}
 	}
 

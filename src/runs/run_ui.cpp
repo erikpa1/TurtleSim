@@ -8,7 +8,7 @@
 
 #include "../app/prelude.h"
 
-#include "../../external/imgui/imgui.h"
+#include "imgui/imgui.h"
 
 #include "../utils/exe_dir.h"
 

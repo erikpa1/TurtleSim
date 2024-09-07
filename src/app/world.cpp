@@ -139,18 +139,20 @@ namespace simstudio
 
 	void World::LoadFromSafeXmlNode(SafeXml& doc)
 	{
+
 		auto factory = ClassFactory::Instance();
 
 
 		if (doc.ErrorID() == 0) {
 
-			auto node_World = doc._document->FirstChildElement("World");
+			auto app_root = doc._document->FirstChildElement("app");
 
 
-			if (node_World) {
+			if (app_root) {
 
+				LogE << app_root->ChildElementCount();
 
-				auto simparams = node_World->FirstChildElement("simparams");
+				auto simparams = app_root->FirstChildElement("simparams");
 
 				if (simparams) {
 					SafeXmlNode safe_sim_params(simparams);
@@ -158,9 +160,7 @@ namespace simstudio
 					_stepper._endIndex = TimeExpr::SecondsFromTimeString(time_param);
 				}
 
-
-				auto entities = node_World->FirstChildElement("entities");
-
+				auto entities = app_root->FirstChildElement("entities");
 
 
 				if (entities) {
@@ -188,7 +188,7 @@ namespace simstudio
 					LogE << "Entities was invalid";
 				}
 
-				auto connections = node_World->FirstChildElement("connections");
+				auto connections = app_root->FirstChildElement("connections");
 
 				if (connections) {
 					for (auto child = connections->FirstChildElement(); child != nullptr; child = child->NextSiblingElement()) {
