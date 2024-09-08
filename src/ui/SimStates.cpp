@@ -22,6 +22,7 @@ namespace simstudio {
 	void SimStates::Draw()
 	{
 
+		_DrawProgress();
 		_DrawStations();
 		_DrawConveyors();
 		_DrawBuffers();
@@ -106,6 +107,16 @@ namespace simstudio {
 
 	}
 
+	void SimStates::_DrawProgress()
+	{
+		const auto& stepper = _app->_world->_stepper;
+
+		_progressText = F("Progress: {} | {}", stepper._stepIndex, stepper._endIndex);
+
+		ImGui::LabelText(_progressText.c_str(), "Value");
+	}
+
+
 	void SimStates::_DrawBuffers()
 	{
 		if (_buffersPlot.size() > 0) {
@@ -172,11 +183,10 @@ namespace simstudio {
 		for (const auto& iter : entites) {
 			const auto& entity = iter.second;
 
-			static int val = entity->GetStateInt();
 
 			LogI << entity->_name << " " << entity->GetStateInt();
 
-			ImGui::InputInt(entity->_name.c_str(), &val);
+			ImGui::InputInt(entity->_name.c_str(), &entity->_state_int);
 		}
 
 

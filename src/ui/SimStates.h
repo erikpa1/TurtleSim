@@ -17,7 +17,7 @@ namespace simstudio {
 	private:
 		UiApp* _app;
 
-
+		void _DrawProgress();
 		void _DrawBuffers();
 		void _DrawConveyors();
 		void _DrawStations();
@@ -26,6 +26,7 @@ namespace simstudio {
 		Array<float> _buffersPlot;
 		Array<float> _conveyorsPlot;
 
+		String _progressText = "Here";
 
 	};
 

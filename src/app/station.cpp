@@ -55,7 +55,7 @@ namespace simstudio
 	bool Station::TakeEntity(Shared<Entity>& entity)
 	{
 
-		if (CanTakeEntity()) {			
+		if (CanTakeEntity()) {
 			LogE << F("Taking: [{}]", entity->_name);
 			_activeEntity = entity;
 			_statistics.entities_in += 1;
@@ -83,14 +83,18 @@ namespace simstudio
 
 	int Station::GetStateInt()
 	{
+
 		if (_activeState == StationStates::WORKING)
 		{
+			_state_int = 1;
 			return 1;
 		}
 		else if (_activeState == StationStates::BLOCKED) {
+			_state_int = 2;
 			return 2;
 		}
 		else {
+			_state_int = 0;
 			return 0;
 		}
 	}

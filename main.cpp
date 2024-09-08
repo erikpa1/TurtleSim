@@ -28,8 +28,8 @@ int main() {
 
 #if IS_WINDOWS_PLATFORM
 
-	run_xml();
-	//run_sdl();
+	//run_xml();
+	run_sdl();
 #endif
 	//run_xml(app);
 	//run_wasm_string_xml(app);

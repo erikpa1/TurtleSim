@@ -31,6 +31,7 @@ namespace simstudio
 		Vec4 _pos_global;
 		Vec4 _pos_local;
 
+		int _state_int = 0;
 
 		String _name;
 		String _uid;

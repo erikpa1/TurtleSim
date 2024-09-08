@@ -22,12 +22,12 @@ namespace simstudio {
 	{
 		if (_activeEntity == nullptr) {
 
-			if (_nextAction <= _world->_stepper._stepIndex) {
+			if (_nextAction <= GetSimSecond()) {
 				_nextAction = LONG_MAX;
 
 				_activeEntity = _GetSpawningEntity();
 
-				LogI << "Spawning MU in [" << _world->_stepper._stepIndex << "] second";
+				LogE << "Spawning MU in [" << _world->_stepper._stepIndex << "] second";
 
 				_world->AddEntity(_activeEntity);
 
@@ -39,7 +39,6 @@ namespace simstudio {
 	void Source::AfterStep()
 	{
 		_TryMoveEntityNext();
-		_CalculateNextAction();
 	}
 
 	void Source::FromXml(SafeXmlNode& node)
@@ -86,19 +85,21 @@ namespace simstudio {
 
 	void Source::_TryMoveEntityNext()
 	{
-		auto connections = _world->GetConnectedEntities(_uid);
+		if (_activeEntity) {
+			auto connections = _world->GetConnectedEntities(_uid);
 
-		if (connections.size() > 0) {
-			if (connections[0]->TakeEntity(_activeEntity)) {
-				_activeEntity.reset();
-				return;
+			if (connections.size() > 0) {
+				if (connections[0]->TakeEntity(_activeEntity)) {
+					_activeEntity.reset();
+					_CalculateNextAction();
+					return;
+				}
 			}
-		}
-		else {
-			LogE << "[Source] " << _uid << " successor don't exists";
-		}
+			else {
+				LogE << "[Source] " << _uid << " successor don't exists";
+			}
 
-
+		}
 
 	}
 
