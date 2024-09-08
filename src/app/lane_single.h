@@ -23,7 +23,7 @@ namespace simstudio {
 		virtual void Init();
 
 		virtual bool TakeEntity(Shared<Entity>& entity) override;
-		virtual void Step(World& app, Stepper& stepper) override;
+		virtual void Step() override;
 
 		virtual void EntityTaken(Shared<Entity>& entity) override;
 

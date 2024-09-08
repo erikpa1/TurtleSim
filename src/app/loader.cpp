@@ -24,7 +24,7 @@ namespace simstudio {
 		}
 
 	}
-	void Loader::Step(World& app, Stepper& stepper)
+	void Loader::Step()
 	{
 		if (_activeState == LoaderState::LOADING) {
 			_statistics._worked += GetLastStepOffset();

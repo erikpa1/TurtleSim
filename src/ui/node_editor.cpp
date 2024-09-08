@@ -4,6 +4,8 @@
 
 #include "uiapp.h"
 
+#include "SimControls.h"
+#include "SimStates.h"
 
 
 
@@ -13,6 +15,9 @@ namespace simstudio {
 	NodeEditor::NodeEditor()
 	{
 		_context = ed::CreateEditor(&_config);
+
+		_states = Share<SimStates>();
+		_controls = Share<SimulationControls>();
 
 	}
 
@@ -37,15 +42,15 @@ namespace simstudio {
 	{
 		_app = app;
 
-		_controls.SetApp(app);
-		_states.SetApp(app);
+		_controls->SetApp(app);
+		_states->SetApp(app);
 
 	}
 
 	void NodeEditor::Draw()
 	{
-		_controls.Draw();
-		_states.Draw();
+		_controls->Draw();
+		_states->Draw();
 
 
 
@@ -64,8 +69,8 @@ namespace simstudio {
 
 	void NodeEditor::Update()
 	{
-		_controls.Update();
-		_states.Update();
+		_controls->Update();
+		_states->Update();
 	}
 
 

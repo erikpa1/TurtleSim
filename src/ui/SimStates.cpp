@@ -1,5 +1,6 @@
 
-
+#include "SimCore/AnyEventEmmiter.h"
+#include "SimCore/Prelude.h"
 #include "SimStates.h"
 
 #include "imgui/imgui.h"
@@ -7,18 +8,26 @@
 
 #include "../app/prelude.h"
 
+
 namespace simstudio {
 
 	void SimStates::SetApp(UiApp* app)
 	{
 		_app = app;
+
+		AnyEventEmitter::I().RegisterEvent("SimulationStarted", this->shared_from_this(), &SimStates::Prepare);
+
 	}
 
 	void SimStates::Draw()
 	{
-		static float arr[] = { 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f };
-		ImGui::PlotLines("Frame Times", arr, IM_ARRAYSIZE(arr));
-		ImGui::PlotHistogram("Histogram", arr, IM_ARRAYSIZE(arr), 0, NULL, 0.0f, 1.0f, ImVec2(0, 80.0f));
+
+		_DrawStations();
+		_DrawConveyors();
+		_DrawBuffers();
+
+
+		return;
 
 
 		enum ContentsType { CT_Text, CT_FillButton };
@@ -48,7 +57,6 @@ namespace simstudio {
 			{
 				const auto& entity = iter.second;
 
-				ImGui::TableSetColumnIndex(0);
 
 				ImGui::TableNextRow();
 				for (int column = 0; column < 3; column++)
@@ -72,8 +80,105 @@ namespace simstudio {
 		}
 
 	}
+
 	void SimStates::Update()
 	{
+
+	}
+
+	void SimStates::Prepare()
+	{
+
+		const auto& entites = _app->_world->_entities;
+		for (const auto& iter : entites) {
+			const auto& entity = iter.second;
+
+			const auto entity_type = entity->Type();
+
+			if (entity_type == Buffer::ClassType()) {
+				_buffersPlot.push_back(0);
+			}
+			else if (entity_type == Conveyor::ClassType()) {
+				_conveyorsPlot.push_back(0);
+			}
+
+		}
+
+	}
+
+	void SimStates::_DrawBuffers()
+	{
+		if (_buffersPlot.size() > 0) {
+			const auto& entites = _app->_world->_entities;
+
+			int index = 0;
+
+			for (const auto& iter : entites) {
+
+				const auto entity_type = iter.second->Type();
+
+				if (entity_type == Buffer::ClassType()) {
+					auto buffer = StaticCast<Buffer>(iter.second);
+					_buffersPlot[index] = buffer->_buffer.size();
+
+					index += 0;
+				}
+			}
+
+			const auto& arr = _buffersPlot.data();
+
+			ImGui::PlotLines("Buffers occupancy:", arr, IM_ARRAYSIZE(arr));
+			ImGui::PlotHistogram("Histogram", arr, IM_ARRAYSIZE(arr), 0, NULL, 0.0f, 1.0f, ImVec2(0, 80.0f));
+
+		}
+
+	}
+
+	void SimStates::_DrawConveyors()
+	{
+
+		if (_conveyorsPlot.size() > 0) {
+
+			const auto& entites = _app->_world->_entities;
+
+			int index = 0;
+
+			for (const auto& iter : entites) {
+
+				const auto entity_type = iter.second->Type();
+
+				if (entity_type == Conveyor::ClassType()) {
+					auto conveyor = StaticCast<Conveyor>(iter.second);
+					_conveyorsPlot[index] = conveyor->_buffer.size();
+
+					index += 0;
+				}
+			}
+
+
+			const auto& arr = _conveyorsPlot.data();
+
+			ImGui::PlotLines("Conveyors occupancy:", arr, IM_ARRAYSIZE(arr));
+			ImGui::PlotHistogram("Histogram", arr, IM_ARRAYSIZE(arr), 0, NULL, 0.0f, 1.0f, ImVec2(0, 80.0f));
+
+
+		}
+
+	}
+
+	void SimStates::_DrawStations()
+	{
+		const auto& entites = _app->_world->_entities;
+		for (const auto& iter : entites) {
+			const auto& entity = iter.second;
+
+			static int val = entity->GetStateInt();
+
+			LogI << entity->_name << " " << entity->GetStateInt();
+
+			ImGui::InputInt(entity->_name.c_str(), &val);
+		}
+
 
 	}
 }

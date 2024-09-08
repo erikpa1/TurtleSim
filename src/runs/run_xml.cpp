@@ -12,8 +12,9 @@
 
 namespace simstudio {
 
-	void run_xml(World& world)
+	void run_xml()
 	{
+		World world;
 
 		String example_file = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example.xml");
 		String example_file_1 = F("{}\\{}", GetSolutionDirectory(), "xml_examples\\example_1_paralel.xml");
@@ -29,8 +30,10 @@ namespace simstudio {
 
 	}
 
-	void run_wasm_string_xml(World& world)
+	void run_wasm_string_xml()
 	{
+		World world;
+
 		world.LoadFromXmlString(WasmExamples::Xml1());
 		world.Init();
 		world.StartSimulation();

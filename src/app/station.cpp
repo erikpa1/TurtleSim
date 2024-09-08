@@ -30,22 +30,19 @@ namespace simstudio
 	}
 
 
-	void Station::Step(World& app, Stepper& stepper)
+	void Station::Step()
 	{
 		if (_activeState == StationStates::WORKING)
 		{
-			if (_manufacturing_end <= stepper.GetStepSecond())
+			if (_manufacturing_end <= _world->_stepper.GetStepSecond())
 			{
-				_FinishManufacturing(app);
+				_FinishManufacturing();
 			}
 		}
 		else if (_activeState == StationStates::BLOCKED) {
-			_TryToPassNextEntity(app);
+			_TryToPassNextEntity();
 		}
-
-
 	}
-
 
 	void Station::FromXml(SafeXmlNode& node)
 	{
@@ -57,7 +54,9 @@ namespace simstudio
 
 	bool Station::TakeEntity(Shared<Entity>& entity)
 	{
-		if (CanTakeEntity()) {
+
+		if (CanTakeEntity()) {			
+			LogE << F("Taking: [{}]", entity->_name);
 			_activeEntity = entity;
 			_statistics.entities_in += 1;
 			_StartManufacturing();
@@ -82,7 +81,7 @@ namespace simstudio
 		return _activeEntity == nullptr;
 	}
 
-    int Station::GetStateInt()
+	int Station::GetStateInt()
 	{
 		if (_activeState == StationStates::WORKING)
 		{
@@ -96,21 +95,21 @@ namespace simstudio
 		}
 	}
 
-	void Station::_FinishManufacturing(World& app)
+	void Station::_FinishManufacturing()
 	{
 		_statistics.manufactured += 1;
 		_activeState = StationStates::NON_OPERATIVE;
 		_AddMaterialConsumption();
 
-		_TryToPassNextEntity(app);
+		_TryToPassNextEntity();
 	}
 
-	void Station::_TryToPassNextEntity(World& app)
+	void Station::_TryToPassNextEntity()
 	{
 
 		bool isBlocked = true;
 
-		auto connections = app.GetConnectedEntities(_uid);
+		auto connections = _world->GetConnectedEntities(_uid);
 
 
 		for (const auto& connection : connections) {
@@ -175,6 +174,9 @@ namespace simstudio
 			_manufacturing_end = _activeTime + manufacturing_time;
 			_statistics.manufactured_time += manufacturing_time;
 			LogI << "Started manufacturing, will be finished at: " << _manufacturing_end;
+
+
+			LogE << F("Station taken an entity, active state: ", GetStateInt());
 		}
 		else {
 			LogE << "Station didn't started manufacturing because entity was null";

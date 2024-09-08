@@ -66,7 +66,8 @@ namespace simstudio
 		{
 			auto& entity = iter.second;
 
-			entity->Step(*this, _stepper);
+			entity->Step();
+			entity->AfterStep();
 		}
 
 	}
@@ -167,7 +168,6 @@ namespace simstudio
 
 					for (auto child = entities->FirstChildElement(); child != nullptr; child = child->NextSiblingElement()) {
 
-						LogE << "Loading entity" << child->Name();
 
 						auto child_type = child->Name();
 
@@ -244,8 +244,6 @@ namespace simstudio
 		auto factory = ClassFactory::Instance();
 
 		const auto entities = jobj.GetObjectArray("entities");
-
-		LogE << entities.size();
 
 		for (const auto& entity_json : entities) {
 			auto child_type = entity_json->GetString("type", "entity");

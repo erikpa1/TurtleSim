@@ -1,5 +1,7 @@
 
 
+#include "SimCore/AnyEventEmmiter.h"
+
 #include "SimControls.h"
 
 #include "imgui/imgui.h"
@@ -7,6 +9,8 @@
 #include "uiapp.h"
 
 #include "../app/world.h"
+#include "../app/stepper.h"
+#include "../statistics/app_report_collector.h"
 
 namespace simstudio {
 
@@ -32,8 +36,23 @@ namespace simstudio {
 
 	void SimulationControls::Update()
 	{
+
 		if (_isSimulating) {
-			_app->_world->Step();
+			const auto& world = _app->_world;
+			const auto stepper = world->_stepper;
+
+
+			if (stepper._stepIndex <= stepper._endIndex) {
+				world->Step();
+			}
+			else {
+				LogI << "Simulation ended";
+
+				SaveStatisticsRecord(*world);
+
+				_isSimulating = false;
+			}
+
 		}
 
 	}
@@ -41,15 +60,20 @@ namespace simstudio {
 	void SimulationControls::_StartSimulation()
 	{
 		_isSimulating = true;
+
+		AnyEventEmitter::I().EmitEvent("SimulationStarted");
 	}
 
 	void SimulationControls::_PauseSimulation()
 	{
 		_isSimulating = true;
+
+		AnyEventEmitter::I().EmitEvent("SimulationPaused");
 	}
 
 	void SimulationControls::_RefreshSimulation()
 	{
 
+		AnyEventEmitter::I().EmitEvent("RefreshSimulation");
 	}
 }

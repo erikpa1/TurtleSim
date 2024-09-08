@@ -15,30 +15,31 @@ namespace simstudio {
 
 	void Source::Init()
 	{
-		_CalculateNextAction(0);
+		_CalculateNextAction();
 	}
 
-	void Source::Step(World& app, Stepper& stepper)
+	void Source::Step()
 	{
 		if (_activeEntity == nullptr) {
 
-			if (_nextAction <= stepper._stepIndex) {
+			if (_nextAction <= _world->_stepper._stepIndex) {
 				_nextAction = LONG_MAX;
 
 				_activeEntity = _GetSpawningEntity();
 
-				LogI << "Spawning MU in [" << stepper._stepIndex << "] second";
+				LogI << "Spawning MU in [" << _world->_stepper._stepIndex << "] second";
 
-				app.AddEntity(_activeEntity);
+				_world->AddEntity(_activeEntity);
 
-				_TryMoveEntityNext(app);
-				_CalculateNextAction(stepper._stepIndex);
 			}
 		}
-		else {
-			_TryMoveEntityNext(app);
-		}
 
+	}
+
+	void Source::AfterStep()
+	{
+		_TryMoveEntityNext();
+		_CalculateNextAction();
 	}
 
 	void Source::FromXml(SafeXmlNode& node)
@@ -50,8 +51,10 @@ namespace simstudio {
 
 	}
 
-	void Source::_CalculateNextAction(long currentTime)
+	void Source::_CalculateNextAction()
 	{
+		long currentTime = _world->_stepper._stepIndex;
+
 		auto secondsToSpawn = _spawn_time.CompileSecondsLong();
 		_nextAction = currentTime + _spawn_time.CompileSecondsLong();
 
@@ -81,9 +84,9 @@ namespace simstudio {
 
 	}
 
-	void Source::_TryMoveEntityNext(World& app)
+	void Source::_TryMoveEntityNext()
 	{
-		auto connections = app.GetConnectedEntities(_uid);
+		auto connections = _world->GetConnectedEntities(_uid);
 
 		if (connections.size() > 0) {
 			if (connections[0]->TakeEntity(_activeEntity)) {

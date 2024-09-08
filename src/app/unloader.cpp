@@ -32,7 +32,7 @@ namespace simstudio {
 
 
 
-	void Unloader::Step(World& app, Stepper& stepper)
+	void Unloader::Step()
 	{
 		if (_activeState == UnloaderState::WORKING) {
 			if (_unloading_end <= GetSimSecond()) {

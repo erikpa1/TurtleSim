@@ -52,7 +52,8 @@ namespace simstudio
 		Entity();
 
 		virtual void Init();
-		virtual void Step(World& app, Stepper& stepper);
+		virtual void Step();
+		virtual void AfterStep();
 		virtual bool TakeEntity(Shared<Entity>& entity);
 		virtual bool CanTakeEntity();
 

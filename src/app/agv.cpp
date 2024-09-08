@@ -18,7 +18,7 @@ namespace simstudio {
 	{
 	}
 
-	void Agv::Step(World& app, Stepper& stepper)
+	void Agv::Step()
 	{
 
 	}

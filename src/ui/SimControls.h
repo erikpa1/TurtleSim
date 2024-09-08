@@ -6,7 +6,7 @@ namespace simstudio {
 
 	class UiApp;
 
-	class SimulationControls {
+	class SimulationControls : public EnableShare<SimulationControls> {
 
 	public:
 		void SetApp(UiApp* app);

@@ -8,6 +8,10 @@
 
 	<entities>
 		<source name="Source_1" uid="Source_1" spawn_time="uniform(5, 15)" />
+
+		<buffer name="Buffer_Source" uid="Buffer_Source" limit="500" />
+
+
 		<station name="Station_0" uid="Station_0" operation_time="uniform(5, 12)" />
 
 		<conveyor name="Conveyor_1" uid="Conveyor_1" length="5"  speed="1"/>
@@ -27,7 +31,10 @@
 	</entities>
 
 	<connections>
-		<single a="Source_1" b="Station_0" />
+		<single a="Source_1" b="Buffer_Source" />
+		
+		<single a="Buffer_Source" b="Station_0" />
+				
 		<single a="Station_0" b="Conveyor_1" />
 
 		<single a="Conveyor_1" b="Station_1" />

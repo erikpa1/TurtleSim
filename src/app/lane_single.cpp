@@ -35,7 +35,7 @@ namespace simstudio {
 
 	}
 
-	void SingleLane::Step(World& app, Stepper& stepper)
+	void SingleLane::Step()
 	{
 		if (_activeAgv) {
 			auto& agv_ref = *_activeAgv.get();
@@ -70,7 +70,7 @@ namespace simstudio {
 		}
 
 		if (_activeAgv) {
-			_activeAgv->Step(app, stepper);
+			_activeAgv->Step();
 		}
 
 	}

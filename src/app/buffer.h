@@ -25,7 +25,7 @@ namespace simstudio {
 		static Shared<Buffer> New();
 
 		virtual void Init();
-		virtual void Step(World& app, Stepper& stepper) override;
+		virtual void Step() override;
 		virtual void FromXml(SafeXmlNode& node) override;
 
 

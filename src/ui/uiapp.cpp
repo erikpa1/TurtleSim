@@ -238,7 +238,7 @@ namespace simstudio {
 
 		const auto paddings = ImGui::GetStyle().FramePadding;
 
-		float menuBarHeight = (paddings.y * 2.0f + ImGui::GetFontSize()) / 2;
+		float menuBarHeight = (paddings.y * 2.0f + ImGui::GetFontSize()) / 2 + 5;
 
 		float screen_width = display_size.x;
 		float screen_height = display_size.y;

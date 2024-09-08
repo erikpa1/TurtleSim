@@ -17,10 +17,10 @@ namespace simstudio {
 
 	}
 
-	void Buffer::Step(World& app, Stepper& stepper)
+	void Buffer::Step()
 	{
 		if (_buffer.size() > 0) {
-			auto connections = app.GetConnectedEntities(_uid);
+			auto connections = _world->GetConnectedEntities(_uid);
 			for (const auto& connection : connections) {
 				Shared<Entity> poped_entity = _buffer.back();
 

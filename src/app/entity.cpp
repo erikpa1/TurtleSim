@@ -23,7 +23,11 @@ namespace simstudio
 	{
 	}
 
-	void Entity::Step(World& app, Stepper& stepper)
+	void Entity::Step()
+	{
+	}
+
+	void Entity::AfterStep()
 	{
 	}
 

@@ -20,7 +20,7 @@ namespace simstudio {
 	{
 	}
 
-	void Conveyor::Step(World& app, Stepper& stepper)
+	void Conveyor::Step()
 	{
 
 		Array<Entity> _toBeDeleted;
@@ -35,7 +35,7 @@ namespace simstudio {
 			auto& localPos = mu->_pos_local;
 
 			if (localPos._x >= _length) {
-				auto connections = app.GetConnectedEntities(_uid);
+				auto connections = _world->GetConnectedEntities(_uid);
 
 				if (connections.size() > 0) {
 					if (connections.at(0)->TakeEntity(mu)) {
