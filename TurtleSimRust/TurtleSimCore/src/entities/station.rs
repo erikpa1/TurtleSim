@@ -42,4 +42,8 @@ impl Entity for Station {
     fn as_any(&self) -> &dyn Any {
         self
     }
+
+    fn step() {
+        println!("Station getting step")
+    }
 }

@@ -6,6 +6,8 @@ pub trait Entity {
     fn update(&self); 
     fn get_name(&self) -> &String; 
     fn as_any(&self) -> &dyn Any;
+
+    fn step();
     
 }
 

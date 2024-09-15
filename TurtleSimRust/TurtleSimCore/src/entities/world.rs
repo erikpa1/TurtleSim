@@ -24,4 +24,11 @@ impl World {
     pub fn get_world_info(&self) -> String {
         String::from("This is some world")
     }
+
+    pub fn step() {
+        
+
+        
+
+    }
 }
