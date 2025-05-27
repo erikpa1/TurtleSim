@@ -7,19 +7,50 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c837d7a7-7d39-404a-9935-a16e06739cc6" name="Changes" comment="" />
+    <list default="true" id="c837d7a7-7d39-404a-9935-a16e06739cc6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/TurtleSimCore/src/behaviours/behActorTaker.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TurtleSimCore/src/behaviours/behProcess.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TurtleSimCore/src/behaviours/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BevySim/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/../BevySim/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TurtleSimCore/src/entities/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/TurtleSimCore/src/entities/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TurtleSimCore/src/entities/station.rs" beforeDir="false" afterPath="$PROJECT_DIR$/TurtleSimCore/src/entities/station.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TurtleSimCore/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/TurtleSimCore/src/main.rs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="RsBuildProfile:test" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Rust File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "erikpa1"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/erikpa1/TurtleSim.git",
+    "accountId": "ecc3997f-45cf-435f-90ac-9b7232e24262"
+  }
+}]]></component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="Nxc8EQFv" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2trmL7Z1OGmiSMIrGyW53WtXxSv" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
@@ -29,12 +60,19 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/erik.palencik/Desktop/Work/TurtleSim/TurtleSimRust",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
     "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
     "org.rust.first.attach.projects": "true",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -87,6 +125,7 @@
       <option name="presentableId" value="Default" />
       <updated>1741118508607</updated>
       <workItem from="1741118509859" duration="194000" />
+      <workItem from="1748371083330" duration="528000" />
     </task>
     <servers />
   </component>

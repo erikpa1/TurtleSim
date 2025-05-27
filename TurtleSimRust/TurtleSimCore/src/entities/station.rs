@@ -30,6 +30,9 @@ impl Station {
     // }
 }
 
+//TODO nejakym sposobom naimportovat tento trait
+// impl BehaviourProcess for Station {}
+
 impl Entity for Station {
     fn update(&self) {
         // Update logic for Buffer

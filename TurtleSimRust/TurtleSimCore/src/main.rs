@@ -1,4 +1,5 @@
 
+mod behaviours;
 mod entities;
 mod test;
 
