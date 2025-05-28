@@ -1,4 +1,4 @@
-use crate::entities::entity::Entity;
+use crate::behaviours::{ActorTakerBehaviour, ProcessBehaviour};
 use crate::entities::prelude::*;
 
 use super::world::World;
@@ -31,22 +31,6 @@ impl Station {
 }
 
 //TODO nejakym sposobom naimportovat tento trait
-// impl BehaviourProcess for Station {}
+impl ProcessBehaviour for Station {}
 
-impl Entity for Station {
-    fn update(&self) {
-        // Update logic for Buffer
-        println!("Updating Buffer: {}", self.name);
-    }
-
-    fn get_name(&self) -> &String {
-        &self.name
-    }
-    fn as_any(&self) -> &dyn Any {
-        self
-    }
-
-    fn step() {
-        println!("Station getting step")
-    }
-}
+impl ActorTakerBehaviour for Station {}

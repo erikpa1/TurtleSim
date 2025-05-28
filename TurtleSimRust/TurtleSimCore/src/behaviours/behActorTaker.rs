@@ -1,9 +1,9 @@
-pub trait BehaviourActorTaker {
-    fn CanTakeActor(&self, actor: std::any) -> bool {
+pub trait ActorTakerBehaviour {
+    fn CanTakeActor(&self, actor: i64) -> bool {
         false
     }
 
-    fn TakeActor(&mut self, actor: std::any) -> bool {
+    fn TakeActor(&mut self, actor: i64) -> bool {
         false
     }
 }
