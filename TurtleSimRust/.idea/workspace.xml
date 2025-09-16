@@ -7,20 +7,7 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c837d7a7-7d39-404a-9935-a16e06739cc6" name="Changes" comment="Inheriting golang architecture">
-      <change afterPath="$PROJECT_DIR$/TurtleSimCore/src/data/entity.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TurtleSimCore/src/data/mod.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TurtleSimCore/src/entities/stepper.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TurtleSimCore/src/behaviours/behActorTaker.rs" beforeDir="false" afterPath="$PROJECT_DIR$/TurtleSimCore/src/behaviours/behActorTaker.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TurtleSimCore/src/behaviours/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/TurtleSimCore/src/behaviours/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TurtleSimCore/src/entities/entity.rs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TurtleSimCore/src/entities/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/TurtleSimCore/src/entities/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TurtleSimCore/src/entities/station.rs" beforeDir="false" afterPath="$PROJECT_DIR$/TurtleSimCore/src/entities/station.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TurtleSimCore/src/entities/world.rs" beforeDir="false" afterPath="$PROJECT_DIR$/TurtleSimCore/src/entities/world.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TurtleSimCore/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/TurtleSimCore/src/lib.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TurtleSimCore/src/test/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/TurtleSimCore/src/test/mod.rs" afterDir="false" />
-    </list>
+    <list default="true" id="c837d7a7-7d39-404a-9935-a16e06739cc6" name="Changes" comment="Update rust big refactor" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

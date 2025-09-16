@@ -1,0 +1,2 @@
+
+brew install sfml  3.0.1 verziu treba

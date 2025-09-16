@@ -25,14 +25,14 @@ using namespace simstudio;
 int main() {
 	RegisterClasses();
 
-
 #if IS_WINDOWS_PLATFORM
-
 	//run_xml();
 	run_sdl();
 #endif
-	//run_xml(app);
+	run_xml();
 	//run_wasm_string_xml(app);
+
+ 	std::cout <<"Hello here" << std::endl;
 
 	return 0;
 }
