@@ -14,6 +14,7 @@ int main() {
 
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
+    shape.setPosition(sf::Vector2f(800, 600));
 
     while (window.isOpen()) {
         // SFML 3.0: pollEvent() returns std::optional<Event>

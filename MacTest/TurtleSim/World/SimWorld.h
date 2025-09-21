@@ -4,18 +4,14 @@
 
 #pragma once
 
-namespace TurtleSim {
-    class SimWorld {
-
+namespace TurtleSim
+{
+    class SimWorld
+    {
     public:
         SimWorld();
 
         void Start();
         void Update();
-
     };
-
-
 }
-
-
