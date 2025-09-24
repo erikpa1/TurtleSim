@@ -11,10 +11,17 @@ find_package(SFML 3.0 REQUIRED COMPONENTS Graphics Window System)
 file(GLOB_RECURSE TURTLE "Turtle/*.cpp")
 file(GLOB_RECURSE TURTLEAPP "TurtleApp/*.cpp")
 file(GLOB_RECURSE TURTLESIM "TurtleSim/*.cpp")
+file(GLOB_RECURSE TURTLESIMUI "TurtleSimUI/*.cpp")
 file(GLOB_RECURSE TURTLEUI "TurtleUI/*.cpp")
 
 
-add_executable(MacTest main.cpp ${TURTLE} ${TURTLEAPP} ${TURTLESIM} ${TURTLEUI})
+add_executable(MacTest main.cpp
+        ${TURTLE}
+        ${TURTLEAPP}
+        ${TURTLESIM}
+        ${TURTLESIMUI}
+        ${TURTLEUI}
+)
 
 # Use SFML 3.0 target names
 target_link_libraries(MacTest SFML::Graphics SFML::Window SFML::System)

@@ -4,11 +4,7 @@
 #pragma once
 
 
-class TurtleApp {
-
-
+class TurtleApp
+{
 
 };
-
-
-
