@@ -1,5 +1,9 @@
+mod app;
+
 use bevy::prelude::*;
 use bevy_egui::{egui, EguiContexts, EguiPlugin, EguiPrimaryContextPass};
+
+use crate::app::DrawApp;
 
 fn main() {
     App::new()
@@ -16,7 +20,8 @@ fn setup_camera_system(mut commands: Commands) {
 
 fn ui_example_system(mut contexts: EguiContexts) -> Result {
     egui::Window::new("Hello").show(contexts.ctx_mut()?, |ui| {
-        ui.label("world");
+
+        DrawApp(ui)
     });
     Ok(())
 }
