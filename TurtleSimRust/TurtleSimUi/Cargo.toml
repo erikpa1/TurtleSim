@@ -1,0 +1,10 @@
+[package]
+name = "TurtleSimUi"
+version = "0.1.0"
+edition = "2021"
+
+
+# Cargo.toml
+[dependencies]
+bevy = "0.17.0"
+bevy_egui = "0.38.1"

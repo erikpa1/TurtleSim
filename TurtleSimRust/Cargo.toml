@@ -2,6 +2,7 @@
 
 members = [
     "TurtleSimCore",
+    "TurtleSimUi",
 ]
 
-default-members = ["TurtleSimCore"]
+default-members = ["TurtleSimUi"]
