@@ -1,13 +1,18 @@
 mod app;
 
+mod sim_entities;
+
 use bevy::prelude::*;
 use bevy_egui::{egui, EguiContexts, EguiPlugin, EguiPrimaryContextPass};
 
-use crate::app::DrawApp;
+use crate::app::{DrawApp};
+
+use crate::sim_entities::{SimEntitiesPlugin};
 
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
+        .add_plugins(SimEntitiesPlugin{})
         .add_plugins(EguiPlugin::default())
         .add_systems(Startup, setup_camera_system)
         .add_systems(EguiPrimaryContextPass, ui_example_system)
@@ -25,3 +30,4 @@ fn ui_example_system(mut contexts: EguiContexts) -> Result {
     });
     Ok(())
 }
+

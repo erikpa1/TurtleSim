@@ -21,6 +21,7 @@ add_executable(MacTest main.cpp
         ${TURTLESIM}
         ${TURTLESIMUI}
         ${TURTLEUI}
+        macmain.cpp
 )
 
 # Use SFML 3.0 target names

@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 bevy = "0.17.0"
 bevy_egui = "0.38.1"
+egui = "0.33.3"
