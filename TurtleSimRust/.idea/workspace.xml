@@ -14,17 +14,7 @@
     </cargoProject>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c837d7a7-7d39-404a-9935-a16e06739cc6" name="Changes" comment="Update bevy egui rendering">
-      <change afterPath="$PROJECT_DIR$/../MacTest/macmain.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TurtleSimUi/src/sim_entities/buffer.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TurtleSimUi/src/sim_entities/mod.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TurtleSimUi/src/sim_entities/station.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MacTest/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../MacTest/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TurtleSimUi/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/TurtleSimUi/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TurtleSimUi/src/app.rs" beforeDir="false" afterPath="$PROJECT_DIR$/TurtleSimUi/src/app.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TurtleSimUi/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/TurtleSimUi/src/main.rs" afterDir="false" />
-    </list>
+    <list default="true" id="c837d7a7-7d39-404a-9935-a16e06739cc6" name="Changes" comment="Update application" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -163,7 +153,7 @@
       <workItem from="1766941127634" duration="102000" />
       <workItem from="1766941999177" duration="843000" />
       <workItem from="1767000344473" duration="2668000" />
-      <workItem from="1767003042341" duration="910000" />
+      <workItem from="1767003042341" duration="950000" />
     </task>
     <task id="LOCAL-00001" summary="Inheriting golang architecture">
       <option name="closed" value="true" />
@@ -189,7 +179,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766598525219</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Update application">
+      <option name="closed" value="true" />
+      <created>1767003991143</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1767003991143</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,6 +197,7 @@
     <MESSAGE value="Inheriting golang architecture" />
     <MESSAGE value="Update gitnore" />
     <MESSAGE value="Update bevy egui rendering" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update bevy egui rendering" />
+    <MESSAGE value="Update application" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update application" />
   </component>
 </project>
